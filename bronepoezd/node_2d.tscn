@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbvt8evvq6kyy"]
+
+[ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Loco.bmp" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://dliu7vknq47sn" path="res://Short Vagon.bmp" id="2_epypp"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Loco" type="Sprite2D" parent="."]
+position = Vector2(873, 339)
+texture = ExtResource("1_0e48y")
+
+[node name="ShortVagon" type="Sprite2D" parent="."]
+position = Vector2(662, 342)
+texture = ExtResource("2_epypp")
+
+[node name="ShortVagon2" type="Sprite2D" parent="."]
+position = Vector2(516, 341)
+texture = ExtResource("2_epypp")
+
+[node name="ShortVagon3" type="Sprite2D" parent="."]
+position = Vector2(366, 343)
+texture = ExtResource("2_epypp")
+
+[node name="ShortVagon4" type="Sprite2D" parent="."]
+position = Vector2(220, 341)
+texture = ExtResource("2_epypp")
