@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=4 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Loco.bmp" id="1_0e48y"]
 [ext_resource type="Texture2D" uid="uid://dliu7vknq47sn" path="res://Short Vagon.bmp" id="2_epypp"]
+[ext_resource type="PackedScene" uid="uid://43fucttv7y8l" path="res://scene 2.tscn" id="3_epypp"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,3 +25,11 @@ texture = ExtResource("2_epypp")
 [node name="ShortVagon4" type="Sprite2D" parent="."]
 position = Vector2(220, 341)
 texture = ExtResource("2_epypp")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+
+[node name="Node2D" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_epypp")]
