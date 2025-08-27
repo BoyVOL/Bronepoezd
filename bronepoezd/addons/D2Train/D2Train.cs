@@ -3,7 +3,7 @@ using Godot;
 using System;
 
 [Tool]
-public partial class train : EditorPlugin
+public partial class D2Train : EditorPlugin
 {
 	public override void _EnterTree()
 	{
