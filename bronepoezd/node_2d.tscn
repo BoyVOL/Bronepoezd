@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=3 format=3 uid="uid://cbvt8evvq6kyy"]
+
+[ext_resource type="Texture2D" uid="uid://b2r5bewfk0fay" path="res://icon2.png" id="1_wtcfe"]
 
 [sub_resource type="Curve2D" id="Curve2D_y32ns"]
 _data = {
@@ -8,6 +10,16 @@ point_count = 5
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 3
+position = Vector2(397, 291)
+points = PackedVector2Array(76, -22, 258, 27, 443, -29, 415, -132, 341, -168, 244, -168, 163, -114)
+texture = ExtResource("1_wtcfe")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(505, 364)
+position = Vector2(397, 291)
 curve = SubResource("Curve2D_y32ns")
