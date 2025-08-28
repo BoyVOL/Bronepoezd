@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=2 format=3 uid="uid://cbvt8evvq6kyy"]
+
+[sub_resource type="Curve2D" id="Curve2D_y32ns"]
+_data = {
+"points": PackedVector2Array(78, -8, -78, 8, 50, -179, -17, -130, 17, 130, -48, 12, -72, -4, 72, 4, 64, 151, -3, 86, 3, -86, 214, 51, 98, 1, -98, -1, 50, -179)
+}
+point_count = 5
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(505, 364)
+curve = SubResource("Curve2D_y32ns")
