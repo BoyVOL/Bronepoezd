@@ -8,5 +8,6 @@
     <Content Include="Scene2.cs" />
     <Content Include="addons\D2TrainTopDown\Nodes\TrainHeadTop\TrainHeadTop.cs" />
     <Content Include="addons\d2trainside\D2TrainSide.cs" />
+    <Content Include="Line2d.cs" />
   </ItemGroup>
 </Project>

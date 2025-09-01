@@ -1,25 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=4 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Texture2D" uid="uid://b2r5bewfk0fay" path="res://icon2.png" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://od1csbjrxrkq" path="res://Line2d.cs" id="2_0e48y"]
 
-[sub_resource type="Curve2D" id="Curve2D_y32ns"]
+[sub_resource type="Curve2D" id="Curve2D_0e48y"]
 _data = {
-"points": PackedVector2Array(78, -8, -78, 8, 50, -179, -17, -130, 17, 130, -48, 12, -72, -4, 72, 4, 64, 151, -3, 86, 3, -86, 214, 51, 98, 1, -98, -1, 50, -179)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 100, 0)
 }
-point_count = 5
+point_count = 2
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Line2D" type="Line2D" parent="."]
 texture_repeat = 3
 position = Vector2(397, 291)
-points = PackedVector2Array(76, -22, 258, 27, 443, -29, 415, -132, 341, -168, 244, -168, 163, -114)
+points = PackedVector2Array(0, 0, 1.12305, 1.09863, 4.29688, 4.10156, 6.56128, 6.17981, 9.22852, 8.56934, 12.262, 11.2152, 15.625, 14.0625, 19.281, 17.0563, 23.1934, 20.1416, 25.2342, 21.7014, 27.3254, 23.2635, 29.4624, 24.8211, 31.6406, 26.3672, 33.8554, 27.895, 36.1023, 29.3976, 38.3766, 30.8681, 40.6738, 32.2998, 42.9893, 33.6857, 45.3186, 35.0189, 47.657, 36.2926, 50, 37.5, 52.343, 38.6341, 54.6814, 39.6881, 59.3262, 41.5283, 63.8977, 42.9657, 68.3594, 43.9453, 72.6746, 44.4122, 76.8066, 44.3115, 80.719, 43.5883, 84.375, 42.1875, 87.738, 40.0543, 90.7715, 37.1338, 93.4387, 33.371, 94.6236, 31.1565, 95.7031, 28.7109, 96.6728, 26.0273, 97.5281, 23.0988, 98.2643, 19.9184, 98.877, 16.4795, 99.3614, 12.775, 99.7131, 8.79822, 99.9275, 4.54216, 100, 0)
 texture = ExtResource("1_wtcfe")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
-
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2(397, 291)
-curve = SubResource("Curve2D_y32ns")
+script = ExtResource("2_0e48y")
+Curve = SubResource("Curve2D_0e48y")
