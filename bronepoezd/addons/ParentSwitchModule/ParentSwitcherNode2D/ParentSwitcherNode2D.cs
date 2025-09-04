@@ -19,7 +19,7 @@ public partial class ParentSwitcherNode2D : Node2D
 			for (int i = 1; i < Link.Count; i++)
 			{
 				Node Test = GetNode<Node>(Link[i]);
-				Test.Reparent(GetNode<Node>(Link[0]));
+				Test.Reparent(GetNode<Node>(Link[0]),false);
 				if (Test is ParentSwitcherNode2D)
 				{
 					((ParentSwitcherNode2D)Test).OldParent = this;
