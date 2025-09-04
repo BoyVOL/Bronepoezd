@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7p6ht3ukh7dr"
-path="res://.godot/imported/icon.png-72e1c1a90bff83c5305037b2a822f088.ctex"
+uid="uid://6cq8b088b4o5"
+path="res://.godot/imported/icon.png-9f77c9bd66d4544b0dd4b9ec1bbc8783.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/D2TrainTopDown/Nodes/LocomotiveTop/icon.png"
-dest_files=["res://.godot/imported/icon.png-72e1c1a90bff83c5305037b2a822f088.ctex"]
+source_file="res://addons/ParentSwitchModule/ParentSwitcherNode2D/icon.png"
+dest_files=["res://.godot/imported/icon.png-9f77c9bd66d4544b0dd4b9ec1bbc8783.ctex"]
 
 [params]
 
