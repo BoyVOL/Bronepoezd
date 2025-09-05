@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=6 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Script" uid="uid://cmt6qvjk3lp8g" path="res://addons/ParentSwitchModule/ParentSwitcherNode2D/ParentSwitcherNode2D.cs" id="2_0e48y"]
-[ext_resource type="Script" uid="uid://cx7x2j724hv4d" path="res://addons/D2TrainTopDown/Nodes/TrainCoreTop/TrainCoreTop.cs" id="3_0hol4"]
+[ext_resource type="Script" uid="uid://dmglo8q6tdgf8" path="res://addons/CurveLinermodule/CurveLiner/CurveLiner.cs" id="3_0hol4"]
 [ext_resource type="Texture2D" uid="uid://c7p6ht3ukh7dr" path="res://addons/D2TrainTopDown/Nodes/LocomotiveTop/icon.png" id="3_epypp"]
+[ext_resource type="Texture2D" uid="uid://b2r5bewfk0fay" path="res://icon2.png" id="3_q6r6c"]
+
+[sub_resource type="Curve2D" id="Curve2D_q6r6c"]
+_data = {
+"points": PackedVector2Array(147.328, -149.586, -147.328, 149.586, 394, 322, -2.2579, 93.1382, 2.2579, -93.1382, 46, 258, -127.007, -5.64474, 127.007, 5.64474, 263, 56, -66.0434, -35.5619, 66.0434, 35.5619, 421, 68, -0.564476, -77.8974, 0.564476, 77.8974, 487, 179, 10.1605, -125.313, -10.1605, 125.313, 394, 322)
+}
+point_count = 6
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,6 +38,14 @@ texture = ExtResource("3_epypp")
 position = Vector2(465, 267)
 texture = ExtResource("3_epypp")
 
-[node name="TrainCoreTop" type="Node2D" parent="."]
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_q6r6c")
+
+[node name="CurveLiner" type="Line2D" parent="Path2D"]
+texture_repeat = 3
+points = PackedVector2Array(479, 132, 537, 235, 691, 296, 838, 220, 813, 131)
+texture = ExtResource("3_q6r6c")
+texture_mode = 1
+joint_mode = 2
 script = ExtResource("3_0hol4")
-metadata/_custom_type_script = "uid://cx7x2j724hv4d"
+metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
