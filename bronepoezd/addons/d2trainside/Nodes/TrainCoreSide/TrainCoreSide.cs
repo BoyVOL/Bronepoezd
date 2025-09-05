@@ -1,6 +1,6 @@
 using Godot;
 using System;
 
-public partial class TrainHeadSide : Node2D
+public partial class TrainHeadSide : ParentSwitcherNode2D
 {
 }
