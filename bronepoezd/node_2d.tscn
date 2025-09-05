@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=7 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Script" uid="uid://dmoq6t7cdgx61" path="res://addons/TrainPhysicsModule/Nodes/Rail/Rail.cs" id="1_epypp"]
+[ext_resource type="Texture2D" uid="uid://ceo5haq60xkxq" path="res://TinyRail.png" id="2_0hol4"]
 [ext_resource type="Script" uid="uid://dmglo8q6tdgf8" path="res://addons/CurveLinermodule/CurveLiner/CurveLiner.cs" id="3_0hol4"]
-[ext_resource type="Texture2D" uid="uid://b2r5bewfk0fay" path="res://icon2.png" id="3_q6r6c"]
 [ext_resource type="Script" uid="uid://cem21ppe4icks" path="res://addons/TrainPhysicsModule/Nodes/Train/Train.cs" id="4_0hol4"]
+[ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://TinyTrain.png" id="5_q6r6c"]
 
 [sub_resource type="Curve2D" id="Curve2D_0hol4"]
 _data = {
@@ -20,9 +21,9 @@ script = ExtResource("1_epypp")
 metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
 
 [node name="CurveLiner" type="Line2D" parent="Rail"]
-texture_repeat = 3
+texture_repeat = 2
 points = PackedVector2Array(479, 132, 537, 235)
-texture = ExtResource("3_q6r6c")
+texture = ExtResource("2_0hol4")
 texture_mode = 1
 joint_mode = 2
 script = ExtResource("3_0hol4")
@@ -33,5 +34,5 @@ position = Vector2(296, 297)
 script = ExtResource("4_0hol4")
 metadata/_custom_type_script = "uid://cem21ppe4icks"
 
-[node name="Icon2" type="Sprite2D" parent="Train"]
-texture = ExtResource("3_q6r6c")
+[node name="TinyTrain" type="Sprite2D" parent="Train"]
+texture = ExtResource("5_q6r6c")
