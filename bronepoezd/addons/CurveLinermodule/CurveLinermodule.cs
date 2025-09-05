@@ -10,7 +10,7 @@ public partial class CurveLinermodule : EditorPlugin
 	{
         GlobalPath = ((Resource)GetScript()).ResourcePath.GetBaseDir();
 		// Initialization of the plugin goes here.
-        AddCustomType("CurveLiner", "Node2D", GD.Load<Script>(GlobalPath + "/CurveLiner/CurveLiner.cs"),
+        AddCustomType("CurveLiner", "Line2D", GD.Load<Script>(GlobalPath + "/CurveLiner/CurveLiner.cs"),
         GD.Load<Texture2D>(GlobalPath + "/CurveLiner/icon.png"));
 		GD.Print("ParentSwitchModule Loaded");
 	}
