@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
+[GlobalClass]
 public partial class ParentSwitcherNode2D : Node2D
 {
 	[Export] public ParentSwitcherNode2D OldParent = null;

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
-public partial class TrainHeadSide : ParentSwitcherNode2D
+[GlobalClass]
+public partial class TrainCoreSide : ParentSwitcherNode2D
 {
 }

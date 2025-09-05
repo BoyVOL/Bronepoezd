@@ -10,9 +10,9 @@ public partial class D2TrainTopDown : EditorPlugin
     {
         GlobalPath = ((Resource)GetScript()).ResourcePath.GetBaseDir();
         // Initialization of the plugin goes here.
-        AddCustomType("TrainCoreTop", "Node2D", GD.Load<Script>(GlobalPath + "/Nodes/TrainCoreTop/TrainCoreTop.cs"),GD.Load<Texture2D>(GlobalPath + "/Nodes/TrainCoreTop/icon.png"));
+        AddCustomType("TrainCoreTop", "ParentSwitcherNode2D", GD.Load<Script>(GlobalPath + "/Nodes/TrainCoreTop/TrainCoreTop.cs"),GD.Load<Texture2D>(GlobalPath + "/Nodes/TrainCoreTop/icon.png"));
         AddCustomType("VagonTop", "Node2D", GD.Load<Script>(GlobalPath + "/Nodes/VagonTop/VagonTop.cs"),GD.Load<Texture2D>(GlobalPath + "/Nodes/VagonTop/icon.png"));
-        AddCustomType("LocomotiveTop", "Node2D", GD.Load<Script>(GlobalPath + "/Nodes/LocomotiveTop/LocomotiveTop.cs"),GD.Load<Texture2D>(GlobalPath + "/Nodes/LocomotiveTop/icon.png"));
+        AddCustomType("LocomotiveTop", "VagonTop", GD.Load<Script>(GlobalPath + "/Nodes/LocomotiveTop/LocomotiveTop.cs"),GD.Load<Texture2D>(GlobalPath + "/Nodes/LocomotiveTop/icon.png"));
         GD.Print("D2TrainTopDown loaded");
     }
 

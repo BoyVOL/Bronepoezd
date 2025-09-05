@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=4 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Script" uid="uid://cmt6qvjk3lp8g" path="res://addons/ParentSwitchModule/ParentSwitcherNode2D/ParentSwitcherNode2D.cs" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://cx7x2j724hv4d" path="res://addons/D2TrainTopDown/Nodes/TrainCoreTop/TrainCoreTop.cs" id="3_0hol4"]
 [ext_resource type="Texture2D" uid="uid://c7p6ht3ukh7dr" path="res://addons/D2TrainTopDown/Nodes/LocomotiveTop/icon.png" id="3_epypp"]
 
 [node name="Node2D" type="Node2D"]
@@ -29,3 +30,7 @@ texture = ExtResource("3_epypp")
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(465, 267)
 texture = ExtResource("3_epypp")
+
+[node name="TrainCoreTop" type="Node2D" parent="."]
+script = ExtResource("3_0hol4")
+metadata/_custom_type_script = "uid://cx7x2j724hv4d"
