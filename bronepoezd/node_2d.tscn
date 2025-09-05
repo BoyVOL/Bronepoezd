@@ -23,7 +23,7 @@ texture = ExtResource("3_epypp")
 
 [node name="Icon" type="Sprite2D" parent="ParentSwitcherNode2D"]
 position = Vector2(-9, -10)
-scale = Vector2(9.79977, 7.9808)
+scale = Vector2(2.78257, 2.26609)
 texture = ExtResource("3_epypp")
 
 [node name="Icon" type="Sprite2D" parent="."]
