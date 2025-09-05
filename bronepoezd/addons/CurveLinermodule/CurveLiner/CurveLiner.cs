@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class CurveLiner : Line2D
 {
     Path2D Parent = null;

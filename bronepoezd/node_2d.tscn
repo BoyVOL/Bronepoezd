@@ -43,7 +43,7 @@ curve = SubResource("Curve2D_q6r6c")
 
 [node name="CurveLiner" type="Line2D" parent="Path2D"]
 texture_repeat = 3
-points = PackedVector2Array(479, 132, 537, 235, 691, 296, 838, 220, 813, 131)
+points = PackedVector2Array(479, 132, 537, 235)
 texture = ExtResource("3_q6r6c")
 texture_mode = 1
 joint_mode = 2
