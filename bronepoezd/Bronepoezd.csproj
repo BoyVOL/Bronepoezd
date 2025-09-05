@@ -9,5 +9,6 @@
     <Content Include="addons\D2TrainTopDown\Nodes\TrainHeadTop\TrainHeadTop.cs" />
     <Content Include="addons\d2trainside\D2TrainSide.cs" />
     <Content Include="Line2d.cs" />
+    <Content Include="addons\ParentSwitchModule\ParentSwitchModule.cs" />
   </ItemGroup>
 </Project>

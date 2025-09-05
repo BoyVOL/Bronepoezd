@@ -11,7 +11,7 @@ public partial class ParentSwitchModule : EditorPlugin
         GlobalPath = ((Resource)GetScript()).ResourcePath.GetBaseDir();
 		// Initialization of the plugin goes here.
         AddCustomType("ParentSwitcherNode2D", "Node2D", GD.Load<Script>(GlobalPath + "/ParentSwitcherNode2D/ParentSwitcherNode2D.cs"),
-        GD.Load<Texture2D>(GlobalPath + "/ParentSwitcherNode2D/icon.png"));
+        GD.Load<Texture2D>(GlobalPath + "/icon.png"));
 		GD.Print("ParentSwitchModule Loaded");
 	}
 
