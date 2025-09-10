@@ -22,6 +22,18 @@ public partial class Train : Node2D
 		{
 			SnapToRail(CurrentRail, railPos);
 		}
+		
+		if (CurrentRail != null)
+		{
+			if (railPos < 0)
+			{
+				GoToPrevRail();
+			}
+			if (railPos > CurrentRail.Curve.GetBakedLength())
+			{
+				GoToNextRail();
+			}
+		}
 	}
 
 	public void GoToNextRail()
@@ -57,27 +69,13 @@ public partial class Train : Node2D
 		{
 			if (eventKey.Keycode == Key.W)
 			{
-				if (CurrentRail != null)
-				{
-					railPos += 10;
-					if (railPos > CurrentRail.Curve.GetBakedLength())
-					{
-						GoToNextRail();
-					}
-				}
+				railPos += 10;
 			}
 			if (eventKey.Keycode == Key.S)
 			{ 
-				if (CurrentRail != null)
-				{
-					railPos -= 10;
-					if (railPos < 0)
-					{
-						GoToPrevRail();
-					}
-				}
+				railPos -= 10;
 			}
-		}
+		}		
 	}
 
 
