@@ -14,10 +14,27 @@ point_count = 7
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Rail" type="Path2D" parent="."]
+[node name="Rail2" type="Path2D" parent="." node_paths=PackedStringArray("NextRail")]
+position = Vector2(300, -37)
+curve = SubResource("Curve2D_0hol4")
+script = ExtResource("1_epypp")
+NextRail = NodePath("../Rail")
+metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
+
+[node name="CurveLiner" type="Line2D" parent="Rail2"]
+texture_repeat = 2
+points = PackedVector2Array(479, 132, 537, 235)
+texture = ExtResource("2_0hol4")
+texture_mode = 1
+joint_mode = 2
+script = ExtResource("3_0hol4")
+metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
+
+[node name="Rail" type="Path2D" parent="." node_paths=PackedStringArray("NextRail")]
 position = Vector2(183, 38)
 curve = SubResource("Curve2D_0hol4")
 script = ExtResource("1_epypp")
+NextRail = NodePath("../Rail2")
 metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
 
 [node name="CurveLiner" type="Line2D" parent="Rail"]
@@ -29,9 +46,9 @@ joint_mode = 2
 script = ExtResource("3_0hol4")
 metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 
-[node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("AttachedRail")]
+[node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("CurrentRail")]
 script = ExtResource("4_0hol4")
-AttachedRail = NodePath("../Rail")
+CurrentRail = NodePath("../Rail")
 railPos = 100.0
 metadata/_custom_type_script = "uid://cem21ppe4icks"
 

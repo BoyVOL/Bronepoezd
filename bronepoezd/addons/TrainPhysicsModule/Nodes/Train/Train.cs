@@ -5,7 +5,7 @@ using System;
 public partial class Train : Node2D
 {
 	[Export]
-	Rail AttachedRail = null;
+	Rail CurrentRail = null;
 
 	[Export]
 	float railPos = 0;
@@ -18,9 +18,21 @@ public partial class Train : Node2D
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		if (AttachedRail != null)
+		if (CurrentRail != null)
 		{
-			SnapToRail(AttachedRail, railPos);
+			SnapToRail(CurrentRail, railPos);
+		}
+	}
+
+	public void GoToNextRail()
+	{
+		if (CurrentRail.NextRail != null)
+		{
+			CurrentRail = CurrentRail.NextRail;
+		}
+		else
+		{
+			CurrentRail = null;
 		}
 	}
 
@@ -32,8 +44,9 @@ public partial class Train : Node2D
 			if (eventKey.Keycode == Key.W)
 			{
 				railPos += 10;
-				if (railPos > AttachedRail.Curve.GetBakedLength())
+				if (CurrentRail != null && railPos > CurrentRail.Curve.GetBakedLength())
 				{
+					GoToNextRail();
 					railPos = 0;
 				}
 			}
