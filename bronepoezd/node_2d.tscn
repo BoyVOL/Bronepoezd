@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=8 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Script" uid="uid://dmoq6t7cdgx61" path="res://addons/TrainPhysicsModule/Nodes/Rail/Rail.cs" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://ceo5haq60xkxq" path="res://TinyRail.png" id="2_0hol4"]
@@ -6,19 +6,26 @@
 [ext_resource type="Script" uid="uid://cem21ppe4icks" path="res://addons/TrainPhysicsModule/Nodes/Train/Train.cs" id="4_0hol4"]
 [ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://TinyTrain.png" id="5_q6r6c"]
 
+[sub_resource type="Curve2D" id="Curve2D_q6r6c"]
+_data = {
+"points": PackedVector2Array(-37.2553, -2.2579, 37.2553, 2.2579, 83, 170, -44.4241, -38.4971, 44.4241, 38.4971, 168, 311, 1.12895, -75.0751, -1.12895, 75.0751, 532, 342, 81.8488, -0.564474, -81.8488, 0.564474, 246, 502, 29.3527, 63.2211, -29.3527, -63.2211, -69, 460, -32.7395, 28.7882, 32.7395, -28.7882, -92, 113, -41.2066, 1.12895, 41.2066, -1.12895, 196, 95)
+}
+point_count = 7
+
 [sub_resource type="Curve2D" id="Curve2D_0hol4"]
 _data = {
-"points": PackedVector2Array(-37.2553, -2.2579, 37.2553, 2.2579, 196, 95, -44.4241, -38.4971, 44.4241, 38.4971, 168, 311, 1.12895, -75.0751, -1.12895, 75.0751, 532, 342, 81.8488, -0.564474, -81.8488, 0.564474, 204, 370, 29.3527, 63.2211, -29.3527, -63.2211, 71, 318, -32.7395, 28.7882, 32.7395, -28.7882, 79, 120, -41.2066, 1.12895, 41.2066, -1.12895, 196, 95)
+"points": PackedVector2Array(-37.2553, -2.2579, 37.2553, 2.2579, 317, 20, -44.4241, -38.4971, 44.4241, 38.4971, 461, 166, 1.12895, -75.0751, -1.12895, 75.0751, 532, 342, 81.8488, -0.564474, -81.8488, 0.564474, 204, 370, 29.3527, 63.2211, -29.3527, -63.2211, 71, 318, -32.7395, 28.7882, 32.7395, -28.7882, 79, 120, -41.2066, 1.12895, 41.2066, -1.12895, 196, 95)
 }
 point_count = 7
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Rail2" type="Path2D" parent="." node_paths=PackedStringArray("NextRail")]
+[node name="Rail2" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
 position = Vector2(300, -37)
-curve = SubResource("Curve2D_0hol4")
+curve = SubResource("Curve2D_q6r6c")
 script = ExtResource("1_epypp")
 NextRail = NodePath("../Rail")
+PrevRail = NodePath("../Rail")
 metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
 
 [node name="CurveLiner" type="Line2D" parent="Rail2"]
@@ -30,11 +37,12 @@ joint_mode = 2
 script = ExtResource("3_0hol4")
 metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 
-[node name="Rail" type="Path2D" parent="." node_paths=PackedStringArray("NextRail")]
-position = Vector2(183, 38)
+[node name="Rail" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
+position = Vector2(184, 39)
 curve = SubResource("Curve2D_0hol4")
 script = ExtResource("1_epypp")
 NextRail = NodePath("../Rail2")
+PrevRail = NodePath("../Rail2")
 metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
 
 [node name="CurveLiner" type="Line2D" parent="Rail"]

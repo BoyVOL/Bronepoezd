@@ -29,6 +29,20 @@ public partial class Train : Node2D
 		if (CurrentRail.NextRail != null)
 		{
 			CurrentRail = CurrentRail.NextRail;
+			railPos = 0;
+		}
+		else
+		{
+			CurrentRail = null;
+		}
+	}
+
+	public void GoToPrevRail()
+	{
+		if (CurrentRail.PrevRail != null)
+		{
+			CurrentRail = CurrentRail.PrevRail;
+			railPos = CurrentRail.Curve.GetBakedLength();
 		}
 		else
 		{
@@ -43,11 +57,24 @@ public partial class Train : Node2D
 		{
 			if (eventKey.Keycode == Key.W)
 			{
-				railPos += 10;
-				if (CurrentRail != null && railPos > CurrentRail.Curve.GetBakedLength())
+				if (CurrentRail != null)
 				{
-					GoToNextRail();
-					railPos = 0;
+					railPos += 10;
+					if (railPos > CurrentRail.Curve.GetBakedLength())
+					{
+						GoToNextRail();
+					}
+				}
+			}
+			if (eventKey.Keycode == Key.S)
+			{ 
+				if (CurrentRail != null)
+				{
+					railPos -= 10;
+					if (railPos < 0)
+					{
+						GoToPrevRail();
+					}
 				}
 			}
 		}
