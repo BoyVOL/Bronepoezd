@@ -8,16 +8,46 @@ public partial class Train : Node2D
 	Rail CurrentRail = null;
 
 	[Export]
+	bool reverse = false;
+
+	[Export]
 	float railPos = 0;
 
 	public void SnapToRail(Rail rail, float position)
 	{
 		this.Transform = rail.Transform * rail.Curve.SampleBakedWithRotation(position);
+		if (reverse) Rotation += MathF.PI;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
+	}
+
+	public void GoToNextRail()
+	{
+		if (CurrentRail.NextRail != null)
+		{
+			CurrentRail = CurrentRail.NextRail;
+			if (CurrentRail.NextRailReverse)
+			{
+				railPos = CurrentRail.Curve.GetBakedLength();
+				reverse = !reverse;
+			}
+			else
+			{
+				railPos = 0;
+			}
+		}
+		else
+		{
+			CurrentRail = null;
+		}
+	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
 		if (CurrentRail != null)
 		{
 			SnapToRail(CurrentRail, railPos);
@@ -34,27 +64,22 @@ public partial class Train : Node2D
 				GoToNextRail();
 			}
 		}
-	}
-
-	public void GoToNextRail()
-	{
-		if (CurrentRail.NextRail != null)
-		{
-			CurrentRail = CurrentRail.NextRail;
-			railPos = 0;
-		}
-		else
-		{
-			CurrentRail = null;
-		}
-	}
+    }
 
 	public void GoToPrevRail()
 	{
 		if (CurrentRail.PrevRail != null)
 		{
 			CurrentRail = CurrentRail.PrevRail;
-			railPos = CurrentRail.Curve.GetBakedLength();
+			if (CurrentRail.PrevRailReverse)
+			{
+				railPos = 0;
+				reverse = !reverse;
+			}
+			else
+			{
+				railPos = CurrentRail.Curve.GetBakedLength();
+			}
 		}
 		else
 		{
@@ -69,11 +94,25 @@ public partial class Train : Node2D
 		{
 			if (eventKey.Keycode == Key.W)
 			{
-				railPos += 10;
+				if (reverse)
+				{
+					railPos -= 10;
+				}
+				else
+				{
+					railPos += 10;
+				}
 			}
 			if (eventKey.Keycode == Key.S)
 			{ 
-				railPos -= 10;
+				if (reverse)
+				{
+					railPos += 10;
+				}
+				else
+				{
+					railPos -= 10;
+				}
 			}
 		}		
 	}
