@@ -15,7 +15,7 @@ point_count = 7
 
 [sub_resource type="Curve2D" id="Curve2D_0hol4"]
 _data = {
-"points": PackedVector2Array(251.191, -55.3184, -251.191, 55.3184, 194, 94, -44.4241, -38.4971, 44.4241, 38.4971, 87, 221, 1.12895, -75.0751, -1.12895, 75.0751, 532, 342, 81.8488, -0.564474, -81.8488, 0.564474, 204, 370, 29.3527, 63.2211, -29.3527, -63.2211, 71, 318, -32.7395, 28.7882, 32.7395, -28.7882, 155, 193, -73.9461, 87.4935, 73.9461, -87.4935, 194, 101)
+"points": PackedVector2Array(75.075, 0.564468, -75.075, -0.564468, 194, 94, 25.0062, -75.1879, -25.0062, 75.1879, 68, 135, 1.12895, -75.0751, -1.12895, 75.0751, 72, 321, -106.685, 2.82237, 106.685, -2.82237, 205, 401, -125.878, 24.8369, 125.878, -24.8369, 458, 351, -19.7566, 116.282, 19.7566, -116.282, 697, 205, 142.812, 59.8342, -142.812, -59.8342, 317, 20)
 }
 point_count = 7
 
@@ -26,7 +26,9 @@ position = Vector2(300, -37)
 curve = SubResource("Curve2D_q6r6c")
 script = ExtResource("1_epypp")
 NextRail = NodePath("../Rail")
+NextRailReverse = true
 PrevRail = NodePath("../Rail")
+PrevRailReverse = true
 metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
 
 [node name="CurveLiner" type="Line2D" parent="Rail2"]
@@ -39,10 +41,11 @@ script = ExtResource("3_0hol4")
 metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 
 [node name="Rail" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
-position = Vector2(184, 39)
+position = Vector2(183, 40)
 curve = SubResource("Curve2D_0hol4")
 script = ExtResource("1_epypp")
 NextRail = NodePath("../Rail2")
+NextRailReverse = true
 PrevRail = NodePath("../Rail2")
 PrevRailReverse = true
 metadata/_custom_type_script = "uid://dmoq6t7cdgx61"
