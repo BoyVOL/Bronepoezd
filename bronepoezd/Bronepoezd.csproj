@@ -10,5 +10,6 @@
     <Content Include="addons\d2trainside\D2TrainSide.cs" />
     <Content Include="Line2d.cs" />
     <Content Include="addons\ParentSwitchModule\ParentSwitchModule.cs" />
+    <Content Include="addons\TrainPhysicsModule\Nodes\Train\Train.cs" />
   </ItemGroup>
 </Project>
