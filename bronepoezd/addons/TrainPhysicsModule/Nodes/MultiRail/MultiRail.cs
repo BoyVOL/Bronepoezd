@@ -2,6 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class MultiRail : Rail
+public partial class MultiRail : Rail,IRail
 {
+
 }

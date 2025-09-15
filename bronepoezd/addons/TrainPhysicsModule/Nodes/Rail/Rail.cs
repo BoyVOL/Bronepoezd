@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class Rail : Path2D
+public partial class Rail : Path2D,IRail
 {
     [Export] public Rail NextRail = null;
     [Export] public bool NextRailReverse = false;

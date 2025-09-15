@@ -65,10 +65,10 @@ metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 position = Vector2(181, 40)
 curve = ExtResource("4_rj586")
 script = ExtResource("7_d21ai")
-NextRail = NodePath("../Rail2")
 NextRailReverse = true
-PrevRail = NodePath("../Rail2")
 PrevRailReverse = true
+NextRail = NodePath("../Rail2")
+PrevRail = NodePath("../Rail2")
 metadata/_custom_type_script = "uid://iue7f62tsxac"
 
 [node name="CurveLiner" type="Line2D" parent="MultiRail"]

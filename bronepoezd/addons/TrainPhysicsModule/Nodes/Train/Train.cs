@@ -52,7 +52,7 @@ public partial class Train : Node2D
 		{
 			SnapToRail(CurrentRail, railPos);
 		}
-		
+
 		if (CurrentRail != null)
 		{
 			if (railPos < 0)
@@ -64,7 +64,7 @@ public partial class Train : Node2D
 				GoToNextRail();
 			}
 		}
-    }
+	}
 
 	public void GoToPrevRail()
 	{
@@ -104,7 +104,7 @@ public partial class Train : Node2D
 				}
 			}
 			if (eventKey.Keycode == Key.S)
-			{ 
+			{
 				if (reverse)
 				{
 					railPos += 10;
@@ -114,8 +114,13 @@ public partial class Train : Node2D
 					railPos -= 10;
 				}
 			}
-		}		
+		}
 	}
 
 
+}
+
+public interface IRail
+{
+	
 }
