@@ -35,10 +35,12 @@ metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 position = Vector2(181, 40)
 curve = ExtResource("4_rj586")
 script = ExtResource("7_d21ai")
-PrevRails = [NodePath("../SingleRail")]
-NextRails = [NodePath("../SingleRail")]
-PrevReverses = Array[bool]([true])
-NextReverses = Array[bool]([true])
+PrevRails = [NodePath("../SingleRail"), NodePath("../SingleRail2")]
+NextRails = [NodePath("../SingleRail"), NodePath("../SingleRail2")]
+PrevReverses = Array[bool]([true, true])
+NextReverses = Array[bool]([true, true])
+PrevActiveID = 1
+NextActiveID = 1
 metadata/_custom_type_script = "uid://iue7f62tsxac"
 
 [node name="CurveLiner" type="Line2D" parent="MultiRail"]
@@ -62,3 +64,22 @@ texture = ExtResource("5_q6r6c")
 
 [node name="Camera2D" type="Camera2D" parent="Train"]
 zoom = Vector2(2, 2)
+
+[node name="SingleRail2" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
+position = Vector2(290, 1)
+curve = ExtResource("1_4d7sh")
+script = ExtResource("1_epypp")
+NextRail = NodePath("../MultiRail")
+NextRailReverse = true
+PrevRail = NodePath("../MultiRail")
+PrevRailReverse = true
+metadata/_custom_type_script = "uid://craksh6ncg5pp"
+
+[node name="CurveLiner" type="Line2D" parent="SingleRail2"]
+texture_repeat = 2
+points = PackedVector2Array(479, 132, 537, 235)
+texture = ExtResource("2_kdubu")
+texture_mode = 1
+joint_mode = 2
+script = ExtResource("3_0hol4")
+metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
