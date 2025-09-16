@@ -11,5 +11,7 @@
     <Content Include="Line2d.cs" />
     <Content Include="addons\ParentSwitchModule\ParentSwitchModule.cs" />
     <Content Include="addons\TrainPhysicsModule\Nodes\Train\Train.cs" />
+    <Content Include="addons\TrainPhysicsModule\Nodes\Rail\Rail.cs" />
+    <Content Include="addons\TrainPhysicsModule\Nodes\MultiRail\MultiRail.cs" />
   </ItemGroup>
 </Project>

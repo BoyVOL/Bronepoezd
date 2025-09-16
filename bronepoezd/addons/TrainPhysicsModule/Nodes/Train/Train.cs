@@ -5,15 +5,22 @@ using System;
 public partial class Train : Node2D
 {
 	[Export]
-	Rail CurrentRail = null;
+	public Node2D StartRail = null;
+
+	public IRail CurrentRail = null;
 
 	[Export]
-	bool reverse = false;
+	public bool reverse = false;
 
 	[Export]
-	float railPos = 0;
+	public float railPos = 0;
 
-	public void SnapToRail(Rail rail, float position)
+    public override void _EnterTree()
+    {
+		if(StartRail != null) CurrentRail = (IRail)StartRail;
+    }
+
+	public void SnapToRail(IRail rail, float position)
 	{
 		this.Transform = rail.Transform * rail.Curve.SampleBakedWithRotation(position);
 		if (reverse) Rotation += MathF.PI;
@@ -22,27 +29,6 @@ public partial class Train : Node2D
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-	}
-
-	public void GoToNextRail()
-	{
-		if (CurrentRail.NextRail != null)
-		{
-			CurrentRail = CurrentRail.NextRail;
-			if (CurrentRail.NextRailReverse)
-			{
-				railPos = CurrentRail.Curve.GetBakedLength();
-				reverse = !reverse;
-			}
-			else
-			{
-				railPos = 0;
-			}
-		}
-		else
-		{
-			CurrentRail = null;
-		}
 	}
 
 	public override void _Process(double delta)
@@ -57,33 +43,12 @@ public partial class Train : Node2D
 		{
 			if (railPos < 0)
 			{
-				GoToPrevRail();
+				CurrentRail.MoveToPrev(this);
 			}
 			if (railPos > CurrentRail.Curve.GetBakedLength())
 			{
-				GoToNextRail();
+				CurrentRail.MoveToNext(this);
 			}
-		}
-	}
-
-	public void GoToPrevRail()
-	{
-		if (CurrentRail.PrevRail != null)
-		{
-			CurrentRail = CurrentRail.PrevRail;
-			if (CurrentRail.PrevRailReverse)
-			{
-				railPos = 0;
-				reverse = !reverse;
-			}
-			else
-			{
-				railPos = CurrentRail.Curve.GetBakedLength();
-			}
-		}
-		else
-		{
-			CurrentRail = null;
 		}
 	}
 
@@ -122,5 +87,17 @@ public partial class Train : Node2D
 
 public interface IRail
 {
-	
+	public Curve2D Curve
+	{
+		get;
+	}
+
+	public Transform2D Transform
+	{
+		get;
+	}
+
+	public void MoveToPrev(Train train); 
+
+	public void MoveToNext(Train train); 
 }
