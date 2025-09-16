@@ -31,14 +31,14 @@ joint_mode = 2
 script = ExtResource("3_0hol4")
 metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 
-[node name="MultiRail" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
+[node name="MultiRail" type="Path2D" parent="." node_paths=PackedStringArray("PrevRails", "NextRails")]
 position = Vector2(181, 40)
 curve = ExtResource("4_rj586")
 script = ExtResource("7_d21ai")
-NextRail = NodePath("../SingleRail")
-NextRailReverse = true
-PrevRail = NodePath("../SingleRail")
-PrevRailReverse = true
+PrevRails = [NodePath("../SingleRail")]
+NextRails = [NodePath("../SingleRail")]
+PrevReverses = Array[bool]([true])
+NextReverses = Array[bool]([true])
 metadata/_custom_type_script = "uid://iue7f62tsxac"
 
 [node name="CurveLiner" type="Line2D" parent="MultiRail"]
