@@ -16,16 +16,7 @@ public partial class MultiRail : Rail, IRail
     {
         if (NextRails[NextActiveID] != null)
         {
-            train.CurrentRail = NextRails[NextActiveID];
-            if (NextReverses[NextActiveID])
-            {
-                train.railPos = NextRails[NextActiveID].Curve.GetBakedLength();
-                train.reverse = !train.reverse;
-            }
-            else
-            {
-                train.railPos = 0;
-            }
+            SwapToRail(train, NextRails[NextActiveID]);
         }
         else
         {
@@ -37,16 +28,7 @@ public partial class MultiRail : Rail, IRail
     {
         if (PrevRails[PrevActiveID] != null)
         {
-            train.CurrentRail = PrevRails[PrevActiveID];
-            if (PrevReverses[PrevActiveID])
-            {
-                train.railPos = 0;
-                train.reverse = !train.reverse;
-            }
-            else
-            {
-                train.railPos = PrevRails[PrevActiveID].Curve.GetBakedLength();
-            }
+            SwapToRail(train, PrevRails[PrevActiveID]);
         }
         else
         {
