@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=13 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Curve2D" uid="uid://be7kojv5rj6sh" path="res://curve_2.tres" id="1_4d7sh"]
 [ext_resource type="Script" uid="uid://craksh6ncg5pp" path="res://addons/TrainPhysicsModule/Nodes/SingleRail/SingleRail.cs" id="1_epypp"]
@@ -9,6 +9,8 @@
 [ext_resource type="Curve2D" uid="uid://t8o0r86n015c" path="res://curve1.tres" id="4_rj586"]
 [ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://TinyTrain.png" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://iue7f62tsxac" path="res://addons/TrainPhysicsModule/Nodes/MultiRail/MultiRail.cs" id="7_d21ai"]
+[ext_resource type="Script" uid="uid://d18g7qfbcv46t" path="res://Button.cs" id="8_hqns4"]
+[ext_resource type="Script" uid="uid://c1y406lxhj5ab" path="res://Button2.cs" id="9_x0ka3"]
 
 [sub_resource type="Curve2D" id="Curve2D_4d7sh"]
 _data = {
@@ -17,6 +19,23 @@ _data = {
 point_count = 7
 
 [node name="Node2D" type="Node2D"]
+
+[node name="SingleRail2" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
+position = Vector2(290, 1)
+curve = SubResource("Curve2D_4d7sh")
+script = ExtResource("1_epypp")
+NextRail = NodePath("../MultiRail")
+PrevRail = NodePath("../MultiRail")
+metadata/_custom_type_script = "uid://craksh6ncg5pp"
+
+[node name="CurveLiner" type="Line2D" parent="SingleRail2"]
+texture_repeat = 2
+points = PackedVector2Array(479, 132, 537, 235)
+texture = ExtResource("2_kdubu")
+texture_mode = 1
+joint_mode = 2
+script = ExtResource("3_0hol4")
+metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 
 [node name="SingleRail" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
 position = Vector2(300, -37)
@@ -39,9 +58,8 @@ metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
 position = Vector2(181, 40)
 curve = ExtResource("4_rj586")
 script = ExtResource("7_d21ai")
-PrevRails = [NodePath("../SingleRail"), NodePath("../SingleRail2")]
+PrevRails = [NodePath("../SingleRail2")]
 NextRails = [NodePath("../SingleRail"), NodePath("../SingleRail2")]
-PrevActiveID = 1
 metadata/_custom_type_script = "uid://iue7f62tsxac"
 
 [node name="CurveLiner" type="Line2D" parent="MultiRail"]
@@ -52,6 +70,22 @@ texture_mode = 1
 joint_mode = 2
 script = ExtResource("3_0hol4")
 metadata/_custom_type_script = "uid://dmglo8q6tdgf8"
+
+[node name="Button" type="Button" parent="MultiRail"]
+offset_left = 192.0
+offset_top = 132.0
+offset_right = 200.0
+offset_bottom = 140.0
+scale = Vector2(6.91365, 2.86399)
+script = ExtResource("8_hqns4")
+
+[node name="Button2" type="Button" parent="MultiRail"]
+offset_left = 328.0
+offset_top = -9.0
+offset_right = 336.0
+offset_bottom = -0.999998
+scale = Vector2(7.23468, 3.95671)
+script = ExtResource("9_x0ka3")
 
 [node name="Train" type="Node2D" parent="." node_paths=PackedStringArray("StartRail")]
 script = ExtResource("4_0hol4")
@@ -65,20 +99,3 @@ texture = ExtResource("5_q6r6c")
 
 [node name="Camera2D" type="Camera2D" parent="Train"]
 zoom = Vector2(2, 2)
-
-[node name="SingleRail2" type="Path2D" parent="." node_paths=PackedStringArray("NextRail", "PrevRail")]
-position = Vector2(290, 1)
-curve = SubResource("Curve2D_4d7sh")
-script = ExtResource("1_epypp")
-NextRail = NodePath("../MultiRail")
-PrevRail = NodePath("../MultiRail")
-metadata/_custom_type_script = "uid://craksh6ncg5pp"
-
-[node name="CurveLiner" type="Line2D" parent="SingleRail2"]
-texture_repeat = 2
-points = PackedVector2Array(479, 132, 537, 235)
-texture = ExtResource("2_kdubu")
-texture_mode = 1
-joint_mode = 2
-script = ExtResource("3_0hol4")
-metadata/_custom_type_script = "uid://dmglo8q6tdgf8"

@@ -1,0 +1,20 @@
+using Godot;
+using System;
+
+public partial class Button : Godot.Button
+{
+    MultiRail Parent = null;
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Parent = GetParent<MultiRail>();
+    }
+
+    public override void _Pressed()
+    {
+        Parent.NextActiveID++;
+        if (Parent.NextActiveID >= Parent.NextRails.Count) Parent.NextActiveID = 0;
+        base._Pressed();
+    }
+}
