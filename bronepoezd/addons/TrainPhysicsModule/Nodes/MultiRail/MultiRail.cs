@@ -7,8 +7,6 @@ public partial class MultiRail : Rail, IRail
 {
     [Export] public Array<Rail> PrevRails = new Array<Rail>();
     [Export] public Array<Rail> NextRails = new Array<Rail>();
-    [Export] public Array<bool> PrevReverses = new Array<bool>();
-    [Export] public Array<bool> NextReverses = new Array<bool>();
     [Export] public int PrevActiveID = 0;
     [Export] public int NextActiveID = 0;
 
