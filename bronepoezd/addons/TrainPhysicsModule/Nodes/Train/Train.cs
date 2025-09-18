@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 [GlobalClass]
 public partial class Train : Node2D
@@ -13,16 +14,22 @@ public partial class Train : Node2D
 	public bool reverse = false;
 
 	[Export]
-	public float railPos = 0;
+	public double RailSpeed = 0;
+	
+	[Export]
+	public double RailAccel = 0;
+
+	[Export]
+	public double railPos = 0;
 
     public override void _EnterTree()
     {
 		if(StartRail != null) CurrentRail = (IRail)StartRail;
     }
 
-	public void SnapToRail(IRail rail, float position)
+	public void SnapToRail(IRail rail, double position)
 	{
-		this.Transform = rail.Transform * rail.Curve.SampleBakedWithRotation(position);
+		this.Transform = rail.Transform * rail.Curve.SampleBakedWithRotation((float)position);
 		if (reverse) Rotation += MathF.PI;
 	}
 
@@ -31,12 +38,28 @@ public partial class Train : Node2D
 		base._PhysicsProcess(delta);
 	}
 
+	public int getDirection() {
+		if (reverse) return -1; else return 1;
+	}
+
+	public void ProcessSpeed(double delta) {
+		railPos += RailSpeed * getDirection()*delta;
+	}
+
+	public void ProcessAccel(double delta)
+	{
+		RailSpeed += RailAccel;
+	}
+
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 		if (CurrentRail != null)
 		{
+			ProcessAccel(delta);
+			ProcessSpeed(delta);
 			SnapToRail(CurrentRail, railPos);
+			RailAccel = 0;
 		}
 
 		if (CurrentRail != null)
@@ -59,25 +82,11 @@ public partial class Train : Node2D
 		{
 			if (eventKey.Keycode == Key.W)
 			{
-				if (reverse)
-				{
-					railPos -= 10;
-				}
-				else
-				{
-					railPos += 10;
-				}
+				RailAccel = 10;
 			}
 			if (eventKey.Keycode == Key.S)
 			{
-				if (reverse)
-				{
-					railPos += 10;
-				}
-				else
-				{
-					railPos -= 10;
-				}
+				RailAccel = -10;
 			}
 		}
 	}
