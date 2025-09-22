@@ -16,6 +16,7 @@ script = ExtResource("2_wrm5b")
 metadata/_custom_type_script = "uid://craksh6ncg5pp"
 
 [node name="CurveLiner" type="Line2D" parent="."]
+visible = false
 texture_repeat = 2
 points = PackedVector2Array(43, 41, 41.3672, 39.4102, 39.4932, 37.5854, 37.0625, 35.2188, 34.1865, 32.4185, 30.9766, 29.293, 27.5439, 25.9507, 24, 22.5, 20.4561, 19.0493, 17.0234, 15.707, 13.8135, 12.5815, 10.9375, 9.78125, 8.50684, 7.41455, 6.63281, 5.58984, 5, 4)
 texture = ExtResource("3_8ervx")
