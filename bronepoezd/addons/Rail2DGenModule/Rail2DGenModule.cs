@@ -9,7 +9,7 @@ public partial class Rail2DGenModule : EditorPlugin
 	public override void _EnterTree()
 	{
 		GlobalPath = ((Resource)GetScript()).ResourcePath.GetBaseDir();
-        AddCustomType("RailGenerator", "Path2D", GD.Load<Script>(GlobalPath + "/Nodes/RailGenerator/RailGenerator.cs"),
+        AddCustomType("RailGenerator", "Node", GD.Load<Script>(GlobalPath + "/Nodes/RailGenerator/RailGenerator.cs"),
         GD.Load<Texture2D>(GlobalPath + "/Nodes/RailGenerator/icon.png"));
 		// Initialization of the plugin goes here.
         GD.Print("Rail2DGenModule loaded");
