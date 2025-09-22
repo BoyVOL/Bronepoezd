@@ -22,10 +22,16 @@ public partial class Train : Node2D
 	[Export]
 	public double railPos = 0;
 
+	[Export]
+	public double BrakeForce = 100;
+
+	[Export]
+	public double Accelerate = 100;
+
     public override void _EnterTree()
-    {
-		if(StartRail != null) CurrentRail = (IRail)StartRail;
-    }
+	{
+		if (StartRail != null) CurrentRail = (IRail)StartRail;
+	}
 
 	public void SnapToRail(IRail rail, double position)
 	{
@@ -48,7 +54,12 @@ public partial class Train : Node2D
 
 	public void ProcessAccel(double delta)
 	{
-		RailSpeed += RailAccel;
+		RailSpeed += RailAccel*delta;
+	}
+
+	public void Brake()
+	{
+		RailAccel -= BrakeForce * getDirection() * -1;
 	}
 
 	public override void _Process(double delta)
@@ -82,11 +93,15 @@ public partial class Train : Node2D
 		{
 			if (eventKey.Keycode == Key.W)
 			{
-				RailAccel = 10;
+				RailAccel += Accelerate;
 			}
 			if (eventKey.Keycode == Key.S)
 			{
-				RailAccel = -10;
+				RailAccel -= Accelerate;
+			}
+			if (eventKey.Keycode == Key.A)
+			{
+				RailAccel -= BrakeForce*Math.Sign(RailSpeed);
 			}
 		}
 	}
