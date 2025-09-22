@@ -28,8 +28,11 @@ public partial class RailGenerator : Node2D
 	[Export]
 	PackedScene Junction = null;
 
-	[ExportToolButton("Generate")]
+	[ExportToolButton("TestGeneration")]
 	public Callable GenerateButton => Callable.From(Generate);
+
+	[ExportToolButton("ClearAll")]
+	public Callable ClearButton => Callable.From(RemoveAllChildren);
 
 	public void Generate()
 	{
