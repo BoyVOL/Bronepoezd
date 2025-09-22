@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 
 [Tool]
 [GlobalClass]
@@ -12,7 +14,7 @@ public partial class RailGenerator : Node2D
 	Vector2 GenBoundaries = new Vector2(0, 0);
 
 	[Export]
-	Color DebugBorderColor = Colors.Aqua;
+	Godot.Color DebugBorderColor = Colors.Aqua;
 
 	[Export]
 	int JunctCount = 1;
@@ -21,10 +23,10 @@ public partial class RailGenerator : Node2D
 	double MinGenDistance = 100;
 
 	[Export]
-	PackedScene StraitRail;
+	PackedScene StraitRail = null;
 
 	[Export]
-	PackedScene Junction;
+	PackedScene Junction = null;
 
 	[ExportToolButton("Generate")]
 	public Callable GenerateButton => Callable.From(Generate);
@@ -36,6 +38,10 @@ public partial class RailGenerator : Node2D
 		foreach (var item in JunctPoints)
 		{
 			GenerateJunction(item);
+			foreach (var item2 in JunctPoints)
+			{
+				GenerateRail(item, item2);
+			}
 		}
 	}
 
@@ -64,22 +70,40 @@ public partial class RailGenerator : Node2D
 					if ((Result[i] - Result[j]).LengthSquared() < minDistance * minDistance)
 					{
 						FarEnough = false;
+						retries++;
 						break;
 					}
 				}
+				if (retries > 1000) throw new Exception("Too many tries to generate rail network");
 			} while (!FarEnough);
 		}
 		return Result;
+	}
+
+	public void GenerateRail(Vector2 Pos1, Vector2 Pos2)
+	{
+		if (StraitRail != null)
+		{
+			SingleRail rail = StraitRail.Instantiate() as SingleRail;
+			AddChild(rail);
+			rail.Position = Vector2.Zero;
+			rail.Curve = (Curve2D)rail.Curve.Duplicate();
+			rail.Curve.ClearPoints();
+			rail.Curve.AddPoint(Pos1);
+			rail.Curve.AddPoint(Pos2);
+			rail.QueueRedraw();	
+		}
 	}
 
 	public void GenerateJunction(Vector2 Pos)
 	{
 		if (Junction != null)
 		{
-			Node2D Buff = Junction.Instantiate<Node2D>(PackedScene.GenEditState.Instance);
-			AddChild(Buff);
-			Buff.Position = Pos;
-			Buff.QueueRedraw();
+			SingleRail rail = Junction.Instantiate() as SingleRail;
+			AddChild(rail);
+			rail.Curve = (Curve2D)rail.Curve.Duplicate();
+			rail.Position = Pos;
+			rail.QueueRedraw();
 		}
 	}
 
