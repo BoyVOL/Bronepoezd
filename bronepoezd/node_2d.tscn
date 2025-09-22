@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=14 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Curve2D" uid="uid://be7kojv5rj6sh" path="res://curve_2.tres" id="1_4d7sh"]
 [ext_resource type="Script" uid="uid://craksh6ncg5pp" path="res://addons/TrainPhysicsModule/Nodes/SingleRail/SingleRail.cs" id="1_epypp"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://TinyTrain.png" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://iue7f62tsxac" path="res://addons/TrainPhysicsModule/Nodes/MultiRail/MultiRail.cs" id="7_d21ai"]
 [ext_resource type="Script" uid="uid://d18g7qfbcv46t" path="res://Button.cs" id="8_hqns4"]
+[ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="11_hqns4"]
 
 [sub_resource type="Curve2D" id="Curve2D_ir8iy"]
 _data = {
@@ -117,3 +118,7 @@ texture = ExtResource("5_q6r6c")
 
 [node name="Camera2D" type="Camera2D" parent="Train"]
 zoom = Vector2(2, 2)
+
+[node name="RailGenerator" type="Node" parent="."]
+script = ExtResource("11_hqns4")
+metadata/_custom_type_script = "uid://bbndwvvh1asi7"

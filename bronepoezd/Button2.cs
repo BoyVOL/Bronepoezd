@@ -14,7 +14,7 @@ public partial class Button2 : Button
     public override void _Pressed()
     {
         Parent.PrevActiveID++;
-        if (Parent.PrevActiveID >= Parent.PrevRails.Count) Parent.PrevActiveID = 0;
+        if (Parent.PrevActiveID >= Parent.PrevRails.Length) Parent.PrevActiveID = 0;
         base._Pressed();
     }
 }

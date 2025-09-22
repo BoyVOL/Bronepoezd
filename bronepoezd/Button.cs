@@ -15,7 +15,7 @@ public partial class Button : Godot.Button
     {
         base._Pressed();
         Parent.NextActiveID++;
-        if (Parent.NextActiveID >= Parent.NextRails.Count) Parent.NextActiveID = 0;
+        if (Parent.NextActiveID >= Parent.NextRails.Length) Parent.NextActiveID = 0;
         Text = Parent.NextActiveID.ToString();
     }
 }
