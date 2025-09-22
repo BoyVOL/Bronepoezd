@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3pbr7svo3kxh"
-path="res://.godot/imported/icon.png-a9200f872179ffdc0da5da3c3179c206.ctex"
+path="res://.godot/imported/icon.png-623caa10aaf839287b9230480fe9f8b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/TrainPhysicsModule/Nodes/MultiRail/icon.png"
-dest_files=["res://.godot/imported/icon.png-a9200f872179ffdc0da5da3c3179c206.ctex"]
+source_file="res://addons/Rail2DGenModule/Nodes/RailGenerator/icon.png"
+dest_files=["res://.godot/imported/icon.png-623caa10aaf839287b9230480fe9f8b5.ctex"]
 
 [params]
 
