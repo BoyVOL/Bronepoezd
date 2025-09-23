@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -41,10 +42,10 @@ public partial class RailGenerator : Node2D
 		foreach (var item in JunctPoints)
 		{
 			GenerateJunction(item);
-			foreach (var item2 in JunctPoints)
-			{
-				GenerateRail(item, item2);
-			}
+		}
+		foreach (var item in GenerateConnectionTable(JunctPoints))
+		{
+			GenerateRail(JunctPoints[item.Key.Item1], JunctPoints[item.Key.Item2]);
 		}
 	}
 
@@ -77,8 +78,21 @@ public partial class RailGenerator : Node2D
 						break;
 					}
 				}
-				if (retries > 1000) throw new Exception("Too many tries to generate rail network");
+				if (retries > 1000) throw new Exception("Too many tries to generate new point");
 			} while (!FarEnough);
+		}
+		return Result;
+	}
+
+	public Dictionary<Tuple<int, int>, bool> GenerateConnectionTable(Vector2[] points)
+	{
+		Dictionary<Tuple<int, int>, bool> Result = new Dictionary<Tuple<int, int>, bool>();
+		for (int i = 0; i < points.Length; i++)
+		{
+			for (int j = 0; j < points.Length; j++)
+			{
+				Result.Add(new Tuple<int, int>(i, j), true);
+			}
 		}
 		return Result;
 	}
@@ -94,7 +108,7 @@ public partial class RailGenerator : Node2D
 			rail.Curve.ClearPoints();
 			rail.Curve.AddPoint(Pos1);
 			rail.Curve.AddPoint(Pos2);
-			rail.QueueRedraw();	
+			rail.QueueRedraw();
 		}
 	}
 
