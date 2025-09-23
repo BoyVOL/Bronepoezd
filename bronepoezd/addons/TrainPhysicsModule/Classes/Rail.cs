@@ -5,6 +5,7 @@ using System;
 [GlobalClass]
 public partial class Rail : Path2D, IRail
 {
+    [Export] public Curve Height = new Curve();
 
     public void SwapToRail(Train train, Rail rail)
     {

@@ -24,6 +24,12 @@ public partial class RailGenerator : Node2D
 	double MinGenDistance = 100;
 
 	[Export]
+	float MaxDevition = 100;
+
+	[Export]
+	float StepScale = 100;
+
+	[Export]
 	PackedScene StraitRail = null;
 
 	[Export]
@@ -43,9 +49,10 @@ public partial class RailGenerator : Node2D
 		{
 			GenerateJunction(item);
 		}
-		foreach (var item in GenerateConnectionTable(JunctPoints))
+		foreach (var item in GenerateConnDictionary(JunctPoints))
 		{
-			GenerateRail(JunctPoints[item.Key.Item1], JunctPoints[item.Key.Item2]);
+			Rail rail = GenerateRail(JunctPoints, item.Key);
+			MakeCurvy(rail);
 		}
 	}
 
@@ -84,20 +91,29 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public Dictionary<Tuple<int, int>, bool> GenerateConnectionTable(Vector2[] points)
+	public Dictionary<Tuple<int, int>, float> GenerateConnDictionary(Vector2[] points)
 	{
-		Dictionary<Tuple<int, int>, bool> Result = new Dictionary<Tuple<int, int>, bool>();
+		Dictionary<Tuple<int, int>, float> Result = new Dictionary<Tuple<int, int>, float>();
 		for (int i = 0; i < points.Length; i++)
 		{
-			for (int j = 0; j < points.Length; j++)
+			for (int j = 0; j < i; j++)
 			{
-				Result.Add(new Tuple<int, int>(i, j), true);
+				Result.Add(new Tuple<int, int>(i, j), 0);
 			}
 		}
 		return Result;
 	}
 
-	public void GenerateRail(Vector2 Pos1, Vector2 Pos2)
+	public void MakeCurvy(Rail rail)
+	{
+		int NumberOfSteps = (int)Math.Round(rail.Curve.GetBakedLength() / StepScale);
+		for (int i = 0; i < NumberOfSteps; i++)
+		{
+			
+		}
+	}
+
+	public Rail GenerateRail(Vector2 Pos1, Vector2 Pos2)
 	{
 		if (StraitRail != null)
 		{
@@ -109,7 +125,14 @@ public partial class RailGenerator : Node2D
 			rail.Curve.AddPoint(Pos1);
 			rail.Curve.AddPoint(Pos2);
 			rail.QueueRedraw();
+			return rail;
 		}
+		else throw new Exception("no scene for connection rail");
+	}
+
+	public Rail GenerateRail(Vector2[] PointArray,Tuple<int, int> connection)
+	{
+		return GenerateRail(PointArray[connection.Item1], PointArray[connection.Item2]);
 	}
 
 	public void GenerateJunction(Vector2 Pos)

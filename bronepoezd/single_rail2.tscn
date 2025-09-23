@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxs2qo44su1w3"]
+[gd_scene load_steps=6 format=3 uid="uid://dxs2qo44su1w3"]
 
 [ext_resource type="Script" uid="uid://craksh6ncg5pp" path="res://addons/TrainPhysicsModule/Nodes/SingleRail/SingleRail.cs" id="2_wrm5b"]
 [ext_resource type="Texture2D" uid="uid://bvgv7mdd50eea" path="res://TinyRailGreen.png" id="3_8ervx"]
@@ -10,9 +10,12 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_c0iqw"]
+
 [node name="SingleRail" type="Path2D"]
 curve = SubResource("Curve2D_c0iqw")
 script = ExtResource("2_wrm5b")
+Height = SubResource("Curve_c0iqw")
 metadata/_custom_type_script = "uid://craksh6ncg5pp"
 
 [node name="CurveLiner" type="Line2D" parent="."]
