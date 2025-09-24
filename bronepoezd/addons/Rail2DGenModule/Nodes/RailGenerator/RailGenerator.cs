@@ -52,7 +52,7 @@ public partial class RailGenerator : Node2D
 		foreach (var item in GenerateConnDictionary(JunctPoints))
 		{
 			Rail rail = GenerateRail(JunctPoints, item.Key);
-			MakeCurvy(rail);
+			Complicate(rail);
 		}
 	}
 
@@ -104,12 +104,15 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public void MakeCurvy(Rail rail)
+	public void Complicate(Rail rail)
 	{
-		int NumberOfSteps = (int)Math.Round(rail.Curve.GetBakedLength() / StepScale);
-		for (int i = 0; i < NumberOfSteps; i++)
+		float Current = StepScale+(GD.Randf()*StepScale - StepScale/2);
+		while (Current < rail.Curve.GetBakedLength())
 		{
-			
+			Vector2 Point = rail.Curve.SampleBaked(Current);
+			Point += new Vector2(GD.Randf() * MaxDevition - MaxDevition / 2, GD.Randf() * MaxDevition - MaxDevition/ 2);
+			rail.Curve.AddPoint(Point, null, null, rail.Curve.PointCount - 1);
+			Current += StepScale+(GD.Randf()*StepScale - StepScale/2);
 		}
 	}
 
