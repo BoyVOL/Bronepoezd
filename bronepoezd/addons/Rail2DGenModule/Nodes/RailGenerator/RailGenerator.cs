@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 
 [Tool]
 [GlobalClass]
@@ -49,8 +51,9 @@ public partial class RailGenerator : Node2D
 		{
 			GenerateJunction(item.Pos);
 		}
-		Dictionary<Tuple<int, int>, int> ConnDitc = GenerateConnDictionary(JunctPoints);
-		foreach (var item in ConnDitc)
+		Dictionary<linkIndexes, float> ConnDict = GenerateConnDictionary(JunctPoints);
+		TravelerGreedy(JunctPoints, ConnDict);
+		foreach (var item in ConnDict)
 		{
 			Rail rail = GenerateRail(JunctPoints, item.Key);
 			Complicate(rail);
@@ -109,28 +112,53 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public Dictionary<Tuple<int, int>, int> GenerateConnDictionary(Array points)
+	public struct linkIndexes {
+		public int StartId;
+		public int EndId;
+
+		public linkIndexes(int startId, int endId)
+		{
+			StartId = startId;
+			EndId = endId;
+		}
+	}
+
+	public Dictionary<linkIndexes, float> GenerateConnDictionary(Array points)
 	{
-		Dictionary<Tuple<int, int>, int> Result = new Dictionary<Tuple<int, int>, int>();
+		Dictionary<linkIndexes, float> Result = new Dictionary<linkIndexes, float>();
 		for (int i = 0; i < points.Length; i++)
 		{
 			for (int j = 0; j < i; j++)
 			{
-				Result.Add(new Tuple<int, int>(i, j), 0);
+				Result.Add(new linkIndexes(i, j), 0);
 			}
 		}
 		return Result;
 	}
 
+	public void CalcWeights(AlgoJunct[] junctions, Dictionary<linkIndexes, float> connections)
+	{
+		foreach (var item in connections)
+		{
+			float weight = (junctions[item.Key.EndId].Pos - junctions[item.Key.StartId].Pos).LengthSquared();
+			connections[item.Key] = weight;
+		}
+	}
+
+	public void TravelerGreedy(AlgoJunct[] junctions, Dictionary<linkIndexes, float> connections)
+	{
+		int CurrentId = (int)GD.RandRange(0, junctions.Length);
+	}
+
 	public void Complicate(Rail rail)
 	{
-		float Current = StepScale+(GD.Randf()*StepScale - StepScale/2);
+		float Current = StepScale + (GD.Randf() * StepScale - StepScale / 2);
 		while (Current < rail.Curve.GetBakedLength())
 		{
 			Vector2 Point = rail.Curve.SampleBaked(Current);
-			Point += new Vector2(GD.Randf() * MaxDevition - MaxDevition / 2, GD.Randf() * MaxDevition - MaxDevition/ 2);
+			Point += new Vector2(GD.Randf() * MaxDevition - MaxDevition / 2, GD.Randf() * MaxDevition - MaxDevition / 2);
 			rail.Curve.AddPoint(Point, null, null, rail.Curve.PointCount - 1);
-			Current += StepScale+(GD.Randf()*StepScale - StepScale/2);
+			Current += StepScale + (GD.Randf() * StepScale - StepScale / 2);
 		}
 	}
 
@@ -151,9 +179,9 @@ public partial class RailGenerator : Node2D
 		else throw new Exception("no scene for connection rail");
 	}
 
-	public Rail GenerateRail(AlgoJunct[] PointArray,Tuple<int, int> connection)
+	public Rail GenerateRail(AlgoJunct[] PointArray,linkIndexes connection)
 	{
-		return GenerateRail(PointArray[connection.Item1].Pos, PointArray[connection.Item2].Pos);
+		return GenerateRail(PointArray[connection.StartId].Pos, PointArray[connection.EndId].Pos);
 	}
 
 	public void GenerateJunction(Vector2 Pos)
