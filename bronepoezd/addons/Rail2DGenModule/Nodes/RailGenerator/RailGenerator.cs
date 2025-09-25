@@ -1,9 +1,11 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 
@@ -51,12 +53,18 @@ public partial class RailGenerator : Node2D
 		{
 			GenerateJunction(item.Pos);
 		}
-		Dictionary<linkIndexes, float> ConnDict = GenerateConnDictionary(JunctPoints);
-		TravelerGreedy(JunctPoints, ConnDict);
-		foreach (var item in ConnDict)
+		float[,] ConnMatrix = GenerateConnMatrix(JunctPoints);
+		TravelerGreedy(JunctPoints, ConnMatrix);
+		for (int i = 0; i < ConnMatrix.GetLength(0); i++)
 		{
-			Rail rail = GenerateRail(JunctPoints, item.Key);
-			Complicate(rail);
+			for (int j = 0; j < ConnMatrix.GetLength(1); j++)
+			{
+				if (ConnMatrix[i, j] != 0)
+				{
+					Rail rail = GenerateRail(JunctPoints,new linkIndexes(i,j));
+					Complicate(rail);
+				}
+			}
 		}
 	}
 
@@ -123,31 +131,31 @@ public partial class RailGenerator : Node2D
 		}
 	}
 
-	public Dictionary<linkIndexes, float> GenerateConnDictionary(Array points)
+	public float[,] GenerateConnMatrix(AlgoJunct[] points)
 	{
-		Dictionary<linkIndexes, float> Result = new Dictionary<linkIndexes, float>();
+		float[,] Result = new float[points.Length,points.Length];
 		for (int i = 0; i < points.Length; i++)
 		{
-			for (int j = 0; j < i; j++)
+			for (int j = i; j < points.Length; j++)
 			{
-				Result.Add(new linkIndexes(i, j), 0);
+				if (i != j) Result [i,j] = (points[i].Pos - points[j].Pos).LengthSquared();
+				else Result [i,j] = 0;
 			}
 		}
 		return Result;
 	}
 
-	public void CalcWeights(AlgoJunct[] junctions, Dictionary<linkIndexes, float> connections)
-	{
-		foreach (var item in connections)
-		{
-			float weight = (junctions[item.Key.EndId].Pos - junctions[item.Key.StartId].Pos).LengthSquared();
-			connections[item.Key] = weight;
-		}
-	}
-
-	public void TravelerGreedy(AlgoJunct[] junctions, Dictionary<linkIndexes, float> connections)
+	public void TravelerGreedy(AlgoJunct[] junctions, float[,]connections)
 	{
 		int CurrentId = (int)GD.RandRange(0, junctions.Length);
+		for (int i = 1; i < junctions.Length; i++)
+		{
+			int MinId = 0;
+			for (int j = 0; j < junctions.Length; j++)
+			{
+				
+			}
+		}
 	}
 
 	public void Complicate(Rail rail)
