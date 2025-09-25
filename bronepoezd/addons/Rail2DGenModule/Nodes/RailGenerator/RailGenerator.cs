@@ -44,12 +44,13 @@ public partial class RailGenerator : Node2D
 	public void Generate()
 	{
 		RemoveAllChildren();
-		Vector2[] JunctPoints = GenJunctionPoints(MinGenDistance);
+		AlgoJunct[] JunctPoints = GenJunctionPoints(MinGenDistance);
 		foreach (var item in JunctPoints)
 		{
-			GenerateJunction(item);
+			GenerateJunction(item.Pos);
 		}
-		foreach (var item in GenerateConnDictionary(JunctPoints))
+		Dictionary<Tuple<int, int>, int> ConnDitc = GenerateConnDictionary(JunctPoints);
+		foreach (var item in ConnDitc)
 		{
 			Rail rail = GenerateRail(JunctPoints, item.Key);
 			Complicate(rail);
@@ -65,9 +66,26 @@ public partial class RailGenerator : Node2D
 		} 
 	}
 
-	public Vector2[] GenJunctionPoints(double minDistance = 0)
+	public struct AlgoJunct
 	{
-		Vector2[] Result = new Vector2[JunctCount];
+		public Vector2 Pos;
+
+		public int fluff = 0;
+
+		public AlgoJunct(Vector2 pos)
+		{
+			Pos = pos;
+		}
+
+		public AlgoJunct()
+		{
+			Pos = Vector2.Zero;
+		}
+	}
+
+	public AlgoJunct[] GenJunctionPoints(double minDistance = 0)
+	{
+		AlgoJunct[] Result = new AlgoJunct[JunctCount];
 		for (int i = 0; i < Result.Length; i++)
 		{
 			int retries = 0;
@@ -75,10 +93,10 @@ public partial class RailGenerator : Node2D
 			do
 			{
 				FarEnough = true;
-				Result[i] = new Vector2(GD.Randf() * GenBoundaries.X, GD.Randf() * GenBoundaries.Y);
+				Result[i] = new AlgoJunct(new Vector2(GD.Randf() * GenBoundaries.X, GD.Randf() * GenBoundaries.Y));
 				for (int j = 0; j < i; j++)
 				{
-					if ((Result[i] - Result[j]).LengthSquared() < minDistance * minDistance)
+					if ((Result[i].Pos - Result[j].Pos).LengthSquared() < minDistance * minDistance)
 					{
 						FarEnough = false;
 						retries++;
@@ -91,9 +109,9 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public Dictionary<Tuple<int, int>, float> GenerateConnDictionary(Vector2[] points)
+	public Dictionary<Tuple<int, int>, int> GenerateConnDictionary(Array points)
 	{
-		Dictionary<Tuple<int, int>, float> Result = new Dictionary<Tuple<int, int>, float>();
+		Dictionary<Tuple<int, int>, int> Result = new Dictionary<Tuple<int, int>, int>();
 		for (int i = 0; i < points.Length; i++)
 		{
 			for (int j = 0; j < i; j++)
@@ -133,9 +151,9 @@ public partial class RailGenerator : Node2D
 		else throw new Exception("no scene for connection rail");
 	}
 
-	public Rail GenerateRail(Vector2[] PointArray,Tuple<int, int> connection)
+	public Rail GenerateRail(AlgoJunct[] PointArray,Tuple<int, int> connection)
 	{
-		return GenerateRail(PointArray[connection.Item1], PointArray[connection.Item2]);
+		return GenerateRail(PointArray[connection.Item1].Pos, PointArray[connection.Item2].Pos);
 	}
 
 	public void GenerateJunction(Vector2 Pos)

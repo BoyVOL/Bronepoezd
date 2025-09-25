@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=20 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="Script" uid="uid://craksh6ncg5pp" path="res://addons/TrainPhysicsModule/Nodes/SingleRail/SingleRail.cs" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://ceo5haq60xkxq" path="res://TinyRail.png" id="2_0hol4"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d18g7qfbcv46t" path="res://Button.cs" id="8_hqns4"]
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="11_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://single_rail2.tscn" id="12_x0ka3"]
+[ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://single_rail3.tscn" id="13_0h7mo"]
 
 [sub_resource type="Curve2D" id="Curve2D_ir8iy"]
 _data = {
@@ -144,5 +145,5 @@ MinGenDistance = 300.0
 MaxDevition = 300.0
 StepScale = 300.0
 StraitRail = ExtResource("12_x0ka3")
-Junction = ExtResource("12_x0ka3")
+Junction = ExtResource("13_0h7mo")
 metadata/_custom_type_script = "uid://bbndwvvh1asi7"
