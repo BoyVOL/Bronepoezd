@@ -147,13 +147,12 @@ public partial class RailGenerator : Node2D
 
 	public void TravelerGreedy(AlgoJunct[] junctions, float[,]connections)
 	{
-		int CurrentId = (int)GD.RandRange(0, junctions.Length);
-		for (int i = 1; i < junctions.Length; i++)
-		{
-			int MinId = 0;
-			for (int j = 0; j < junctions.Length; j++)
+		int CurrentI = (int)GD.RandRange(0, junctions.Length);
+		for (int f = 1; f < junctions.Length; f++)
+		{						
+			for (int j = 0; j < connections.GetLength(0); j++)
 			{
-				
+
 			}
 		}
 	}
