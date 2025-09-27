@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 [Tool]
 [GlobalClass]
@@ -53,15 +54,15 @@ public partial class RailGenerator : Node2D
 		{
 			GenerateJunction(item.Pos);
 		}
-		float[,] ConnMatrix = GenerateConnMatrix(JunctPoints);
+		AlgoConn[,] ConnMatrix = GenerateConnMatrix(JunctPoints);
 		TravelerGreedy(JunctPoints, ConnMatrix);
 		for (int i = 0; i < ConnMatrix.GetLength(0); i++)
 		{
 			for (int j = 0; j < ConnMatrix.GetLength(1); j++)
 			{
-				if (ConnMatrix[i, j] != 0)
+				if (ConnMatrix[i, j].Distance > 0)
 				{
-					Rail rail = GenerateRail(JunctPoints,new linkIndexes(i,j));
+					Rail rail = GenerateRail(JunctPoints,ConnMatrix[i, j]);
 					Complicate(rail);
 				}
 			}
@@ -120,40 +121,52 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public struct linkIndexes {
-		public int StartId;
-		public int EndId;
+	public struct AlgoConn
+	{
+		public int ID1 = 0;
 
-		public linkIndexes(int startId, int endId)
+		public int ID2 = 0;
+		public float Distance = 0;
+
+		public bool Visited = false;
+
+		public AlgoConn()
 		{
-			StartId = startId;
-			EndId = endId;
+
+		}
+
+		public AlgoConn(int id1, int id2)
+		{
+			ID1 = id1;
+			ID2 = id2;
 		}
 	}
 
-	public float[,] GenerateConnMatrix(AlgoJunct[] points)
+	public AlgoConn[,] GenerateConnMatrix(AlgoJunct[] points)
 	{
-		float[,] Result = new float[points.Length,points.Length];
+		AlgoConn[,] Result = new AlgoConn[points.Length, points.Length];
 		for (int i = 0; i < points.Length; i++)
 		{
 			for (int j = i; j < points.Length; j++)
 			{
-				if (i != j) Result [i,j] = (points[i].Pos - points[j].Pos).LengthSquared();
-				else Result [i,j] = 0;
+				Result[i, j].ID1 = i;
+				Result[i, j].ID2 = j;
+				if (i != j)
+				{
+					Result[i, j].Distance = (points[i].Pos - points[j].Pos).LengthSquared();
+				}
+				else Result[i, j].Distance = 0;
 			}
 		}
 		return Result;
 	}
 
-	public void TravelerGreedy(AlgoJunct[] junctions, float[,]connections)
+	public void TravelerGreedy(AlgoJunct[] junctions, AlgoConn[,]connections)
 	{
 		int CurrentI = (int)GD.RandRange(0, junctions.Length);
 		for (int f = 1; f < junctions.Length; f++)
-		{						
-			for (int j = 0; j < connections.GetLength(0); j++)
-			{
+		{
 
-			}
 		}
 	}
 
@@ -186,9 +199,9 @@ public partial class RailGenerator : Node2D
 		else throw new Exception("no scene for connection rail");
 	}
 
-	public Rail GenerateRail(AlgoJunct[] PointArray,linkIndexes connection)
+	public Rail GenerateRail(AlgoJunct[] PointArray,AlgoConn connection)
 	{
-		return GenerateRail(PointArray[connection.StartId].Pos, PointArray[connection.EndId].Pos);
+		return GenerateRail(PointArray[connection.ID1].Pos, PointArray[connection.ID2].Pos);
 	}
 
 	public void GenerateJunction(Vector2 Pos)
