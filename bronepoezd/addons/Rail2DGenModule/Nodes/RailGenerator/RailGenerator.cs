@@ -49,21 +49,22 @@ public partial class RailGenerator : Node2D
 	public void Generate()
 	{
 		RemoveAllChildren();
-		AlgoJunct[] JunctPoints = GenJunctionPoints(MinGenDistance);
-		foreach (var item in JunctPoints)
+		MultiRail[] JunctPoints = GenJunctionPoints(MinGenDistance);
+		foreach (MultiRail item in JunctPoints)
 		{
-			GenerateJunction(item.Pos);
+			AddChild(item);
+			item.QueueRedraw();
 		}
-		AlgoConn[,] ConnMatrix = GenerateConnMatrix(JunctPoints);
-		TravelerGreedy(JunctPoints, ConnMatrix);
+		SingleRail[,] ConnMatrix = GenerateConnMatrix(JunctPoints);
 		for (int i = 0; i < ConnMatrix.GetLength(0); i++)
 		{
 			for (int j = 0; j < ConnMatrix.GetLength(1); j++)
 			{
-				if (ConnMatrix[i, j].Distance > 0)
+				if (ConnMatrix[i, j] != null)
 				{
-					Rail rail = GenerateRail(JunctPoints,ConnMatrix[i, j]);
-					Complicate(rail);
+					AddChild(ConnMatrix[i, j]);
+					ConnMatrix[i, j].QueueRedraw();
+					Complicate(ConnMatrix[i, j]);
 				}
 			}
 		}
@@ -78,26 +79,9 @@ public partial class RailGenerator : Node2D
 		} 
 	}
 
-	public struct AlgoJunct
+	public MultiRail[] GenJunctionPoints(double minDistance = 0)
 	{
-		public Vector2 Pos;
-
-		public int fluff = 0;
-
-		public AlgoJunct(Vector2 pos)
-		{
-			Pos = pos;
-		}
-
-		public AlgoJunct()
-		{
-			Pos = Vector2.Zero;
-		}
-	}
-
-	public AlgoJunct[] GenJunctionPoints(double minDistance = 0)
-	{
-		AlgoJunct[] Result = new AlgoJunct[JunctCount];
+		MultiRail[] Result = new MultiRail[JunctCount];
 		for (int i = 0; i < Result.Length; i++)
 		{
 			int retries = 0;
@@ -105,10 +89,10 @@ public partial class RailGenerator : Node2D
 			do
 			{
 				FarEnough = true;
-				Result[i] = new AlgoJunct(new Vector2(GD.Randf() * GenBoundaries.X, GD.Randf() * GenBoundaries.Y));
+				Result[i] = GenerateJunction(new Vector2(GD.Randf() * GenBoundaries.X, GD.Randf() * GenBoundaries.Y));
 				for (int j = 0; j < i; j++)
 				{
-					if ((Result[i].Pos - Result[j].Pos).LengthSquared() < minDistance * minDistance)
+					if ((Result[i].Position - Result[j].Position).LengthSquared() < minDistance * minDistance)
 					{
 						FarEnough = false;
 						retries++;
@@ -121,53 +105,20 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public struct AlgoConn
+	public SingleRail[,] GenerateConnMatrix(MultiRail[] points)
 	{
-		public int ID1 = 0;
-
-		public int ID2 = 0;
-		public float Distance = 0;
-
-		public bool Visited = false;
-
-		public AlgoConn()
-		{
-
-		}
-
-		public AlgoConn(int id1, int id2)
-		{
-			ID1 = id1;
-			ID2 = id2;
-		}
-	}
-
-	public AlgoConn[,] GenerateConnMatrix(AlgoJunct[] points)
-	{
-		AlgoConn[,] Result = new AlgoConn[points.Length, points.Length];
+		SingleRail[,] Result = new SingleRail[points.Length, points.Length];
 		for (int i = 0; i < points.Length; i++)
 		{
 			for (int j = i; j < points.Length; j++)
 			{
-				Result[i, j].ID1 = i;
-				Result[i, j].ID2 = j;
 				if (i != j)
 				{
-					Result[i, j].Distance = (points[i].Pos - points[j].Pos).LengthSquared();
+					Result[i, j] = GenerateRail(points[i].Position,points[j].Position);
 				}
-				else Result[i, j].Distance = 0;
 			}
 		}
 		return Result;
-	}
-
-	public void TravelerGreedy(AlgoJunct[] junctions, AlgoConn[,]connections)
-	{
-		int CurrentI = (int)GD.RandRange(0, junctions.Length);
-		for (int f = 1; f < junctions.Length; f++)
-		{
-
-		}
 	}
 
 	public void Complicate(Rail rail)
@@ -182,38 +133,32 @@ public partial class RailGenerator : Node2D
 		}
 	}
 
-	public Rail GenerateRail(Vector2 Pos1, Vector2 Pos2)
+	public SingleRail GenerateRail(Vector2 Pos1, Vector2 Pos2)
 	{
 		if (StraitRail != null)
 		{
 			SingleRail rail = StraitRail.Instantiate() as SingleRail;
-			AddChild(rail);
 			rail.Position = Vector2.Zero;
 			rail.Curve = (Curve2D)rail.Curve.Duplicate();
 			rail.Curve.ClearPoints();
 			rail.Curve.AddPoint(Pos1);
 			rail.Curve.AddPoint(Pos2);
-			rail.QueueRedraw();
 			return rail;
 		}
 		else throw new Exception("no scene for connection rail");
 	}
 
-	public Rail GenerateRail(AlgoJunct[] PointArray,AlgoConn connection)
+	public MultiRail GenerateJunction(Vector2 Pos)
 	{
-		return GenerateRail(PointArray[connection.ID1].Pos, PointArray[connection.ID2].Pos);
-	}
-
-	public void GenerateJunction(Vector2 Pos)
-	{
+		MultiRail rail;
 		if (Junction != null)
 		{
-			SingleRail rail = Junction.Instantiate() as SingleRail;
-			AddChild(rail);
+			rail = Junction.Instantiate() as MultiRail;
 			rail.Curve = (Curve2D)rail.Curve.Duplicate();
 			rail.Position = Pos;
-			rail.QueueRedraw();
 		}
+		else rail = null;
+		return rail;
 	}
 
 	public override void _EnterTree()
