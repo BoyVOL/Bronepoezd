@@ -6,9 +6,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Xml.XPath;
 
 [Tool]
 [GlobalClass]
@@ -64,7 +66,6 @@ public partial class RailGenerator : Node2D
 				{
 					AddChild(ConnMatrix[i, j]);
 					ConnMatrix[i, j].QueueRedraw();
-					Complicate(ConnMatrix[i, j]);
 				}
 			}
 		}
@@ -107,15 +108,36 @@ public partial class RailGenerator : Node2D
 
 	public SingleRail[,] GenerateConnMatrix(MultiRail[] points)
 	{
-		SingleRail[,] Result = new SingleRail[points.Length, points.Length];
+		SingleRail[,] AllConnections = new SingleRail[points.Length, points.Length];
 		for (int i = 0; i < points.Length; i++)
 		{
 			for (int j = i; j < points.Length; j++)
 			{
 				if (i != j)
 				{
-					Result[i, j] = GenerateRail(points[i].Position,points[j].Position);
+					AllConnections[i, j] = GenerateRail(points[i].Position, points[j].Position);
 				}
+			}
+		}
+		SingleRail[,] Result = new SingleRail[points.Length, points.Length];
+		for (int i = 0; i < points.Length; i++)
+		{
+			int[] minIndex = [i,i];
+			for (int j = i; j < points.Length; j++)
+			{
+				GD.Print(AllConnections[i, j] + " " +  minIndex[0] + minIndex[1] + " " + AllConnections[minIndex[0], minIndex[1]]);
+				if (AllConnections[minIndex[0], minIndex[1]] != null)
+				{
+					if (AllConnections[i, j].Curve.GetBakedLength() < AllConnections[minIndex[0], minIndex[1]].Curve.GetBakedLength())
+					{
+						minIndex = [i, j];
+					}
+				}
+				else
+				{
+					if(AllConnections[i,j] != null) minIndex = [i, j];
+				}
+				Result[minIndex[0], minIndex[1]] = AllConnections[minIndex[0], minIndex[1]];
 			}
 		}
 		return Result;
@@ -143,6 +165,7 @@ public partial class RailGenerator : Node2D
 			rail.Curve.ClearPoints();
 			rail.Curve.AddPoint(Pos1);
 			rail.Curve.AddPoint(Pos2);
+			Complicate(rail);
 			return rail;
 		}
 		else throw new Exception("no scene for connection rail");
