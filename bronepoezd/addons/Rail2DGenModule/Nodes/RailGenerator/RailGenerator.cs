@@ -52,23 +52,8 @@ public partial class RailGenerator : Node2D
 	{
 		RemoveAllChildren();
 		MultiRail[] JunctPoints = GenJunctionPoints(MinGenDistance);
-		foreach (MultiRail item in JunctPoints)
-		{
-			AddChild(item);
-			item.QueueRedraw();
-		}
 		SingleRail[,] ConnMatrix = GenerateConnMatrix(JunctPoints);
-		for (int i = 0; i < ConnMatrix.GetLength(0); i++)
-		{
-			for (int j = 0; j < ConnMatrix.GetLength(1); j++)
-			{
-				if (ConnMatrix[i, j] != null)
-				{
-					AddChild(ConnMatrix[i, j]);
-					ConnMatrix[i, j].QueueRedraw();
-				}
-			}
-		}
+		AddAsChildren(JunctPoints);
 	}
 
 	public void RemoveAllChildren()
@@ -111,7 +96,7 @@ public partial class RailGenerator : Node2D
 		SingleRail[,] AllConnections = new SingleRail[points.Length, points.Length];
 		for (int i = 0; i < points.Length; i++)
 		{
-			for (int j = 0; j < points.Length; j++)
+			for (int j = i; j < points.Length; j++)
 			{
 				if (i != j)
 				{
@@ -148,7 +133,7 @@ public partial class RailGenerator : Node2D
 			rail.PrevRail = Start;
 			rail.NextRail = End;
 			List<Rail> StartList = Start.NextRails.ToList();
-			List<Rail> EndList = Start.NextRails.ToList();
+			List<Rail> EndList = End.PrevRails.ToList();
 			StartList.Add(rail);
 			EndList.Add(rail);
 			Start.NextRails = StartList.ToArray();
@@ -170,6 +155,30 @@ public partial class RailGenerator : Node2D
 		}
 		else rail = null;
 		return rail;
+	}
+
+	public void AddAsChildren(MultiRail[] Junctions) {
+		foreach (MultiRail junct in Junctions)
+		{
+			this.AddChild(junct);
+			junct.QueueRedraw();
+			foreach (var rail in junct.PrevRails)
+			{
+				if (rail.GetParent<Node>() != this)
+				{
+				AddChild(rail);
+				rail.QueueRedraw();
+				}
+			}
+			foreach (var rail in junct.NextRails)
+			{
+				if (rail.GetParent<Node>() != this)
+				{
+				AddChild(rail);
+				rail.QueueRedraw();
+				}
+			}
+		}
 	}
 
 	public override void _EnterTree()
