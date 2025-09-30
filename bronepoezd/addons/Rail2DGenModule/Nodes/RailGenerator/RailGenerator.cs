@@ -119,27 +119,7 @@ public partial class RailGenerator : Node2D
 				}
 			}
 		}
-		SingleRail[,] Result = new SingleRail[points.Length, points.Length];
-		for (int i = 0; i < points.Length; i++)
-		{
-			int[] minIndex = [i,i];
-			for (int j = i; j < points.Length; j++)
-			{
-				GD.Print(AllConnections[i, j] + " " +  minIndex[0] + minIndex[1] + " " + AllConnections[minIndex[0], minIndex[1]]);
-				if (AllConnections[minIndex[0], minIndex[1]] != null)
-				{
-					if (AllConnections[i, j].Curve.GetBakedLength() < AllConnections[minIndex[0], minIndex[1]].Curve.GetBakedLength())
-					{
-						minIndex = [i, j];
-					}
-				}
-				else
-				{
-					if(AllConnections[i,j] != null) minIndex = [i, j];
-				}
-				Result[minIndex[0], minIndex[1]] = AllConnections[minIndex[0], minIndex[1]];
-			}
-		}
+		SingleRail[,] Result = AllConnections;
 		return Result;
 	}
 
