@@ -111,11 +111,11 @@ public partial class RailGenerator : Node2D
 		SingleRail[,] AllConnections = new SingleRail[points.Length, points.Length];
 		for (int i = 0; i < points.Length; i++)
 		{
-			for (int j = i; j < points.Length; j++)
+			for (int j = 0; j < points.Length; j++)
 			{
 				if (i != j)
 				{
-					AllConnections[i, j] = GenerateRail(points[i].Position, points[j].Position);
+					AllConnections[i, j] = GenerateRail(points[i], points[j]);
 				}
 			}
 		}
@@ -135,7 +135,7 @@ public partial class RailGenerator : Node2D
 		}
 	}
 
-	public SingleRail GenerateRail(Vector2 Pos1, Vector2 Pos2)
+	public SingleRail GenerateRail(MultiRail Start, MultiRail End)
 	{
 		if (StraitRail != null)
 		{
@@ -143,8 +143,16 @@ public partial class RailGenerator : Node2D
 			rail.Position = Vector2.Zero;
 			rail.Curve = (Curve2D)rail.Curve.Duplicate();
 			rail.Curve.ClearPoints();
-			rail.Curve.AddPoint(Pos1);
-			rail.Curve.AddPoint(Pos2);
+			rail.Curve.AddPoint(Start.Position);
+			rail.Curve.AddPoint(End.Position);
+			rail.PrevRail = Start;
+			rail.NextRail = End;
+			List<Rail> StartList = Start.NextRails.ToList();
+			List<Rail> EndList = Start.NextRails.ToList();
+			StartList.Add(rail);
+			EndList.Add(rail);
+			Start.NextRails = StartList.ToArray();
+			End.PrevRails = EndList.ToArray();
 			Complicate(rail);
 			return rail;
 		}
@@ -168,6 +176,7 @@ public partial class RailGenerator : Node2D
 	{
 		base._EnterTree();
 		Parent = GetParent<Node2D>();
+		Generate();
 	}
 
 
