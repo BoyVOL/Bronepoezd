@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6xgk3evd0l2h"]
+[gd_scene load_steps=4 format=3 uid="uid://b6xgk3evd0l2h"]
 
 [ext_resource type="Script" uid="uid://cem21ppe4icks" path="res://addons/TrainPhysicsModule/Nodes/Train/Train.cs" id="1_lomod"]
 [ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://TinyTrain.png" id="2_kfycv"]
+[ext_resource type="Script" uid="uid://fggwcbseow7m" path="res://Camera2d.cs" id="3_kfycv"]
 
 [node name="Train" type="Node2D"]
 script = ExtResource("1_lomod")
@@ -15,3 +16,4 @@ texture = ExtResource("2_kfycv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+script = ExtResource("3_kfycv")
