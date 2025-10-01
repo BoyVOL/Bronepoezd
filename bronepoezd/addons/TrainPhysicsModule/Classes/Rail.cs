@@ -55,8 +55,17 @@ public partial class Rail : Path2D, IRail
 
     Transform2D IRail.Transform
     {
-        get { return this.Transform; }
+        get
+        {
+            Transform2D Result = this.Transform;
+            return Result;
+        }
     }
+
+    Vector2 IRail.GlobalShift {
+        get { return this.GlobalPosition - this.Position;}
+    }
+
 
     void IRail.MoveToNext(Train train)
     {

@@ -36,6 +36,7 @@ public partial class Train : Node2D
 	public void SnapToRail(IRail rail, double position)
 	{
 		this.Transform = rail.Transform * rail.Curve.SampleBakedWithRotation((float)position);
+		Position += rail.GlobalShift;
 		if (reverse) Rotation += MathF.PI;
 	}
 
@@ -117,6 +118,11 @@ public interface IRail
 	}
 
 	public Transform2D Transform
+	{
+		get;
+	}
+
+	public Vector2 GlobalShift
 	{
 		get;
 	}

@@ -42,18 +42,27 @@ public partial class RailGenerator : Node2D
 	[Export]
 	PackedScene Junction = null;
 
+	[Export]
+	Node2D Train = null;
+
 	[ExportToolButton("TestGeneration")]
-	public Callable GenerateButton => Callable.From(Generate);
+	public Callable GenerateButton => Callable.From(TestGenerate);
 
 	[ExportToolButton("ClearAll")]
 	public Callable ClearButton => Callable.From(RemoveAllChildren);
 
-	public void Generate()
+	public void TestGenerate()
+	{
+		Generate();
+	}
+
+	public MultiRail[] Generate()
 	{
 		RemoveAllChildren();
 		MultiRail[] JunctPoints = GenJunctionPoints(MinGenDistance);
 		GenerateConnections(JunctPoints);
 		AddAsChildren(JunctPoints);
+		return JunctPoints;
 	}
 
 	public void RemoveAllChildren()
@@ -75,7 +84,8 @@ public partial class RailGenerator : Node2D
 			do
 			{
 				FarEnough = true;
-				Result[i] = GenerateJunction(new Vector2(GD.Randf() * GenBoundaries.X, GD.Randf() * GenBoundaries.Y));
+				Vector2 Pos = new Vector2 (GD.Randf() * GenBoundaries.X, GD.Randf() * GenBoundaries.Y);
+				Result[i] = GenerateJunction(Pos);
 				for (int j = 0; j < i; j++)
 				{
 					if ((Result[i].Position - Result[j].Position).LengthSquared() < minDistance * minDistance)
@@ -91,18 +101,51 @@ public partial class RailGenerator : Node2D
 		return Result;
 	}
 
-	public void GenerateConnections(MultiRail[] points)
+	public MultiRail FindClosestEmpty(MultiRail[] rails, MultiRail current)
 	{
-		for (int i = 0; i < points.Length; i++)
+		MultiRail Result = null;
+		foreach (MultiRail rail in rails)
 		{
-			for (int j = 0; j < points.Length; j++)
+			if (rail != current)
 			{
-				if (i != j)
-				{
-					GenerateRail(points[i], points[j]);
+				if (rail.NextRails.Length == 0 && rail.PrevRails.Length == 0){
+					if (Result != null)
+					{
+						bool CloserThanBefore = rail.Position.DistanceSquaredTo(current.Position) < Result.Position.DistanceSquaredTo(current.Position);
+						if (CloserThanBefore) Result = rail;
+					}
+					else
+					{
+						Result = rail;
+					}	
 				}
 			}
 		}
+		return Result;
+	}
+
+	public void Close(MultiRail[] points)
+	{
+		MultiRail Start = null;
+		MultiRail End = null;
+		foreach (var rail in points)
+		{
+			if (rail.PrevRails.Length == 0) Start = rail;
+			if (rail.NextRails.Length == 0) End = rail;
+		}
+		if (Start != null && End != null) GenerateRail(End, Start);
+	}
+
+	public void GenerateConnections(MultiRail[] points)
+	{
+		MultiRail Current = points[(int)GD.RandRange(0, points.Length - 1)];
+		while (Current != null)
+		{
+			MultiRail Next = FindClosestEmpty(points, Current);
+			if (Next != null) GenerateRail(Current, Next);
+			Current = Next;
+		}
+		Close(points);
 	}
 
 	public void Complicate(Rail rail)
@@ -125,8 +168,8 @@ public partial class RailGenerator : Node2D
 			rail.Position = Vector2.Zero;
 			rail.Curve = (Curve2D)rail.Curve.Duplicate();
 			rail.Curve.ClearPoints();
-			rail.Curve.AddPoint(Start.Position);
-			rail.Curve.AddPoint(End.Position);
+			rail.Curve.AddPoint(Start.GlobalPosition+Start.Curve.GetPointPosition(Start.Curve.PointCount-1)-rail.GlobalPosition);
+			rail.Curve.AddPoint(End.GlobalPosition+Start.Curve.GetPointPosition(0)-rail.GlobalPosition);
 			rail.PrevRail = Start;
 			rail.NextRail = End;
 			List<Rail> StartList = Start.NextRails.ToList();
@@ -141,6 +184,16 @@ public partial class RailGenerator : Node2D
 		else throw new Exception("no scene for connection rail");
 	}
 
+	public void PlaceTrain(Rail rail)
+	{
+		if (Train != null)
+		{
+			Train train = (Train)Train;
+			train.CurrentRail = rail;
+		}
+		else throw new Exception("no defined train");
+	}
+
 	public MultiRail GenerateJunction(Vector2 Pos)
 	{
 		MultiRail rail;
@@ -148,7 +201,7 @@ public partial class RailGenerator : Node2D
 		{
 			rail = Junction.Instantiate() as MultiRail;
 			rail.Curve = (Curve2D)rail.Curve.Duplicate();
-			rail.Position = Pos;
+			rail.Position = Pos; 
 		}
 		else rail = null;
 		return rail;
@@ -182,7 +235,8 @@ public partial class RailGenerator : Node2D
 	{
 		base._EnterTree();
 		Parent = GetParent<Node2D>();
-		Generate();
+		MultiRail[] juncts = Generate();
+		PlaceTrain(juncts[0]);
 	}
 
 
