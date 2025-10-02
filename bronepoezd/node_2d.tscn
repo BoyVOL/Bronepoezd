@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=7 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://train.tscn" id="1_0hol4"]
-[ext_resource type="Script" uid="uid://cmt6qvjk3lp8g" path="res://addons/ParentSwitchModule/ParentSwitcherNode2D/ParentSwitcherNode2D.cs" id="5_q6r6c"]
+[ext_resource type="Script" uid="uid://oleha8777abu" path="res://addons/d2trainside/Nodes/TrainCoreSide/TrainCoreSide.cs" id="5_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Loco.bmp" id="6_kdubu"]
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="11_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://single_rail2.tscn" id="12_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://single_rail3.tscn" id="13_0h7mo"]
@@ -14,8 +15,9 @@ offset_right = 1203.0
 offset_bottom = 1200.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
 handle_input_locally = false
-size = Vector2i(1200, 1200)
+size = Vector2i(1200, 600)
 render_target_update_mode = 4
 
 [node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport"]
@@ -36,6 +38,13 @@ metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="Train" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("1_0hol4")]
 
-[node name="ParentSwitcherNode2D" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D/Train"]
+[node name="TrainCoreSide" type="Node2D" parent="."]
+position = Vector2(1199, 638)
 script = ExtResource("5_q6r6c")
-metadata/_custom_type_script = "uid://cmt6qvjk3lp8g"
+metadata/_custom_type_script = "uid://oleha8777abu"
+
+[node name="Sprite2D" type="Sprite2D" parent="TrainCoreSide"]
+texture = ExtResource("6_kdubu")
+
+[node name="Camera2D" type="Camera2D" parent="TrainCoreSide"]
+position = Vector2(-251, -19)
