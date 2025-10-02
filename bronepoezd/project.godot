@@ -14,6 +14,10 @@ config/name="Bronepoezd"
 run/main_scene="uid://cbvt8evvq6kyy"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
+[display]
+
+window/size/mode=2
+
 [dotnet]
 
 project/assembly_name="Bronepoezd"
