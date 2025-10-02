@@ -190,6 +190,15 @@ public partial class RailGenerator : Node2D
 		{
 			Train train = (Train)Train;
 			train.CurrentRail = rail;
+			float random = GD.Randf();
+			if (random > 0.5f)
+			{
+				train.reverse = false;
+			}
+			else
+			{
+				train.reverse = true;
+			}
 		}
 		else throw new Exception("no defined train");
 	}
