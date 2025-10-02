@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=6 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://train.tscn" id="1_0hol4"]
+[ext_resource type="Script" uid="uid://cmt6qvjk3lp8g" path="res://addons/ParentSwitchModule/ParentSwitcherNode2D/ParentSwitcherNode2D.cs" id="5_q6r6c"]
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="11_hqns4"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://single_rail2.tscn" id="12_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://single_rail3.tscn" id="13_0h7mo"]
@@ -34,3 +35,7 @@ Train = NodePath("../Train")
 metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="Train" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("1_0hol4")]
+
+[node name="ParentSwitcherNode2D" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D/Train"]
+script = ExtResource("5_q6r6c")
+metadata/_custom_type_script = "uid://cmt6qvjk3lp8g"

@@ -5,10 +5,9 @@ using System;
 [GlobalClass]
 public partial class ParentSwitcherNode2D : Node2D
 {
-	[Export] public ParentSwitcherNode2D OldParent = null;
+	public ParentSwitcherNode2D OldParent = null;
 
 	[Export] Array<Array<NodePath>> Links = new Array<Array<NodePath>>();
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 	}
