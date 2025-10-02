@@ -3,20 +3,20 @@ using System;
 
 public partial class Camera2d : Camera2D
 {
+    [Export]
+    public String ZoomInAction = "ZoomIn";
+    
+    [Export]
+    public String ZoomOutAction = "ZoomOut";
 
 	public override void _UnhandledInput(InputEvent @event)
     {
         base._UnhandledInput(@event);
-        if (@event is InputEventMouseButton mouse)
-        {
-            if (mouse.ButtonIndex == MouseButton.WheelUp)
-            {
+		if (@event.IsAction(ZoomInAction)){
                 Zoom /= new Vector2(1.1f, 1.1f);
-            }
-            if (mouse.ButtonIndex == MouseButton.WheelDown)
-            {
+		}
+		if (@event.IsAction(ZoomOutAction)){
                 Zoom *= new Vector2(1.1f, 1.1f);
-            }
-        }
+		}
     }
 }

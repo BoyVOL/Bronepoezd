@@ -13,6 +13,10 @@ public partial class TrainPhysicsModule : EditorPlugin
         GD.Load<Texture2D>(GlobalPath + "/Nodes/SingleRail/icon.png"));
         AddCustomType("Train", "Node2D", GD.Load<Script>(GlobalPath + "/Nodes/Train/Train.cs"),
         GD.Load<Texture2D>(GlobalPath + "/Nodes/Train/icon.png"));
+		InputEventKey ev = new InputEventKey();
+		ev.Keycode = Key.W;
+		InputMap.AddAction("TrainAccelerate");
+		InputMap.ActionAddEvent("TrainAccelerate", ev);
         AddCustomType("MultiRail", "Rail", GD.Load<Script>(GlobalPath + "/Nodes/MultiRail/MultiRail.cs"),
         GD.Load<Texture2D>(GlobalPath + "/Nodes/MultiRail/icon.png"));
 		// Initialization of the plugin goes here.
@@ -25,6 +29,7 @@ public partial class TrainPhysicsModule : EditorPlugin
 		RemoveCustomType("MultiRail");
 		RemoveCustomType("SingleRail");
 		RemoveCustomType("Train");
+		InputMap.EraseAction("TrainAccelerate");
 		GD.Print("TrainPhysicsModule unloaded");
 	}
 }

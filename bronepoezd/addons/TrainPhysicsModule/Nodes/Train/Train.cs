@@ -28,6 +28,15 @@ public partial class Train : Node2D
 	[Export]
 	public double Accelerate = 100;
 
+	[Export]
+	public String AccelerateAction = "TrainAccelerate";
+
+	[Export]
+	public String DecelerateAction = "TrainDecelerate";
+
+	[Export]
+	public String BreakAction = "TrainBreak";
+
     public override void _EnterTree()
 	{
 		if (StartRail != null) CurrentRail = (IRail)StartRail;
@@ -90,20 +99,14 @@ public partial class Train : Node2D
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		base._UnhandledInput(@event);
-		if (@event is InputEventKey eventKey)
-		{
-			if (eventKey.Keycode == Key.W)
-			{
+		if (@event.IsAction(AccelerateAction)){
 				RailAccel += Accelerate;
-			}
-			if (eventKey.Keycode == Key.S)
-			{
+		}
+		if (@event.IsAction(DecelerateAction)){
 				RailAccel -= Accelerate;
-			}
-			if (eventKey.Keycode == Key.A)
-			{
-				RailAccel -= BrakeForce*Math.Sign(RailSpeed);
-			}
+		}
+		if (@event.IsAction(BreakAction)){
+				RailAccel -= BrakeForce * Math.Sign(RailSpeed);
 		}
 	}
 

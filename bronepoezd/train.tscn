@@ -17,3 +17,5 @@ texture = ExtResource("2_kfycv")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 script = ExtResource("3_kfycv")
+ZoomInAction = "CameraZoomIn"
+ZoomOutAction = "CameraZoomOut"
