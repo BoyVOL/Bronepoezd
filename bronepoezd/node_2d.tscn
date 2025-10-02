@@ -10,7 +10,7 @@
 [node name="RailGenerator" type="Node2D" parent="." node_paths=PackedStringArray("Train")]
 position = Vector2(0, -10)
 script = ExtResource("11_hqns4")
-GenBoundaries = Vector2(20000, 15000)
+GenBoundaries = Vector2(200000, 150000)
 DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
 JunctCount = 22
 MinGenDistance = 300.0

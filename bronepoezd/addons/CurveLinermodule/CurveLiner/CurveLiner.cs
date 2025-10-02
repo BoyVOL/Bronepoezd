@@ -11,13 +11,16 @@ public partial class CurveLiner : Line2D
     {
         base._EnterTree();
         Parent = GetParent<Path2D>();
+        UpdatePoints();
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        Points = Parent.Curve.GetBakedPoints();
     }
 
-
+    public void UpdatePoints()
+    {
+        Points = Parent.Curve.GetBakedPoints();
+    }
 }

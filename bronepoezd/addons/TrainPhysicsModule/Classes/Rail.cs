@@ -62,8 +62,9 @@ public partial class Rail : Path2D, IRail
         }
     }
 
-    Vector2 IRail.GlobalShift {
-        get { return this.GlobalPosition - this.Position;}
+    Vector2 IRail.GlobalShift
+    {
+        get { return this.GlobalPosition - this.Position; }
     }
 
 
@@ -76,5 +77,4 @@ public partial class Rail : Path2D, IRail
     {
         throw new NotImplementedException();
     }
-
 }
