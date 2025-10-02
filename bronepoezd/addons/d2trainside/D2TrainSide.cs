@@ -10,7 +10,7 @@ public partial class D2TrainSide : EditorPlugin
     {
         GlobalPath = ((Resource)GetScript()).ResourcePath.GetBaseDir();
         // Initialization of the plugin goes here.
-        AddCustomType("TrainCoreSide", "ParentSwitcherNode2D", GD.Load<Script>(GlobalPath + "/Nodes/TrainCoreSide/TrainCoreSide.cs"),
+        AddCustomType("TrainCoreSide", "Node2D", GD.Load<Script>(GlobalPath + "/Nodes/TrainCoreSide/TrainCoreSide.cs"),
         GD.Load<Texture2D>(GlobalPath + "/Nodes/TrainCoreSide/icon.png"));
         AddCustomType("LocomotiveSide", "VagonSide", GD.Load<Script>(GlobalPath + "/Nodes/LocomotiveSide/LocomotiveSide.cs"),
         GD.Load<Texture2D>(GlobalPath + "/Nodes/LocomotiveSide/icon.png"));
