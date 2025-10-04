@@ -1,22 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbvt8evvq6kyy"]
+[gd_scene load_steps=14 format=3 uid="uid://cbvt8evvq6kyy"]
 
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://train.tscn" id="1_0hol4"]
 [ext_resource type="Shader" uid="uid://bele7nnmc7cs5" path="res://MovingLine.gdshader" id="5_d21ai"]
 [ext_resource type="Script" uid="uid://oleha8777abu" path="res://addons/d2trainside/Nodes/TrainCoreSide/TrainCoreSide.cs" id="5_q6r6c"]
 [ext_resource type="Shader" uid="uid://c222mi74acjnj" path="res://Pseudo3d.gdshader" id="6_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Loco.bmp" id="6_kdubu"]
+[ext_resource type="Script" uid="uid://b8ukysd8ke4lf" path="res://Sprite2d.cs" id="8_ir8iy"]
 [ext_resource type="Texture2D" uid="uid://bvgv7mdd50eea" path="res://TinyRailGreen.png" id="8_rj586"]
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="11_hqns4"]
+[ext_resource type="Script" uid="uid://od1csbjrxrkq" path="res://Line2d.cs" id="11_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://single_rail2.tscn" id="12_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://single_rail3.tscn" id="13_0h7mo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir8iy"]
 shader = ExtResource("6_4d7sh")
-shader_parameter/TestMatrix = Basis(1, 0, 0, 0, 1, 0, 0, 0, 0.5)
+shader_parameter/TMatrix = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rj586"]
 shader = ExtResource("5_d21ai")
-shader_parameter/speed = 2.0
+shader_parameter/speed = 1.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -34,7 +36,7 @@ render_target_update_mode = 4
 
 [node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport"]
 
-[node name="RailGenerator" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D"]
+[node name="RailGenerator" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D" node_paths=PackedStringArray("Train")]
 position = Vector2(0, -10)
 script = ExtResource("11_hqns4")
 GenBoundaries = Vector2(20000, 15000)
@@ -45,6 +47,7 @@ MaxDevition = 300.0
 StepScale = 300.0
 StraitRail = ExtResource("12_x0ka3")
 Junction = ExtResource("13_0h7mo")
+Train = NodePath("../Train")
 metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="Train" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("1_0hol4")]
@@ -58,15 +61,16 @@ metadata/_custom_type_script = "uid://oleha8777abu"
 texture_filter = 1
 texture_repeat = 1
 material = SubResource("ShaderMaterial_ir8iy")
-position = Vector2(-500, -171)
-scale = Vector2(7.50391, 5.4375)
+position = Vector2(-621, -201)
+scale = Vector2(3, 3)
 texture = ExtResource("6_kdubu")
 centered = false
+script = ExtResource("8_ir8iy")
 
 [node name="Camera2D" type="Camera2D" parent="TrainCoreSide"]
 position = Vector2(-251, -19)
 
-[node name="Line2D" type="Line2D" parent="TrainCoreSide"]
+[node name="Line2D" type="Line2D" parent="TrainCoreSide" node_paths=PackedStringArray("train")]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_rj586")
 position = Vector2(-46, 29)
@@ -77,3 +81,5 @@ texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 1
 end_cap_mode = 1
+script = ExtResource("11_x0ka3")
+train = NodePath("../../SubViewportContainer/SubViewport/Node2D/Train")
