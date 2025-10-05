@@ -12,15 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://single_rail2.tscn" id="12_x0ka3"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://single_rail3.tscn" id="13_0h7mo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir8iy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj586"]
+shader = ExtResource("5_d21ai")
+shader_parameter/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqns4"]
 shader = ExtResource("6_4d7sh")
 shader_parameter/TMatrixVec1 = Vector3(1, 0, 0)
 shader_parameter/TMatrixVec2 = Vector3(0, 1, 0)
 shader_parameter/TMatrixVec3 = Vector3(0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj586"]
-shader = ExtResource("5_d21ai")
-shader_parameter/speed = 1.0
 
 [node name="Node2D" type="Node2D"]
 
@@ -59,16 +59,6 @@ position = Vector2(1199, 638)
 script = ExtResource("5_q6r6c")
 metadata/_custom_type_script = "uid://oleha8777abu"
 
-[node name="Sprite2D" type="Sprite2D" parent="TrainCoreSide"]
-texture_filter = 1
-texture_repeat = 1
-material = SubResource("ShaderMaterial_ir8iy")
-position = Vector2(-621, -201)
-scale = Vector2(3, 3)
-texture = ExtResource("6_kdubu")
-centered = false
-script = ExtResource("8_ir8iy")
-
 [node name="Camera2D" type="Camera2D" parent="TrainCoreSide"]
 position = Vector2(-251, -19)
 
@@ -85,3 +75,12 @@ begin_cap_mode = 1
 end_cap_mode = 1
 script = ExtResource("11_x0ka3")
 train = NodePath("../../SubViewportContainer/SubViewport/Node2D/Train")
+
+[node name="Sprite2D" type="Sprite2D" parent="TrainCoreSide"]
+material = SubResource("ShaderMaterial_hqns4")
+position = Vector2(-240, -93)
+scale = Vector2(3.375, 2.96875)
+texture = ExtResource("6_kdubu")
+script = ExtResource("8_ir8iy")
+sc = 0.64
+angleX = 0.11
