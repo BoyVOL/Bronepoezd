@@ -78,9 +78,9 @@ train = NodePath("../../SubViewportContainer/SubViewport/Node2D/Train")
 
 [node name="Sprite2D" type="Sprite2D" parent="TrainCoreSide"]
 material = SubResource("ShaderMaterial_hqns4")
-position = Vector2(-240, -93)
-scale = Vector2(3.375, 2.96875)
+position = Vector2(-240, -337.5)
+scale = Vector2(3.375, 10.6094)
 texture = ExtResource("6_kdubu")
 script = ExtResource("8_ir8iy")
 sc = 0.64
-angleX = 0.11
+angleX = 0.035
