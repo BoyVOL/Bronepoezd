@@ -14,7 +14,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir8iy"]
 shader = ExtResource("6_4d7sh")
-shader_parameter/TMatrix = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+shader_parameter/TMatrixVec1 = Vector3(1, 0, 0)
+shader_parameter/TMatrixVec2 = Vector3(0, 1, 0)
+shader_parameter/TMatrixVec3 = Vector3(0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rj586"]
 shader = ExtResource("5_d21ai")
