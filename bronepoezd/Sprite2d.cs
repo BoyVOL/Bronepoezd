@@ -51,6 +51,6 @@ public partial class Sprite2d : Sprite2D
 		Matrix<float> Y = matrix.DenseDiagonal(3, 1);
 		Matrix<float> X = matrix.DenseDiagonal(3, 1);
 		Matrix<float> result = X * Y * Z*M ;
-		PassMatrixToShader(result.ToArray());
+		//PassMatrixToShader(result.ToArray());
 	}
 }
