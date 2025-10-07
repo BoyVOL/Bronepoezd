@@ -12,14 +12,14 @@ public partial class CurveLinermodule : EditorPlugin
 		// Initialization of the plugin goes here.
         AddCustomType("CurveLiner", "Line2D", GD.Load<Script>(GlobalPath + "/CurveLiner/CurveLiner.cs"),
         GD.Load<Texture2D>(GlobalPath + "/CurveLiner/icon.png"));
-		GD.Print("ParentSwitchModule Loaded");
+		GD.Print("CurveLinermodule Loaded");
 	}
 
 	public override void _ExitTree()
 	{
 		// Clean-up of the plugin goes here.
 		RemoveCustomType("CurveLiner");
-		GD.Print("ParentSwitchModule unloaded");
+		GD.Print("CurveLinermodule unloaded");
 	}
 }
 #endif
