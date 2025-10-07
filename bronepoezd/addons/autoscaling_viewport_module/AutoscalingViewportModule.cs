@@ -11,12 +11,15 @@ public partial class AutoscalingViewportModule : EditorPlugin
 	{
         GlobalPath = ((Resource)GetScript()).ResourcePath.GetBaseDir();
 		// Initialization of the plugin goes here.
-		GD.Print("AutoscalingViewportModule unloaded");
+        AddCustomType("AutoscalingViewport", "Line2D", GD.Load<Script>(GlobalPath + "/AutoscalingViewport/AutoscalingViewport.cs"),
+        GD.Load<Texture2D>(GlobalPath + "/AutoscalingViewport/icon.png"));
+		GD.Print("AutoscalingViewportModule loaded");
 	}
 
 	public override void _ExitTree()
 	{
 		// Clean-up of the plugin goes here.
+		RemoveCustomType("AutoscalingViewport");
 		GD.Print("AutoscalingViewportModule unloaded");
 	}
 }
