@@ -7,21 +7,16 @@ public partial class Rail : Path2D, IRail
 {
     [Export] public Curve Height = new Curve();
 
-    public void SwapToRail(Train train, Rail rail)
+    public void SwapToRail(Train train, Rail NextRail)
     {
-        train.CurrentRail = rail;
-        Vector2[] Points = Curve.GetBakedPoints();
-        Vector2[] RailPoints = rail.Curve.GetBakedPoints();
-        Vector2 RailHeadGlobalPoint = RailPoints[RailPoints.Length - 1] + rail.GlobalPosition;
-        Vector2 RailTailGlobalPoint = RailPoints[0] + rail.GlobalPosition;
+        train.CurrentRail = NextRail;
         if (train.railPos > Curve.GetBakedLength() / 2)
         {
-            train.railPos = rail.Curve.GetClosestOffset(Curve.SampleBaked(Curve.GetBakedLength(), true));
-            Vector2 HeadGlobalPoint = Points[Points.Length - 1] + GlobalPosition;
-            if ((HeadGlobalPoint - RailHeadGlobalPoint).LengthSquared() < (HeadGlobalPoint - RailTailGlobalPoint).LengthSquared())
+            train.railPos = NextRail.Curve.GetClosestOffset(Curve.SampleBaked(Curve.GetBakedLength(), true));
+            if (!HeadToTail(NextRail))
             {
                 //Head of old rail, head of new rail
-                train.railPos = rail.Curve.GetBakedLength();
+                train.railPos = NextRail.Curve.GetBakedLength();
                 train.reverse = !train.reverse;
             }
             else
@@ -32,12 +27,11 @@ public partial class Rail : Path2D, IRail
         }
         else
         {
-            train.railPos = rail.Curve.GetClosestOffset(Curve.SampleBaked(0, true));
-            Vector2 TailGlobalPoint = Points[0] + GlobalPosition;
-            if ((TailGlobalPoint - RailHeadGlobalPoint).LengthSquared() < (TailGlobalPoint - RailTailGlobalPoint).LengthSquared())
+            train.railPos = NextRail.Curve.GetClosestOffset(Curve.SampleBaked(0, true));
+            if (TailToHead(NextRail))
             {
                 //Tail of old rail, head of new rail
-                train.railPos = rail.Curve.GetBakedLength();
+                train.railPos = NextRail.Curve.GetBakedLength();
             }
             else
             {
@@ -46,6 +40,37 @@ public partial class Rail : Path2D, IRail
                 train.reverse = !train.reverse;
             }
         }
+    }
+
+    /// <summary>
+    /// Выводит истину, если хвост текущей рельсы ближе к голове сравниваемой, нежели к её хвосту
+    /// </summary>
+    /// <param name="NextRail">сравниваемая рельса</param>
+    /// <returns></returns>
+    public bool TailToHead(Rail NextRail)
+    {
+        Vector2[] Points = Curve.GetBakedPoints();
+        Vector2 TailGlobalPoint = Points[0] + GlobalPosition;
+        Vector2[] RailPoints = NextRail.Curve.GetBakedPoints();
+        Vector2 NextRailHeadGlobalPoint = RailPoints[RailPoints.Length - 1] + NextRail.GlobalPosition;
+        Vector2 NextRailTailGlobalPoint = RailPoints[0] + NextRail.GlobalPosition;
+        return (TailGlobalPoint - NextRailHeadGlobalPoint).LengthSquared() < (TailGlobalPoint - NextRailTailGlobalPoint).LengthSquared();
+    }
+
+
+    /// <summary>
+    /// Выводит истину, если голова текущей рельсы ближе к хвосту сравниваемой, нежели к её голове
+    /// </summary>
+    /// <param name="NextRail">сравниваемая рельса</param>
+    /// <returns></returns>
+    public bool HeadToTail(Rail NextRail)
+    {
+        Vector2[] Points = Curve.GetBakedPoints();
+        Vector2 HeadGlobalPoint = Points[Points.Length - 1] + GlobalPosition;
+        Vector2[] RailPoints = NextRail.Curve.GetBakedPoints();
+        Vector2 NextRailHeadGlobalPoint = RailPoints[RailPoints.Length - 1] + NextRail.GlobalPosition;
+        Vector2 NextRailTailGlobalPoint = RailPoints[0] + NextRail.GlobalPosition;
+        return (HeadGlobalPoint - NextRailTailGlobalPoint).LengthSquared() < (HeadGlobalPoint - NextRailHeadGlobalPoint).LengthSquared();
     }
 
     Curve2D IRail.Curve

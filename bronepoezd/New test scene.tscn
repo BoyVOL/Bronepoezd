@@ -45,6 +45,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AutoscalingViewport" type="SubViewport" parent="Control/SubViewportContainer" node_paths=PackedStringArray("ScalingSource")]
 transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
 script = ExtResource("1_6rc7p")
 ScalingSource = NodePath("../..")
 metadata/_custom_type_script = "uid://ocdra8ykfjf4"
