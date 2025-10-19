@@ -15,6 +15,12 @@ public partial class Train : Node2D
 
 	[Export]
 	public double RailSpeed = 0;
+
+	[Export]
+	public double UpdateInterval = 0;
+
+	[Export]
+	public double PrevSpeed = 0;
 	
 	[Export]
 	public double RailAccel = 0;
@@ -64,8 +70,14 @@ public partial class Train : Node2D
 
 	public void ProcessAccel(double delta)
 	{
-		RailSpeed += RailAccel*delta;
+		RailSpeed += RailAccel * delta;
 	}
+	
+	public void WriteDownSpeed(double delta)
+    {
+		PrevSpeed = RailSpeed;
+		UpdateInterval = delta;
+    }
 
 	public void Brake()
 	{
@@ -81,6 +93,7 @@ public partial class Train : Node2D
 			ProcessSpeed(delta);
 			SnapToRail(CurrentRail, railPos);
 			RailAccel = 0;
+			WriteDownSpeed(delta);
 		}
 
 		if (CurrentRail != null)
