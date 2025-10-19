@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkjab5ou31vn2"]
+[gd_scene load_steps=11 format=3 uid="uid://bkjab5ou31vn2"]
 
 [ext_resource type="Script" uid="uid://oleha8777abu" path="res://addons/d2trainside/Nodes/TrainCoreSide/TrainCoreSide.cs" id="1_hklr1"]
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="2_ngc2d"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_geu54"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
+[ext_resource type="Script" uid="uid://b2dwbdcjor5ft" path="res://Scenes/Test Scenes/Node2d.cs" id="8_ngc2d"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ir8iy"]
 viewport_path = NodePath("SubViewport")
@@ -15,12 +16,6 @@ viewport_path = NodePath("SubViewport")
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 2321.0
-offset_bottom = 1337.0
 
 [node name="TrainCoreSide" type="Node2D" parent="."]
 position = Vector2(1199, 638)
@@ -94,3 +89,10 @@ Train = NodePath("../Train")
 metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="Train" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("7_k05v2")]
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("8_ngc2d")
+Vec1 = Vector2(2, 1)
+Vec2 = Vector2(1, 1)
+Vec3 = Vector2(10, 2)
+Result = Vector2(0.0553004, -0.99847)
