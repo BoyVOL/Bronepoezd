@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceo5haq60xkxq"
-path="res://.godot/imported/TinyRail.png-ca51a9b4d6f1be59cfad777b8d8ba8df.ctex"
+uid="uid://dliu7vknq47sn"
+path="res://.godot/imported/Short Vagon.bmp-d3c8c0d8c2dfe74bc4e977d136715694.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TinyRail.png"
-dest_files=["res://.godot/imported/TinyRail.png-ca51a9b4d6f1be59cfad777b8d8ba8df.ctex"]
+source_file="res://Resources/Sprites/Short Vagon.bmp"
+dest_files=["res://.godot/imported/Short Vagon.bmp-d3c8c0d8c2dfe74bc4e977d136715694.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

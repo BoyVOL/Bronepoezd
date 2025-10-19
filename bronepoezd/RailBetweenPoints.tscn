@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://deq7gjwfeqt8n"]
-
-[ext_resource type="PackedScene" uid="uid://pdbacjhbnrcd" path="res://single_rail_5.tscn" id="1_vjl3o"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="SingleRail5" parent="." instance=ExtResource("1_vjl3o")]
-position = Vector2(305, -41)

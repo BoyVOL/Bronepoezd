@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dxs2qo44su1w3"]
 
-[ext_resource type="Texture2D" uid="uid://bvgv7mdd50eea" path="res://TinyRailGreen.png" id="2_c0iqw"]
+[ext_resource type="Texture2D" uid="uid://bvgv7mdd50eea" path="res://Resources/Sprites/TinyRailGreen.png" id="2_c0iqw"]
 [ext_resource type="Script" uid="uid://craksh6ncg5pp" path="res://addons/TrainPhysicsModule/Nodes/SingleRail/SingleRail.cs" id="2_wrm5b"]
 [ext_resource type="Script" uid="uid://dmglo8q6tdgf8" path="res://addons/CurveLinermodule/CurveLiner/CurveLiner.cs" id="4_3082i"]
 

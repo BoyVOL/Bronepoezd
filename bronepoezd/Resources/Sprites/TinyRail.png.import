@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cckkn2jfknp32"
-path="res://.godot/imported/TinyTrain.png-dd6a5eadb2a6fb321560fda6c9882837.ctex"
+uid="uid://ceo5haq60xkxq"
+path="res://.godot/imported/TinyRail.png-ae5440638231ad200cd9159f972d6069.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TinyTrain.png"
-dest_files=["res://.godot/imported/TinyTrain.png-dd6a5eadb2a6fb321560fda6c9882837.ctex"]
+source_file="res://Resources/Sprites/TinyRail.png"
+dest_files=["res://.godot/imported/TinyRail.png-ae5440638231ad200cd9159f972d6069.ctex"]
 
 [params]
 
