@@ -148,15 +148,35 @@ public partial class RailGenerator : Node2D
 		Close(points);
 	}
 
+	public void SmoothOut(Rail rail)
+	{
+        for (int i = 1; i < rail.Curve.PointCount-1; i++)
+		{
+			Vector2 Original = rail.Curve.GetPointPosition(i);
+			Vector2 Prev = rail.Curve.GetPointPosition(i - 1);
+			Vector2 Next = rail.Curve.GetPointPosition(i + 1);
+			Vector2 Tangent = MathExtra.GetTangent(Original, Prev, Next);
+			Vector2 Out = Tangent;
+			Vector2 In = Out * -1;
+			float OutModule = Original.DistanceTo(Next)/2;
+			float InModule = Original.DistanceTo(Prev)/2;
+			rail.Curve.SetPointIn(i, In*InModule);
+			rail.Curve.SetPointOut(i, Out*OutModule);
+		}
+    }
+
 	public void Complicate(Rail rail)
 	{
 		float Current = StepScale + (GD.Randf() * StepScale - StepScale / 2);
+		int TriesCount = 0;
 		while (Current < rail.Curve.GetBakedLength())
 		{
+			TriesCount++;
 			Vector2 Point = rail.Curve.SampleBaked(Current);
 			Point += new Vector2(GD.Randf() * MaxDevition - MaxDevition / 2, GD.Randf() * MaxDevition - MaxDevition / 2);
 			rail.Curve.AddPoint(Point, null, null, rail.Curve.PointCount - 1);
 			Current += StepScale + (GD.Randf() * StepScale - StepScale / 2);
+			if (TriesCount > 10000) throw new Exception("too much tries to complicate rail");
 		}
 	}
 
@@ -179,6 +199,7 @@ public partial class RailGenerator : Node2D
 			Start.NextRails = StartList.ToArray();
 			End.PrevRails = EndList.ToArray();
 			Complicate(rail);
+			SmoothOut(rail);
 			return rail;
 		}
 		else throw new Exception("no scene for connection rail");
