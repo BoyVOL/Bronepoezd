@@ -13,7 +13,7 @@ public partial class CurveLiner : Line2D
     public override void _EnterTree()
     {
         base._EnterTree();
-        Parent = GetParent<Path2D>();
+        if (Parent == null) Parent = GetParent<Path2D>();
         UpdatePoints();
     }
 
@@ -24,6 +24,6 @@ public partial class CurveLiner : Line2D
 
     public void UpdatePoints()
     {
-        Points = Parent.Curve.GetBakedPoints();
+        if(Parent != null) Points = Parent.Curve.GetBakedPoints();
     }
 }
