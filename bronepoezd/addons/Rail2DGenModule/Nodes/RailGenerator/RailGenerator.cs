@@ -31,6 +31,9 @@ public partial class RailGenerator : Node2D
 	double MinGenDistance = 100;
 
 	[Export]
+	float MinDevition = 10;
+
+	[Export]
 	float MaxDevition = 100;
 
 	[Export]
@@ -173,7 +176,14 @@ public partial class RailGenerator : Node2D
 		{
 			TriesCount++;
 			Vector2 Point = rail.Curve.SampleBaked(Current);
-			Point += new Vector2(GD.Randf() * MaxDevition - MaxDevition / 2, GD.Randf() * MaxDevition - MaxDevition / 2);
+			Vector2 Origin = Point;
+			int stepCount = 0;
+			while(Point.DistanceTo(Origin) < MinDevition)
+			{
+				stepCount++;
+				Point += new Vector2(GD.Randf() * MaxDevition - MaxDevition / 2, GD.Randf() * MaxDevition - MaxDevition / 2);
+				if (stepCount > 100) throw new Exception("Too Much Tries to generate deviation point");
+            }
 			rail.Curve.AddPoint(Point, null, null, rail.Curve.PointCount - 1);
 			Current += StepScale + (GD.Randf() * StepScale - StepScale / 2);
 			if (TriesCount > 10000) throw new Exception("too much tries to complicate rail");
