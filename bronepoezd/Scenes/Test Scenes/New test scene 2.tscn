@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkjab5ou31vn2"]
+[gd_scene load_steps=9 format=3 uid="uid://bkjab5ou31vn2"]
 
-[ext_resource type="Script" uid="uid://oleha8777abu" path="res://addons/d2trainside/Nodes/TrainCoreSide/TrainCoreSide.cs" id="1_hklr1"]
+[ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="2_ngc2d"]
 [ext_resource type="Script" uid="uid://c6oktdhee6rhr" path="res://Resources/Code/Sprite3d.cs" id="3_uvvv4"]
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_8ri4j"]
@@ -8,75 +8,87 @@
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ir8iy"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
+viewport_path = NodePath("SubViewportContainer/AutoscalingViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4d7sh"]
-viewport_path = NodePath("SubViewportContainer/SubViewport")
+[node name="Control" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Node2D" type="Node2D"]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TrainCoreSide" type="Node2D" parent="."]
-position = Vector2(1199, 638)
-script = ExtResource("1_hklr1")
-metadata/_custom_type_script = "uid://oleha8777abu"
-
-[node name="Camera2D" type="Camera2D" parent="TrainCoreSide"]
-position = Vector2(-251, -19)
-
-[node name="Sprite2D" type="Sprite2D" parent="TrainCoreSide"]
-position = Vector2(-284, -23)
-scale = Vector2(2.33984, 2.33984)
-texture = SubResource("ViewportTexture_ir8iy")
-
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer2" node_paths=PackedStringArray("ScalingSource")]
 transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+script = ExtResource("1_hklr1")
+ScalingSource = NodePath("../..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
 
-[node name="Node3D" type="Node3D" parent="SubViewport"]
+[node name="Node3D" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport"]
 
-[node name="Sprite3D" type="Sprite3D" parent="SubViewport/Node3D" node_paths=PackedStringArray("train")]
+[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D" node_paths=PackedStringArray("train")]
 transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, 0, 0, 0)
 layers = 8
 sorting_offset = 1.0
 sorting_use_aabb_center = false
 texture = ExtResource("2_ngc2d")
 script = ExtResource("3_uvvv4")
-train = NodePath("../../../SubViewportContainer/SubViewport/Node2D/Train")
+train = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.878592, 0.477574, 0, -0.477574, 0.878592, 0, 0.9008, 1.70444)
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/Sprite3D"]
+transform = Transform3D(0.999998, 0.0014662, -0.000663715, -0.000739244, 0.784756, 0.619805, 0.0014296, -0.619803, 0.784756, -0.00176737, 0.903084, 1.70323)
 fov = 85.6
 near = 0.001
 
-[node name="Sprite3D3" type="Sprite3D" parent="SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, -7.15295e-08, 1, 0, -1, -7.15295e-08, 0.0372493, -0.316933, 0.0104643)
+[node name="Sprite3D3" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -7.15295e-08, 1, 0, -1, -7.15295e-08, 0.00621474, -0.309866, -0.00689299)
 layers = 4
 sorting_use_aabb_center = false
-texture = SubResource("ViewportTexture_4d7sh")
+texture = SubResource("ViewportTexture_hklr1")
 region_rect = Rect2(0, 0, 288, 163.5)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 clip_contents = true
-offset_left = 3.0
-offset_right = 1203.0
-offset_bottom = 1200.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 0
 size_flags_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-disable_3d = true
+[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer" node_paths=PackedStringArray("ScalingSource")]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1200, 600)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
+script = ExtResource("1_hklr1")
+ScalingSource = NodePath("../..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
 
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport"]
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/AutoscalingViewport"]
 
-[node name="RailGenerator" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D" node_paths=PackedStringArray("Train")]
-position = Vector2(0, -10)
+[node name="RailGenerator" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" node_paths=PackedStringArray("Train")]
+position = Vector2(0, 1)
 script = ExtResource("4_8ri4j")
-GenBoundaries = Vector2(50000, 50000)
+GenBoundaries = Vector2(500000, 500000)
 DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
 JunctCount = 22
 MinGenDistance = 5000.0
@@ -87,4 +99,4 @@ Junction = ExtResource("6_5anjg")
 Train = NodePath("../Train")
 metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
-[node name="Train" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("7_k05v2")]
+[node name="Train" parent="SubViewportContainer/AutoscalingViewport/Node2D" instance=ExtResource("7_k05v2")]

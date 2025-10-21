@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[Tool]
 [GlobalClass]
 public partial class AutoscalingViewport : SubViewport
 {
@@ -19,6 +20,13 @@ public partial class AutoscalingViewport : SubViewport
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if(ScalingSource != null) Size = (Vector2I)(ScalingSource.GetViewport().GetVisibleRect().Size*Scale);
+        if(ScalingSource != null)
+        {
+            if(ScalingSource is Control)
+            {
+                Control Container = (Control)ScalingSource;
+                Size = (Vector2I)(Container.Size*Scale);
+            }
+        }
     }
 }
