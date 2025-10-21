@@ -55,7 +55,7 @@ fov = 85.6
 near = 0.001
 
 [node name="Sprite3D3" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, -7.15295e-08, 1, 0, -1, -7.15295e-08, 0.00621474, -0.309866, -0.00689299)
+transform = Transform3D(1, 2.32831e-10, -4.47926e-11, 7.13953e-11, -7.1479e-08, 1, 1.16415e-10, -1, -7.1479e-08, 0.00621474, -0.309866, -0.00689299)
 layers = 4
 sorting_use_aabb_center = false
 texture = SubResource("ViewportTexture_hklr1")
