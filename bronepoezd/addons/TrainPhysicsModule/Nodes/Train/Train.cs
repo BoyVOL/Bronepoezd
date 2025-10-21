@@ -21,9 +21,12 @@ public partial class Train : Node2D
 
 	[Export]
 	public double PrevSpeed = 0;
-	
+
 	[Export]
 	public double RailAccel = 0;
+
+	[Export]
+	public double RailFriction = 0;
 
 	[Export]
 	public double railPos = 0;
@@ -72,6 +75,18 @@ public partial class Train : Node2D
 	{
 		RailSpeed += RailAccel * delta;
 	}
+
+	public void ProcessFriction(double delta)
+	{
+		double frictionMoment = RailFriction * delta;
+        if (Math.Abs(RailSpeed) > frictionMoment)
+        {
+			RailSpeed -= frictionMoment * Math.Sign(RailSpeed);
+        } else
+        {
+			RailSpeed = 0;
+        }
+    }
 	
 	public void WriteDownSpeed(double delta)
     {
@@ -90,9 +105,11 @@ public partial class Train : Node2D
 		if (CurrentRail != null)
 		{
 			ProcessAccel(delta);
+			ProcessFriction(delta);
 			ProcessSpeed(delta);
 			SnapToRail(CurrentRail, railPos);
 			RailAccel = 0;
+			RailFriction = 0;
 			WriteDownSpeed(delta);
 		}
 
@@ -119,7 +136,7 @@ public partial class Train : Node2D
 				RailAccel -= Accelerate;
 		}
 		if (@event.IsAction(BreakAction)){
-				RailAccel -= BrakeForce * Math.Sign(RailSpeed);
+				RailFriction = BrakeForce;
 		}
 	}
 
