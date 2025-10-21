@@ -108,8 +108,6 @@ public partial class Train : Node2D
 			ProcessFriction(delta);
 			ProcessSpeed(delta);
 			SnapToRail(CurrentRail, railPos);
-			RailAccel = 0;
-			RailFriction = 0;
 			WriteDownSpeed(delta);
 		}
 
@@ -128,15 +126,17 @@ public partial class Train : Node2D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		base._UnhandledInput(@event);
-		if (@event.IsAction(AccelerateAction)){
+		if (@event.IsActionPressed(AccelerateAction)){
 				RailAccel += Accelerate;
 		}
-		if (@event.IsAction(DecelerateAction)){
-				RailAccel -= Accelerate;
+		if (@event.IsActionPressed(DecelerateAction)){
+			RailAccel -= Accelerate;
 		}
-		if (@event.IsAction(BreakAction)){
+		if (@event.IsActionPressed(BreakAction)){
 				RailFriction = BrakeForce;
+		}
+		if (@event.IsActionReleased(BreakAction)){
+				RailFriction = 0;
 		}
 	}
 
