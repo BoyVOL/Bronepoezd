@@ -5,7 +5,8 @@ using System;
 [Tool]
 public partial class CurveLiner : Line2D
 {
-    Path2D Parent = null;
+    [Export]
+    public Path2D Source = null;
 
 	[ExportToolButton("UpdatePoints")]
 	public Callable UpdateButton => Callable.From(UpdatePoints);
@@ -13,7 +14,7 @@ public partial class CurveLiner : Line2D
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (Parent == null) Parent = GetParent<Path2D>();
+        if (Source == null) Source = GetParent<Path2D>();
         UpdatePoints();
     }
 
@@ -24,6 +25,6 @@ public partial class CurveLiner : Line2D
 
     public void UpdatePoints()
     {
-        if(Parent != null) Points = Parent.Curve.GetBakedPoints();
+        if(Source != null) Points = Source.Curve.GetBakedPoints();
     }
 }
