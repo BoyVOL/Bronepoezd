@@ -14,7 +14,6 @@ public partial class CurveLiner : Line2D
     public override void _EnterTree()
     {
         base._EnterTree();
-        GD.Print(Source);
         if (Source == null)
         {
             Source = GetParent<Path2D>();
