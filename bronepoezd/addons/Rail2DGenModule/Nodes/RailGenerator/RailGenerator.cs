@@ -40,6 +40,9 @@ public partial class RailGenerator : Node2D
 	float StepScale = 100;
 
 	[Export]
+	float MinSmoothingModule = 10;
+
+	[Export]
 	PackedScene StraitRail = null;
 
 	[Export]
@@ -162,9 +165,11 @@ public partial class RailGenerator : Node2D
 			Vector2 Out = Tangent;
 			Vector2 In = Out * -1;
 			float OutModule = Original.DistanceTo(Next)/2;
-			float InModule = Original.DistanceTo(Prev)/2;
-			rail.Curve.SetPointIn(i, In*InModule);
-			rail.Curve.SetPointOut(i, Out*OutModule);
+			float InModule = Original.DistanceTo(Prev) / 2;
+			float MidModule = (OutModule + InModule) / 2;
+			if (MidModule < MinSmoothingModule) MidModule = MinSmoothingModule;
+			rail.Curve.SetPointIn(i, In*MidModule);
+			rail.Curve.SetPointOut(i, Out*MidModule);
 		}
     }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkjab5ou31vn2"]
+[gd_scene load_steps=12 format=3 uid="uid://bkjab5ou31vn2"]
 
 [ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="2_ngc2d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 [ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/ProxyPath2dVisualiserModule/Nodes/RailVisualiser/RailVisualiser.cs" id="8_ngc2d"]
 [ext_resource type="PackedScene" uid="uid://dygrhtk5wuc43" path="res://Scenes/Components/RailVisualiser.tscn" id="9_uvvv4"]
+[ext_resource type="Script" uid="uid://donytb8xf0xsb" path="res://addons/NodeRemoteTrackerModule/Nodes/Node2DTracker/Node2DTracker.cs" id="10_8ri4j"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
 viewport_path = NodePath("SubViewportContainer/AutoscalingViewport")
@@ -93,8 +94,10 @@ GenBoundaries = Vector2(50000, 50000)
 DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
 JunctCount = 22
 MinGenDistance = 5000.0
+MinDevition = 100.0
 MaxDevition = 500.0
 StepScale = 500.0
+MinSmoothingModule = 5.0
 StraitRail = ExtResource("5_geu54")
 Junction = ExtResource("6_5anjg")
 Train = NodePath("../Train")
@@ -109,3 +112,7 @@ script = ExtResource("8_ngc2d")
 Source = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator")
 VisualTemplate = ExtResource("9_uvvv4")
 metadata/_custom_type_script = "uid://bbqb35lgqcvcl"
+
+[node name="Node2DTracker" type="Node2D" parent="Node2D/RailVisualiser"]
+script = ExtResource("10_8ri4j")
+metadata/_custom_type_script = "uid://donytb8xf0xsb"
