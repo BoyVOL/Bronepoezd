@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_qmkne"]
 _data = {
-"points": PackedVector2Array(-15.8918, -4.24656, 0, 0, 1, -10, 0, 0, 0, 0, -19, 15)
+"points": PackedVector2Array(-15.8918, -4.24656, 0, 0, 16, -2, 0, 0, 0, 0, -19, 15)
 }
 point_count = 2
 
@@ -20,13 +20,14 @@ NextRails = []
 Height = SubResource("Curve_eajpu")
 metadata/_custom_type_script = "uid://iue7f62tsxac"
 
-[node name="CurveLiner" type="Line2D" parent="."]
+[node name="CurveLiner" type="Line2D" parent="." node_paths=PackedStringArray("Source")]
 texture_repeat = 2
-points = PackedVector2Array(1, -10, 0.140625, -8.92578, -2.125, -6.09375, -3.63867, -4.20166, -5.32813, -2.08984, -7.13477, 0.168457, -9, 2.5, -10.8652, 4.83154, -12.6719, 7.08984, -14.3613, 9.20166, -15.875, 11.0938, -18.1406, 13.9258, -19, 15)
+points = PackedVector2Array(16, -2, 14.4961, -1.26953, 10.5313, 0.65625, 7.88232, 1.94287, 4.92578, 3.37891, 1.76416, 4.91455, -1.5, 6.5, -4.76416, 8.08545, -7.92578, 9.62109, -10.8823, 11.0571, -13.5313, 12.3438, -17.4961, 14.2695, -19, 15)
 texture = ExtResource("2_xtlgm")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("3_qmkne")
+Source = NodePath("..")
 metadata/_custom_type_script = "uid://dmglo8q6tdgf8"

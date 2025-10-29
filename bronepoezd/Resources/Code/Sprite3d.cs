@@ -9,7 +9,7 @@ public partial class Sprite3d : Sprite3D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        Rotation = new Vector3(0, -train.Rotation, 0);
+        //Rotation = new Vector3(0, -train.Rotation, 0);
     }
 
 }

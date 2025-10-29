@@ -5,4 +5,7 @@ using System;
 public partial class Node25DTracker : Node3D
 {
     [Export] Node2D Source = null;
+
+    [Export]
+    Vector2 ProjectionScale = Vector2.One;
 }

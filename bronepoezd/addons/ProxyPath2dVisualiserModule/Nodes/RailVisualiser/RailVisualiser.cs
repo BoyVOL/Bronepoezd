@@ -17,10 +17,10 @@ public partial class RailVisualiser : Node2D
         List<Path2D> TempResult = new List<Path2D>();
         if (Source != null)
         {
-            Godot.Collections.Array<Node> Temp = Source.GetChildren();
+            Godot.Collections.Array<Node> Temp = Source.GetChildren(true);
             foreach (Node tempNode in Temp)
             {
-                if(tempNode is IRail)
+                if(tempNode is Path2D)
                 {
                     TempResult.Add((Path2D)tempNode);
                 }

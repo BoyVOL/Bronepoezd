@@ -14,7 +14,11 @@ public partial class CurveLiner : Line2D
     public override void _EnterTree()
     {
         base._EnterTree();
-        if (Source == null) Source = GetParent<Path2D>();
+        GD.Print(Source);
+        if (Source == null)
+        {
+            Source = GetParent<Path2D>();
+        }
         UpdatePoints();
     }
 
@@ -25,6 +29,11 @@ public partial class CurveLiner : Line2D
 
     public void UpdatePoints()
     {
+        if (Source != GetParent())
+        {
+            Position = Source.Position;
+            Rotation = Source.Rotation;
+        }
         if(Source != null) Points = Source.Curve.GetBakedPoints();
     }
 }
