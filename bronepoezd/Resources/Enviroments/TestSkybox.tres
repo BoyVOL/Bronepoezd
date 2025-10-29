@@ -1,6 +1,6 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://bnhaw4sp2xl76"]
 
-[ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://Resources/Sprites/TinyTrain.png" id="1_0pfc7"]
+[ext_resource type="Texture2D" uid="uid://co1ic6ds8wbsa" path="res://Resources/Enviroments/Epic_GloriousPink_EquiRect.png" id="1_0pfc7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4b54s"]
 panorama = ExtResource("1_0pfc7")

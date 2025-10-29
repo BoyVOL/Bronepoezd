@@ -60,8 +60,8 @@ environment = ExtResource("4_geu54")
 fov = 53.1367
 near = 0.001
 
-[node name="Sprite3D3" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D"]
-transform = Transform3D(1.5, 1.74623e-10, 7.63299e-18, 0, -6.55671e-08, 1.5, 1.74623e-10, -1.5, -6.55671e-08, 0.00621474, -0.309866, -0.00689299)
+[node name="Sprite3D3" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/Sprite3D"]
+transform = Transform3D(1.5, 0.00214291, 0.00112117, -0.00111827, -0.00202827, 1.5, 0.00214443, -1.5, -0.00202666, 0.00599492, -0.309879, -0.00646896)
 layers = 4
 sorting_use_aabb_center = false
 texture = SubResource("ViewportTexture_hklr1")
@@ -114,6 +114,7 @@ metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 2
 size = Vector2i(2048, 1024)
 render_target_update_mode = 4
 

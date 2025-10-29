@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dygrhtk5wuc43"]
 
-[ext_resource type="Texture2D" uid="uid://bvgv7mdd50eea" path="res://Resources/Sprites/TinyRailGreen.png" id="1_odkam"]
+[ext_resource type="Texture2D" uid="uid://df64o5e86ktsd" path="res://Resources/Sprites/RailBlack.png" id="1_odkam"]
 [ext_resource type="Script" uid="uid://dmglo8q6tdgf8" path="res://addons/CurveLinermodule/CurveLiner/CurveLiner.cs" id="2_ms11c"]
 
 [node name="CurveLiner" type="Line2D"]
