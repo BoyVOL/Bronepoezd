@@ -13,6 +13,7 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_eajpu"]
 
 [node name="MultiRail" type="Path2D" node_paths=PackedStringArray("PrevRails", "NextRails")]
+scale = Vector2(1.0016, 1.00903)
 curve = SubResource("Curve2D_qmkne")
 script = ExtResource("1_aou18")
 PrevRails = []

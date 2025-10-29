@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3uvov2g5b36q"
-path="res://.godot/imported/RailBlack.png-62f9b53722db63a148673f1940da5433.ctex"
+uid="uid://bavbn17exf2f8"
+path="res://.godot/imported/SleepersBlack.png-e8822c1249ad5870279584a44b4c966a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Sprites/RailBlack.png"
-dest_files=["res://.godot/imported/RailBlack.png-62f9b53722db63a148673f1940da5433.ctex"]
+source_file="res://Resources/Sprites/SleepersBlack.png"
+dest_files=["res://.godot/imported/SleepersBlack.png-e8822c1249ad5870279584a44b4c966a.ctex"]
 
 [params]
 

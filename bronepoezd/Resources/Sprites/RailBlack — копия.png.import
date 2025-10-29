@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3uvov2g5b36q"
-path="res://.godot/imported/RailBlack.png-62f9b53722db63a148673f1940da5433.ctex"
+uid="uid://cl2xu12o036vj"
+path="res://.godot/imported/RailBlack — копия.png-c3b1f6243f58d833b2fa1a7a77f4ae43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Sprites/RailBlack.png"
-dest_files=["res://.godot/imported/RailBlack.png-62f9b53722db63a148673f1940da5433.ctex"]
+source_file="res://Resources/Sprites/RailBlack — копия.png"
+dest_files=["res://.godot/imported/RailBlack — копия.png-c3b1f6243f58d833b2fa1a7a77f4ae43.ctex"]
 
 [params]
 
