@@ -24,7 +24,7 @@ project/assembly_name="Bronepoezd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/CurveLinermodule/plugin.cfg", "res://addons/D2TrainTopDown/plugin.cfg", "res://addons/ParentSwitchModule/plugin.cfg", "res://addons/ProxyPath2dVisualiserModule/plugin.cfg", "res://addons/Rail2DGenModule/plugin.cfg", "res://addons/TrainPhysicsModule/plugin.cfg", "res://addons/autoscaling_viewport_module/plugin.cfg", "res://addons/d2trainside/plugin.cfg")
+enabled=PackedStringArray("res://addons/CurveLinermodule/plugin.cfg", "res://addons/D2TrainTopDown/plugin.cfg", "res://addons/NodeRemoteTrackerModule/plugin.cfg", "res://addons/ParentSwitchModule/plugin.cfg", "res://addons/ProxyPath2dVisualiserModule/plugin.cfg", "res://addons/Rail2DGenModule/plugin.cfg", "res://addons/TrainPhysicsModule/plugin.cfg", "res://addons/autoscaling_viewport_module/plugin.cfg", "res://addons/d2trainside/plugin.cfg")
 
 [input]
 
