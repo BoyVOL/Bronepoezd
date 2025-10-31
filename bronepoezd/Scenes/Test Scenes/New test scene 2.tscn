@@ -147,7 +147,7 @@ metadata/_custom_type_script = "uid://ocdra8ykfjf4"
 
 [node name="RailGenerator" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" node_paths=PackedStringArray("Train")]
 script = ExtResource("4_8ri4j")
-GenBoundaries = Vector2(10000, 10000)
+GenBoundaries = Vector2(100000, 100000)
 DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
 JunctCount = 22
 MinGenDistance = 500.0

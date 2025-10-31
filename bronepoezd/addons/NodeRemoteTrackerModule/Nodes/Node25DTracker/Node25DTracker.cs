@@ -27,7 +27,7 @@ public partial class Node25DTracker : Node3D
         {
             case Planes.XY:
                 {
-                    //Position = new Vector3(Source.Position.X*ProjectionScale.X, Source.Position.Y*ProjectionScale.Y, 0);
+                    Position = new Vector3(Source.Position.X*ProjectionScale.X, Source.Position.Y*ProjectionScale.Y, 0);
                     Rotation = new Vector3(0, Source.Rotation, 0);
                     break;
                 }
