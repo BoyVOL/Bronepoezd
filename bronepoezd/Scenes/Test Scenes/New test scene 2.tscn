@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bkjab5ou31vn2"]
+[gd_scene load_steps=21 format=3 uid="uid://bkjab5ou31vn2"]
 
 [ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
 [ext_resource type="Script" uid="uid://b5mdvbifvwmg5" path="res://addons/NodeRemoteTrackerModule/Nodes/Node25DTracker/Node25DTracker.cs" id="2_5anjg"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b0jajeai1dj0c" path="res://Scenes/Components/SleepersVisualiser.tscn" id="12_5anjg"]
 [ext_resource type="Script" uid="uid://cgtyv80c272py" path="res://Scenes/Test Scenes/SpeedSlider.cs" id="14_es6ox"]
 [ext_resource type="Script" uid="uid://d2do07b0na54i" path="res://Scenes/Test Scenes/BreakLever.cs" id="15_ai32b"]
+[ext_resource type="Script" uid="uid://6slhhqlhokmj" path="res://Scenes/Test Scenes/Revers.cs" id="16_sl85x"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
 viewport_path = NodePath("SubViewport")
@@ -189,6 +190,8 @@ Train = NodePath("../Train")
 metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="Train" parent="SubViewportContainer/AutoscalingViewport/Node2D" instance=ExtResource("7_k05v2")]
+BrakeForce = 50.0
+Accelerate = 30.0
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -236,7 +239,7 @@ metadata/_custom_type_script = "uid://donytb8xf0xsb"
 ignore_rotation = false
 zoom = Vector2(10, 10)
 
-[node name="SpeedLever" type="VSlider" parent="." node_paths=PackedStringArray("train")]
+[node name="SpeedLever" type="VSlider" parent="." node_paths=PackedStringArray("train", "reversButton")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.974
@@ -250,19 +253,35 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("14_es6ox")
 train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+reversButton = NodePath("../Revers")
 
 [node name="BreakLever" type="VSlider" parent="." node_paths=PackedStringArray("train")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.952
-anchor_top = 0.333
+anchor_top = 0.573
 anchor_right = 0.978
 anchor_bottom = 1.0
 offset_left = 0.296021
-offset_top = 0.216003
+offset_top = -0.304016
 offset_right = 0.343994
 offset_bottom = -76.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("15_ai32b")
 train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+
+[node name="Revers" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.908
+anchor_top = 1.0
+anchor_right = 0.944
+anchor_bottom = 1.0
+offset_left = -3.01611
+offset_top = -80.0
+offset_right = -0.488037
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("16_sl85x")

@@ -12,6 +12,9 @@ public partial class SpeedSlider : VSlider
 
     [Export]
     Train train = null;
+
+    [Export]
+    CheckButton reversButton = null;
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed(AccelerateAction))
@@ -27,7 +30,13 @@ public partial class SpeedSlider : VSlider
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        train.RailAccel = train.Accelerate/MaxValue*Value;
+        if(reversButton != null && reversButton.ButtonPressed)
+        {
+            train.RailAccel = train.Accelerate / MaxValue * -Value;
+        } else
+        {
+            train.RailAccel = train.Accelerate/MaxValue*Value;
+        }
         
     }
 
