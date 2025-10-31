@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkjab5ou31vn2"]
+[gd_scene load_steps=18 format=3 uid="uid://bkjab5ou31vn2"]
 
 [ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
 [ext_resource type="Script" uid="uid://b5mdvbifvwmg5" path="res://addons/NodeRemoteTrackerModule/Nodes/Node25DTracker/Node25DTracker.cs" id="2_5anjg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_8ri4j"]
 [ext_resource type="Environment" uid="uid://bnhaw4sp2xl76" path="res://Resources/Enviroments/TestSkybox.tres" id="4_geu54"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_geu54"]
+[ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://Resources/Sprites/TinyTrain.png" id="5_k05v2"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 [ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/ProxyPath2dVisualiserModule/Nodes/RailVisualiser/RailVisualiser.cs" id="8_ngc2d"]
@@ -18,6 +19,15 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5anjg"]
 viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_es6ox"]
+transparency = 1
+albedo_texture = ExtResource("5_k05v2")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ai32b"]
+material = SubResource("StandardMaterial3D_es6ox")
+size = Vector2(0.5, 0.5)
+orientation = 2
 
 [node name="Control" type="Control"]
 clip_contents = true
@@ -49,8 +59,10 @@ metadata/_custom_type_script = "uid://ocdra8ykfjf4"
 [node name="Node3D" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport"]
 
 [node name="TrainTracker" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D" node_paths=PackedStringArray("Source")]
+top_level = true
 script = ExtResource("2_5anjg")
 Source = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+ProjectionScale = Vector2(0.1, 0.1)
 TrackingPlane = 1
 metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
 
@@ -98,7 +110,6 @@ region_rect = Rect2(0, 0, 288, 163.5)
 
 [node name="Sprite3D2" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
 transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
-layers = 8
 sorting_offset = 1.0
 sorting_use_aabb_center = false
 texture_filter = 5
@@ -106,7 +117,6 @@ texture = ExtResource("2_ngc2d")
 
 [node name="Sprite3D4" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
 transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
-layers = 8
 sorting_offset = 1.0
 sorting_use_aabb_center = false
 texture_filter = 5
@@ -114,11 +124,24 @@ texture = ExtResource("2_ngc2d")
 
 [node name="Sprite3D5" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
 transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
-layers = 8
 sorting_offset = 1.0
 sorting_use_aabb_center = false
 texture_filter = 5
 texture = ExtResource("2_ngc2d")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0959129, 0.299417, -0.0121033)
+amount = 50
+lifetime = 4.89
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+draw_order = 2
+mesh = SubResource("PlaneMesh_ai32b")
+emission_colors = PackedColorArray(1, 1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 z_index = 1
