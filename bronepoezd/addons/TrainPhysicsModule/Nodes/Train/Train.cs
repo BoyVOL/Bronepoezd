@@ -37,15 +37,6 @@ public partial class Train : Node2D
 	[Export]
 	public double Accelerate = 100;
 
-	[Export]
-	public String AccelerateAction = "TrainAccelerate";
-
-	[Export]
-	public String DecelerateAction = "TrainDecelerate";
-
-	[Export]
-	public String BreakAction = "TrainBreak";
-
     public override void _EnterTree()
 	{
 		if (StartRail != null) CurrentRail = (IRail)StartRail;
@@ -94,11 +85,6 @@ public partial class Train : Node2D
 		UpdateInterval = delta;
     }
 
-	public void Brake()
-	{
-		RailAccel -= BrakeForce * getDirection() * -1;
-	}
-
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -121,22 +107,6 @@ public partial class Train : Node2D
 			{
 				CurrentRail.MoveToNext(this);
 			}
-		}
-	}
-
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event.IsActionPressed(AccelerateAction)){
-				RailAccel += Accelerate;
-		}
-		if (@event.IsActionPressed(DecelerateAction)){
-			RailAccel -= Accelerate;
-		}
-		if (@event.IsActionPressed(BreakAction)){
-				RailFriction = BrakeForce;
-		}
-		if (@event.IsActionReleased(BreakAction)){
-				RailFriction = 0;
 		}
 	}
 

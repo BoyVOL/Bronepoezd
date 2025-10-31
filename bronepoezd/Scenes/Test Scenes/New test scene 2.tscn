@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bkjab5ou31vn2"]
+[gd_scene load_steps=20 format=3 uid="uid://bkjab5ou31vn2"]
 
 [ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
 [ext_resource type="Script" uid="uid://b5mdvbifvwmg5" path="res://addons/NodeRemoteTrackerModule/Nodes/Node25DTracker/Node25DTracker.cs" id="2_5anjg"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dygrhtk5wuc43" path="res://Scenes/Components/RailVisualiser.tscn" id="9_uvvv4"]
 [ext_resource type="Script" uid="uid://donytb8xf0xsb" path="res://addons/NodeRemoteTrackerModule/Nodes/Node2DTracker/Node2DTracker.cs" id="10_8ri4j"]
 [ext_resource type="PackedScene" uid="uid://b0jajeai1dj0c" path="res://Scenes/Components/SleepersVisualiser.tscn" id="12_5anjg"]
+[ext_resource type="Script" uid="uid://cgtyv80c272py" path="res://Scenes/Test Scenes/SpeedSlider.cs" id="14_es6ox"]
+[ext_resource type="Script" uid="uid://d2do07b0na54i" path="res://Scenes/Test Scenes/BreakLever.cs" id="15_ai32b"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
 viewport_path = NodePath("SubViewport")
@@ -209,7 +211,7 @@ metadata/_custom_type_script = "uid://donytb8xf0xsb"
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport/Node2D2/RailVisualiser/Node2DTracker"]
 ignore_rotation = false
-zoom = Vector2(15, 15)
+zoom = Vector2(10, 10)
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 transparent_bg = true
@@ -232,4 +234,35 @@ metadata/_custom_type_script = "uid://donytb8xf0xsb"
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport2/Node2D3/RailVisualiser/Node2DTracker"]
 ignore_rotation = false
-zoom = Vector2(15, 15)
+zoom = Vector2(10, 10)
+
+[node name="SpeedLever" type="VSlider" parent="." node_paths=PackedStringArray("train")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.974
+anchor_top = 0.333
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.0480957
+offset_top = 0.216003
+offset_bottom = -76.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("14_es6ox")
+train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+
+[node name="BreakLever" type="VSlider" parent="." node_paths=PackedStringArray("train")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.952
+anchor_top = 0.333
+anchor_right = 0.978
+anchor_bottom = 1.0
+offset_left = 0.296021
+offset_top = 0.216003
+offset_right = 0.343994
+offset_bottom = -76.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("15_ai32b")
+train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
