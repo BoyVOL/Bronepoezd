@@ -3,6 +3,14 @@ using System;
 
 public partial class Revers : CheckButton
 {
+
     [Export]
-    Train train = null;
+    public String ReversAction = "TrainRevers";
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed(ReversAction))
+        {
+            ButtonPressed = !ButtonPressed;
+        }
+    }
 }
