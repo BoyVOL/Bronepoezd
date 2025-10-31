@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_8ri4j"]
 [ext_resource type="Environment" uid="uid://bnhaw4sp2xl76" path="res://Resources/Enviroments/TestSkybox.tres" id="4_geu54"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_geu54"]
-[ext_resource type="Texture2D" uid="uid://cckkn2jfknp32" path="res://Resources/Sprites/TinyTrain.png" id="5_k05v2"]
+[ext_resource type="Texture2D" uid="uid://cirxu7elebpaw" path="res://Resources/Sprites/Smoke.png" id="5_k05v2"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 [ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/ProxyPath2dVisualiserModule/Nodes/RailVisualiser/RailVisualiser.cs" id="8_ngc2d"]
@@ -20,14 +20,15 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_5anjg"]
 viewport_path = NodePath("SubViewport2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_es6ox"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k05v2"]
 transparency = 1
+shading_mode = 0
 albedo_texture = ExtResource("5_k05v2")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ai32b"]
-material = SubResource("StandardMaterial3D_es6ox")
+[sub_resource type="QuadMesh" id="QuadMesh_es6ox"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_k05v2")
 size = Vector2(0.5, 0.5)
-orientation = 2
 
 [node name="Control" type="Control"]
 clip_contents = true
@@ -65,14 +66,6 @@ Source = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/T
 ProjectionScale = Vector2(0.1, 0.1)
 TrackingPlane = 1
 metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
-
-[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
-transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, 0, 0, -0.213289)
-layers = 8
-sorting_offset = 1.0
-sorting_use_aabb_center = false
-texture_filter = 5
-texture = ExtResource("2_ngc2d")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
 transform = Transform3D(1, -3.20326e-09, 1.56807e-11, 3.19441e-09, 0.997577, 0.0695651, -2.38478e-10, -0.0695651, 0.997577, 0.0127989, 0.49556, 1.15337)
@@ -122,26 +115,36 @@ sorting_use_aabb_center = false
 texture_filter = 5
 texture = ExtResource("2_ngc2d")
 
-[node name="Sprite3D5" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
-transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.480749, 0.299417, -0.0121033)
+amount = 50
+lifetime = 3.29
+preprocess = 0.88
+randomness = 0.75
+draw_order = 1
+mesh = SubResource("QuadMesh_es6ox")
+emission_colors = PackedColorArray(1, 1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, -0.00414681, 0.00809574, -0.212351)
+layers = 8
 sorting_offset = 1.0
 sorting_use_aabb_center = false
 texture_filter = 5
 texture = ExtResource("2_ngc2d")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0959129, 0.299417, -0.0121033)
-amount = 50
-lifetime = 4.89
-visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
-draw_order = 2
-mesh = SubResource("PlaneMesh_ai32b")
-emission_colors = PackedColorArray(1, 1, 1, 1)
-direction = Vector3(0, 1, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 1.0
+[node name="Sprite3D5" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
+visibility_parent = NodePath("../Sprite3D")
+sorting_offset = 10.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 z_index = 1
