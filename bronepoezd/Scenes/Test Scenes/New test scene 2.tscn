@@ -17,6 +17,9 @@
 [ext_resource type="Script" uid="uid://d2do07b0na54i" path="res://Scenes/Test Scenes/BreakLever.cs" id="15_ai32b"]
 [ext_resource type="Script" uid="uid://6slhhqlhokmj" path="res://Scenes/Test Scenes/Revers.cs" id="16_sl85x"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_sl85x"]
+viewport_path = NodePath("SubViewport3")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
 viewport_path = NodePath("SubViewport")
 
@@ -42,6 +45,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1507970913]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_sl85x")
+stretch_mode = 5
+
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="." unique_id=1143823410]
 z_as_relative = false
 clip_contents = true
@@ -51,105 +66,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer2" unique_id=1037663843 node_paths=PackedStringArray("ScalingSource")]
-handle_input_locally = false
-size = Vector2i(1152, 648)
-size_2d_override = Vector2i(20, 40)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-script = ExtResource("1_hklr1")
-ScalingSource = NodePath("../..")
-metadata/_custom_type_script = "uid://ocdra8ykfjf4"
-
-[node name="Node3D" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport" unique_id=1110600320]
-
-[node name="TrainTracker" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D" unique_id=1345003003 node_paths=PackedStringArray("Source")]
-top_level = true
-script = ExtResource("2_5anjg")
-Source = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
-ProjectionScale = Vector2(0.1, 0.1)
-TrackingPlane = 1
-metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
-
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=2006886784]
-transform = Transform3D(1, -3.20326e-09, 1.56808e-11, 3.20238e-09, 0.999819, 0.0190406, -7.66697e-11, -0.0190406, 0.999819, -0.0168046, 0.371607, 0.89205)
-environment = ExtResource("4_geu54")
-fov = 112.351
-near = 0.001
-
-[node name="Rail" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=1667484645]
-transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.34, -0.007)
-layers = 4
-sorting_use_aabb_center = false
-texture = SubResource("ViewportTexture_hklr1")
-region_rect = Rect2(0, 0, 288, 163.5)
-
-[node name="Rail3" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=1099711980]
-transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.35, -0.007)
-layers = 4
-sorting_use_aabb_center = false
-texture = SubResource("ViewportTexture_hklr1")
-region_rect = Rect2(0, 0, 288, 163.5)
-
-[node name="Rail4" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=1091903873]
-transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.36, -0.007)
-layers = 4
-sorting_use_aabb_center = false
-texture = SubResource("ViewportTexture_hklr1")
-region_rect = Rect2(0, 0, 288, 163.5)
-
-[node name="sleepers" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=1889607784]
-transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.37, -0.007)
-layers = 4
-sorting_use_aabb_center = false
-texture = SubResource("ViewportTexture_5anjg")
-region_rect = Rect2(0, 0, 288, 163.5)
-
-[node name="Sprite3D2" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=761599621]
-transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
-sorting_offset = 1.0
-sorting_use_aabb_center = false
-texture_filter = 5
-texture = ExtResource("2_ngc2d")
-
-[node name="Sprite3D4" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=963675338]
-transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
-sorting_offset = 1.0
-sorting_use_aabb_center = false
-texture_filter = 5
-texture = ExtResource("2_ngc2d")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=19377579]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.480749, 0.299417, -0.0121033)
-amount = 50
-lifetime = 3.29
-preprocess = 0.88
-randomness = 0.75
-draw_order = 1
-mesh = SubResource("QuadMesh_es6ox")
-emission_colors = PackedColorArray(1, 1, 1, 1)
-direction = Vector3(0, 1, 0)
-spread = 10.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 0.2
-initial_velocity_max = 2.0
-
-[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=542317731]
-transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, -0.00414681, 0.00809574, -0.212351)
-layers = 8
-sorting_offset = 1.0
-sorting_use_aabb_center = false
-texture_filter = 5
-texture = ExtResource("2_ngc2d")
-
-[node name="Sprite3D5" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker" unique_id=1454584625]
-transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
-visibility_parent = NodePath("../Sprite3D")
-sorting_offset = 10.0
-sorting_use_aabb_center = false
-texture_filter = 5
-texture = ExtResource("2_ngc2d")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1427085992]
 z_index = 1
@@ -297,3 +213,98 @@ grow_vertical = 0
 tooltip_text = "Кнопка реверса 
 Нажмите R для смены направления тяги"
 script = ExtResource("16_sl85x")
+
+[node name="SubViewport3" type="SubViewport" parent="." unique_id=31746575]
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(600, 300)
+
+[node name="Node3D" type="Node3D" parent="SubViewport3" unique_id=1110600320]
+
+[node name="TrainTracker" type="Node3D" parent="SubViewport3/Node3D" unique_id=1345003003 node_paths=PackedStringArray("Source")]
+top_level = true
+script = ExtResource("2_5anjg")
+Source = NodePath("../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+ProjectionScale = Vector2(0.1, 0.1)
+TrackingPlane = 1
+metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=2006886784]
+transform = Transform3D(1, -3.20326e-09, 1.56808e-11, 3.20238e-09, 0.999819, 0.0190406, -7.66697e-11, -0.0190406, 0.999819, -0.0168046, 0.371607, 0.89205)
+environment = ExtResource("4_geu54")
+fov = 112.351
+near = 0.001
+
+[node name="Rail" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1667484645]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.34, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Rail3" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1099711980]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.35, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Rail4" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1091903873]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.36, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="sleepers" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1889607784]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.37, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_5anjg")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Sprite3D2" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=761599621]
+transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="Sprite3D4" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=963675338]
+transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=19377579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.480749, 0.299417, -0.0121033)
+amount = 50
+lifetime = 3.29
+preprocess = 0.88
+randomness = 0.75
+draw_order = 1
+mesh = SubResource("QuadMesh_es6ox")
+emission_colors = PackedColorArray(1, 1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=542317731]
+transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, -0.00414681, 0.00809574, -0.212351)
+layers = 8
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="Sprite3D5" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1454584625]
+transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
+visibility_parent = NodePath("../Sprite3D")
+sorting_offset = 10.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
