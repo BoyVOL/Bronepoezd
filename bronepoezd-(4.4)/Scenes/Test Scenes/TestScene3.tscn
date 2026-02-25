@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://bfqph5qgiwmks"]
+
+[ext_resource type="Script" uid="uid://oleha8777abu" path="res://addons/d2trainside/Nodes/TrainCoreSide/TrainCoreSide.cs" id="1_sxvqa"]
+[ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="2_30gd0"]
+[ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="2_jph6i"]
+[ext_resource type="Script" uid="uid://c6oktdhee6rhr" path="res://Resources/Code/Sprite3d.cs" id="3_jph6i"]
+[ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_lexe1"]
+[ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_316t3"]
+[ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_k2sfs"]
+[ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_gmpoo"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8wm3f"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kwbjg"]
+viewport_path = NodePath("Control/SubViewportContainer/AutoscalingViewport")
+
+[node name="TestScene3" type="Node"]
+
+[node name="TrainCoreSide" type="Node2D" parent="."]
+position = Vector2(1199, 638)
+script = ExtResource("1_sxvqa")
+metadata/_custom_type_script = "uid://oleha8777abu"
+
+[node name="Camera2D" type="Camera2D" parent="TrainCoreSide"]
+position = Vector2(-251, -19)
+
+[node name="Sprite2D" type="Sprite2D" parent="TrainCoreSide"]
+position = Vector2(-284, -23)
+scale = Vector2(2.33984, 2.33984)
+texture = SubResource("ViewportTexture_8wm3f")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AutoscalingViewport" type="SubViewport" parent="Control/SubViewportContainer2" node_paths=PackedStringArray("ScalingSource")]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+script = ExtResource("2_jph6i")
+ScalingSource = NodePath("..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
+
+[node name="Node3D" type="Node3D" parent="Control/SubViewportContainer2/AutoscalingViewport"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Control/SubViewportContainer2/AutoscalingViewport/Node3D" node_paths=PackedStringArray("train")]
+transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, 0, 0, 0)
+layers = 8
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture = ExtResource("2_30gd0")
+script = ExtResource("3_jph6i")
+train = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer2/AutoscalingViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.878592, 0.477574, 0, -0.477574, 0.878592, 0, 0.9008, 1.70444)
+fov = 85.6
+near = 0.001
+
+[node name="Sprite3D3" type="Sprite3D" parent="Control/SubViewportContainer2/AutoscalingViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -7.15295e-08, 1, 0, -1, -7.15295e-08, -0.0356102, -0.316933, 0.0360345)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_kwbjg")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = -0.0849028
+anchor_bottom = 0.0370741
+offset_right = 599.808
+offset_bottom = 299.976
+size_flags_horizontal = 0
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoscalingViewport" type="SubViewport" parent="Control/SubViewportContainer" node_paths=PackedStringArray("ScalingSource")]
+handle_input_locally = false
+size = Vector2i(50, 50)
+render_target_update_mode = 4
+script = ExtResource("2_jph6i")
+ScalingSource = NodePath("..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
+
+[node name="Node2D" type="Node2D" parent="Control/SubViewportContainer/AutoscalingViewport"]
+
+[node name="RailGenerator" type="Node2D" parent="Control/SubViewportContainer/AutoscalingViewport/Node2D" node_paths=PackedStringArray("Train")]
+position = Vector2(0, 1)
+script = ExtResource("4_lexe1")
+GenBoundaries = Vector2(50000, 50000)
+DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
+JunctCount = 22
+MinGenDistance = 5000.0
+MaxDevition = 500.0
+StepScale = 500.0
+StraitRail = ExtResource("5_316t3")
+Junction = ExtResource("6_k2sfs")
+Train = NodePath("../Train")
+metadata/_custom_type_script = "uid://bbndwvvh1asi7"
+
+[node name="Train" parent="Control/SubViewportContainer/AutoscalingViewport/Node2D" instance=ExtResource("7_gmpoo")]

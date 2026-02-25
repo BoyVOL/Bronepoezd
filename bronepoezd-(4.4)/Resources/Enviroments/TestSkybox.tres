@@ -1,0 +1,13 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://bnhaw4sp2xl76"]
+
+[ext_resource type="Texture2D" uid="uid://co1ic6ds8wbsa" path="res://Resources/Enviroments/Epic_GloriousPink_EquiRect.png" id="1_0pfc7"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4b54s"]
+panorama = ExtResource("1_0pfc7")
+
+[sub_resource type="Sky" id="Sky_kn7ep"]
+sky_material = SubResource("PanoramaSkyMaterial_4b54s")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_kn7ep")

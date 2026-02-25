@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfg6qbu22euqi"]
+
+[ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="1_3rv4k"]
+[ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="2_2ergk"]
+[ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="3_a36j8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RailGenerator" type="Node2D" parent="." node_paths=PackedStringArray("Train")]
+position = Vector2(0, 1)
+script = ExtResource("1_3rv4k")
+GenBoundaries = Vector2(50000, 50000)
+DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
+JunctCount = 22
+MinGenDistance = 5000.0
+MinDevition = 100.0
+MaxDevition = 500.0
+StepScale = 500.0
+StraitRail = ExtResource("2_2ergk")
+Junction = ExtResource("3_a36j8")
+Train = NodePath("")
+metadata/_custom_type_script = "uid://bbndwvvh1asi7"

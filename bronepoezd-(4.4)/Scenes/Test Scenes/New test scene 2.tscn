@@ -1,0 +1,297 @@
+[gd_scene load_steps=21 format=3 uid="uid://bkjab5ou31vn2"]
+
+[ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
+[ext_resource type="Script" uid="uid://b5mdvbifvwmg5" path="res://addons/NodeRemoteTrackerModule/Nodes/Node25DTracker/Node25DTracker.cs" id="2_5anjg"]
+[ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="2_ngc2d"]
+[ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_8ri4j"]
+[ext_resource type="Environment" uid="uid://bnhaw4sp2xl76" path="res://Resources/Enviroments/TestSkybox.tres" id="4_geu54"]
+[ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_geu54"]
+[ext_resource type="Texture2D" uid="uid://cirxu7elebpaw" path="res://Resources/Sprites/Smoke.png" id="5_k05v2"]
+[ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
+[ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
+[ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/ProxyPath2dVisualiserModule/Nodes/RailVisualiser/RailVisualiser.cs" id="8_ngc2d"]
+[ext_resource type="PackedScene" uid="uid://dygrhtk5wuc43" path="res://Scenes/Components/RailVisualiser.tscn" id="9_uvvv4"]
+[ext_resource type="Script" uid="uid://donytb8xf0xsb" path="res://addons/NodeRemoteTrackerModule/Nodes/Node2DTracker/Node2DTracker.cs" id="10_8ri4j"]
+[ext_resource type="PackedScene" uid="uid://b0jajeai1dj0c" path="res://Scenes/Components/SleepersVisualiser.tscn" id="12_5anjg"]
+[ext_resource type="Script" uid="uid://cgtyv80c272py" path="res://Scenes/Test Scenes/SpeedSlider.cs" id="14_es6ox"]
+[ext_resource type="Script" uid="uid://d2do07b0na54i" path="res://Scenes/Test Scenes/BreakLever.cs" id="15_ai32b"]
+[ext_resource type="Script" uid="uid://6slhhqlhokmj" path="res://Scenes/Test Scenes/Revers.cs" id="16_sl85x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5anjg"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k05v2"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("5_k05v2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_es6ox"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_k05v2")
+size = Vector2(0.5, 0.5)
+
+[node name="Control" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+z_as_relative = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer2" node_paths=PackedStringArray("ScalingSource")]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+script = ExtResource("1_hklr1")
+ScalingSource = NodePath("../..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport"]
+
+[node name="TrainTracker" type="Node3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D" node_paths=PackedStringArray("Source")]
+top_level = true
+script = ExtResource("2_5anjg")
+Source = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+ProjectionScale = Vector2(0.1, 0.1)
+TrackingPlane = 1
+metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1, -3.20326e-09, 1.56808e-11, 3.20238e-09, 0.999819, 0.0190406, -7.66697e-11, -0.0190406, 0.999819, -0.0168046, 0.371607, 0.89205)
+environment = ExtResource("4_geu54")
+fov = 112.351
+near = 0.001
+
+[node name="Rail" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.34, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Rail3" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.35, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Rail4" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.36, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="sleepers" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.37, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_5anjg")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Sprite3D2" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="Sprite3D4" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.480749, 0.299417, -0.0121033)
+amount = 50
+lifetime = 3.29
+preprocess = 0.88
+randomness = 0.75
+draw_order = 1
+mesh = SubResource("QuadMesh_es6ox")
+emission_colors = PackedColorArray(1, 1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, -0.00414681, 0.00809574, -0.212351)
+layers = 8
+sorting_offset = 1.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="Sprite3D5" type="Sprite3D" parent="SubViewportContainer2/AutoscalingViewport/Node3D/TrainTracker"]
+transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
+visibility_parent = NodePath("../Sprite3D")
+sorting_offset = 10.0
+sorting_use_aabb_center = false
+texture_filter = 5
+texture = ExtResource("2_ngc2d")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = 1
+z_as_relative = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Карта рельсы.
+Приближение отдаление возможно колесом мыши.
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer" node_paths=PackedStringArray("ScalingSource")]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+script = ExtResource("1_hklr1")
+ScalingSource = NodePath("../..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
+
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/AutoscalingViewport"]
+
+[node name="RailGenerator" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" node_paths=PackedStringArray("Train")]
+script = ExtResource("4_8ri4j")
+GenBoundaries = Vector2(100000, 100000)
+DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
+JunctCount = 22
+MinGenDistance = 500.0
+MaxDevition = 500.0
+StepScale = 1000.0
+MinSmoothingModule = 5.0
+StraitRail = ExtResource("5_geu54")
+Junction = ExtResource("6_5anjg")
+Train = NodePath("../Train")
+metadata/_custom_type_script = "uid://bbndwvvh1asi7"
+
+[node name="Train" parent="SubViewportContainer/AutoscalingViewport/Node2D" instance=ExtResource("7_k05v2")]
+BrakeForce = 50.0
+Accelerate = 30.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(4000, 4000)
+render_target_update_mode = 4
+
+[node name="Node2D2" type="Node2D" parent="SubViewport"]
+
+[node name="RailVisualiser" type="Node2D" parent="SubViewport/Node2D2" node_paths=PackedStringArray("Source")]
+script = ExtResource("8_ngc2d")
+Source = NodePath("../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator")
+VisualTemplate = ExtResource("9_uvvv4")
+metadata/_custom_type_script = "uid://bbqb35lgqcvcl"
+
+[node name="Node2DTracker" type="Node2D" parent="SubViewport/Node2D2/RailVisualiser" node_paths=PackedStringArray("Source")]
+script = ExtResource("10_8ri4j")
+Source = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+metadata/_custom_type_script = "uid://donytb8xf0xsb"
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport/Node2D2/RailVisualiser/Node2DTracker"]
+ignore_rotation = false
+zoom = Vector2(10, 10)
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(4000, 4000)
+render_target_update_mode = 4
+
+[node name="Node2D3" type="Node2D" parent="SubViewport2"]
+
+[node name="RailVisualiser" type="Node2D" parent="SubViewport2/Node2D3" node_paths=PackedStringArray("Source")]
+script = ExtResource("8_ngc2d")
+Source = NodePath("../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator")
+VisualTemplate = ExtResource("12_5anjg")
+metadata/_custom_type_script = "uid://bbqb35lgqcvcl"
+
+[node name="Node2DTracker" type="Node2D" parent="SubViewport2/Node2D3/RailVisualiser" node_paths=PackedStringArray("Source")]
+script = ExtResource("10_8ri4j")
+Source = NodePath("../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+metadata/_custom_type_script = "uid://donytb8xf0xsb"
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport2/Node2D3/RailVisualiser/Node2DTracker"]
+ignore_rotation = false
+zoom = Vector2(10, 10)
+
+[node name="SpeedLever" type="VSlider" parent="." node_paths=PackedStringArray("train", "reversButton")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.974
+anchor_top = 0.333
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.0480957
+offset_top = 0.216003
+offset_bottom = -76.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Слайдер Тяги
+W для ускорения, S для ослабления тяги"
+script = ExtResource("14_es6ox")
+train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+reversButton = NodePath("../Revers")
+
+[node name="BreakLever" type="VSlider" parent="." node_paths=PackedStringArray("train")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.952
+anchor_top = 0.573
+anchor_right = 0.978
+anchor_bottom = 1.0
+offset_left = 0.296021
+offset_top = -0.304016
+offset_right = 0.343994
+offset_bottom = -76.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Слайдер тормозов
+Q для торможения, A для ослабления
+"
+script = ExtResource("15_ai32b")
+train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+
+[node name="Revers" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.908
+anchor_top = 1.0
+anchor_right = 0.944
+anchor_bottom = 1.0
+offset_left = -3.01611
+offset_top = -80.0
+offset_right = -0.488037
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "Кнопка реверса 
+Нажмите R для смены направления тяги"
+script = ExtResource("16_sl85x")
