@@ -68,6 +68,7 @@ public partial class RailGenerator : Node2D
 		MultiRail[] JunctPoints = GenJunctionPoints(MinGenDistance);
 		GenerateConnections(JunctPoints);
 		AddAsChildren(JunctPoints);
+		AlignAll(JunctPoints);
 		return JunctPoints;
 	}
 
@@ -156,7 +157,7 @@ public partial class RailGenerator : Node2D
 
 	public void AlignJuction(MultiRail point)
 	{
-		Vector2 Center = point.Curve.GetPointPosition(0) - point.Curve.GetPointPosition(point.Curve.PointCount);
+		Vector2 Center = point.Curve.GetPointPosition(0) - point.Curve.GetPointPosition(point.Curve.PointCount-1);
 		float EndAngle = 0;
 		float StartAngle = 0;
 		foreach (Rail NextRail in point.NextRails)
@@ -176,8 +177,9 @@ public partial class RailGenerator : Node2D
 		}
 		StartAngle /= point.PrevRails.Count();
 		float length = point.Curve.GetBakedLength();
-		Vector2 NewStart = Center+Vector2.FromAngle(StartAngle)*length;
-		Vector2 NewEnd = Center+Vector2.FromAngle(EndAngle)*length;
+		Vector2 NewStart = Center+Vector2.FromAngle(StartAngle)*length/2;
+		Vector2 NewEnd = Center+Vector2.FromAngle(EndAngle)*-length/2;
+		GD.Print(NewStart,NewEnd);
 		point.Curve.SetPointPosition(0, NewStart);
 		point.Curve.SetPointPosition(point.Curve.PointCount-1,NewEnd);
 	}
@@ -187,6 +189,11 @@ public partial class RailGenerator : Node2D
 		foreach (MultiRail point in points){
 			AlignJuction(point);
 		}
+	}
+
+	public void ClampPoints(MultiRail Junct)
+	{
+		
 	}
 
 	public void SmoothOut(Rail rail)
