@@ -30,6 +30,7 @@ viewport_path = NodePath("SubViewport2")
 transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("5_k05v2")
+texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_es6ox"]
 lightmap_size_hint = Vector2i(7, 7)
@@ -217,8 +218,11 @@ script = ExtResource("16_sl85x")
 [node name="SubViewport3" type="SubViewport" parent="." unique_id=31746575]
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
+scaling_3d_mode = 1
+anisotropic_filtering_level = 0
+fsr_sharpness = 1.0
 canvas_item_default_texture_filter = 0
-size = Vector2i(600, 300)
+size = Vector2i(700, 400)
 
 [node name="Node3D" type="Node3D" parent="SubViewport3" unique_id=1110600320]
 
@@ -268,14 +272,14 @@ region_rect = Rect2(0, 0, 288, 163.5)
 transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
 sorting_offset = 1.0
 sorting_use_aabb_center = false
-texture_filter = 5
+texture_filter = 1
 texture = ExtResource("2_ngc2d")
 
 [node name="Sprite3D4" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=963675338]
 transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
 sorting_offset = 1.0
 sorting_use_aabb_center = false
-texture_filter = 5
+texture_filter = 1
 texture = ExtResource("2_ngc2d")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=19377579]
@@ -298,7 +302,7 @@ transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999
 layers = 8
 sorting_offset = 1.0
 sorting_use_aabb_center = false
-texture_filter = 5
+texture_filter = 1
 texture = ExtResource("2_ngc2d")
 
 [node name="Sprite3D5" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1454584625]
@@ -306,5 +310,5 @@ transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0
 visibility_parent = NodePath("../Sprite3D")
 sorting_offset = 10.0
 sorting_use_aabb_center = false
-texture_filter = 5
+texture_filter = 1
 texture = ExtResource("2_ngc2d")
