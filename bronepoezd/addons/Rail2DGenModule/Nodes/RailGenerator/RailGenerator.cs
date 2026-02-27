@@ -154,26 +154,6 @@ public partial class RailGenerator : Node2D
 		Close(points);
 	}
 
-	public void AlignJuction(MultiRail point)
-	{
-		Vector2 Center = point.Curve.GetPointPosition(0) - point.Curve.GetPointPosition(point.Curve.PointCount);
-		foreach (Rail NextRail in point.NextRails)
-		{
-			
-		}
-		foreach (Rail PrevRail in point.PrevRails)
-		{
-			
-		}
-	}
-
-	public void AlignAll(MultiRail[] points)
-	{
-		foreach (MultiRail point in points){
-			AlignJuction(point);
-		}
-	}
-
 	public void SmoothOut(Rail rail)
 	{
         for (int i = 1; i < rail.Curve.PointCount-1; i++)
