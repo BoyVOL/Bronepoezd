@@ -157,29 +157,14 @@ public partial class RailGenerator : Node2D
 	public void AlignJuction(MultiRail point)
 	{
 		Vector2 Center = point.Curve.GetPointPosition(0) - point.Curve.GetPointPosition(point.Curve.PointCount);
-		float EndAngle = 0;
-		float StartAngle = 0;
 		foreach (Rail NextRail in point.NextRails)
 		{
-			if(NextRail.Curve.PointCount > 1)
-			{
-				EndAngle += Center.AngleTo(NextRail.Curve.GetPointPosition(1));
-			}
+			
 		}
-		EndAngle /= point.NextRails.Count();
 		foreach (Rail PrevRail in point.PrevRails)
 		{
-			if(PrevRail.Curve.PointCount > 1)
-			{
-				StartAngle += Center.AngleTo(PrevRail.Curve.GetPointPosition(PrevRail.Curve.PointCount-2));
-			}
+			
 		}
-		StartAngle /= point.PrevRails.Count();
-		float length = point.Curve.GetBakedLength();
-		Vector2 NewStart = Center+Vector2.FromAngle(StartAngle)*length;
-		Vector2 NewEnd = Center+Vector2.FromAngle(EndAngle)*length;
-		point.Curve.SetPointPosition(0, NewStart);
-		point.Curve.SetPointPosition(point.Curve.PointCount-1,NewEnd);
 	}
 
 	public void AlignAll(MultiRail[] points)
