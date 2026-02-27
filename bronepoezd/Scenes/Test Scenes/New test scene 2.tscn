@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_8ri4j"]
 [ext_resource type="Environment" uid="uid://bnhaw4sp2xl76" path="res://Resources/Enviroments/TestSkybox.tres" id="4_geu54"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_geu54"]
-[ext_resource type="Texture2D" uid="uid://cirxu7elebpaw" path="res://Resources/Sprites/Smoke.png" id="5_k05v2"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 [ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/ProxyPath2dVisualiserModule/Nodes/RailVisualiser/RailVisualiser.cs" id="8_ngc2d"]
@@ -16,6 +15,7 @@
 [ext_resource type="Script" uid="uid://cgtyv80c272py" path="res://Scenes/Test Scenes/SpeedSlider.cs" id="14_es6ox"]
 [ext_resource type="Script" uid="uid://d2do07b0na54i" path="res://Scenes/Test Scenes/BreakLever.cs" id="15_ai32b"]
 [ext_resource type="Script" uid="uid://6slhhqlhokmj" path="res://Scenes/Test Scenes/Revers.cs" id="16_sl85x"]
+[ext_resource type="Texture2D" uid="uid://dlqcac73tjfik" path="res://Resources/Sprites/player model placeholder.png" id="17_7iupa"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_sl85x"]
 viewport_path = NodePath("SubViewport3")
@@ -29,7 +29,7 @@ viewport_path = NodePath("SubViewport2")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k05v2"]
 transparency = 1
 shading_mode = 0
-albedo_texture = ExtResource("5_k05v2")
+albedo_texture = ExtResource("17_7iupa")
 texture_filter = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_es6ox"]
@@ -99,7 +99,7 @@ metadata/_custom_type_script = "uid://ocdra8ykfjf4"
 
 [node name="RailGenerator" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=242911968 node_paths=PackedStringArray("Train")]
 script = ExtResource("4_8ri4j")
-GenBoundaries = Vector2(100000, 100000)
+GenBoundaries = Vector2(10000, 10000)
 DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
 JunctCount = 22
 MinGenDistance = 500.0
@@ -218,11 +218,11 @@ script = ExtResource("16_sl85x")
 [node name="SubViewport3" type="SubViewport" parent="." unique_id=31746575]
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
-scaling_3d_mode = 1
+texture_mipmap_bias = -2.0
 anisotropic_filtering_level = 0
 fsr_sharpness = 1.0
 canvas_item_default_texture_filter = 0
-size = Vector2i(700, 400)
+size = Vector2i(500, 250)
 
 [node name="Node3D" type="Node3D" parent="SubViewport3" unique_id=1110600320]
 
@@ -271,14 +271,12 @@ region_rect = Rect2(0, 0, 288, 163.5)
 [node name="Sprite3D2" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=761599621]
 transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
 sorting_offset = 1.0
-sorting_use_aabb_center = false
 texture_filter = 1
 texture = ExtResource("2_ngc2d")
 
 [node name="Sprite3D4" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=963675338]
 transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
 sorting_offset = 1.0
-sorting_use_aabb_center = false
 texture_filter = 1
 texture = ExtResource("2_ngc2d")
 
@@ -299,16 +297,13 @@ initial_velocity_max = 2.0
 
 [node name="Sprite3D" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=542317731]
 transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, -0.00414681, 0.00809574, -0.212351)
-layers = 8
 sorting_offset = 1.0
-sorting_use_aabb_center = false
 texture_filter = 1
 texture = ExtResource("2_ngc2d")
 
-[node name="Sprite3D5" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=1454584625]
-transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, -0.162956)
-visibility_parent = NodePath("../Sprite3D")
+[node name="Character" type="Sprite3D" parent="SubViewport3/Node3D/TrainTracker" unique_id=459354585]
+transform = Transform3D(-0.99813265, 0, -0.061083328, 0, 1, 0, 0.061083328, 0, -0.99813265, 0.3935653, 0.04417181, 0.43136072)
 sorting_offset = 10.0
-sorting_use_aabb_center = false
-texture_filter = 1
-texture = ExtResource("2_ngc2d")
+billboard = 1
+texture_filter = 0
+texture = ExtResource("17_7iupa")
