@@ -214,10 +214,20 @@ public partial class RailGenerator : Node2D
 			Start.NextRails = StartList.ToArray();
 			End.PrevRails = EndList.ToArray();
 			Complicate(rail);
+			PosAdjust(rail);
 			SmoothOut(rail);
 			return rail;
 		}
 		else throw new Exception("no scene for connection rail");
+	}
+
+	/// <summary>
+	/// Метод для смещения положения рельсы к её примерному центру
+	/// </summary>
+	/// <param name="rail"></param>
+	public void PosAdjust(Rail rail)
+	{
+		rail.PositionRelShift(new Vector2(100,100));
 	}
 
 	public void PlaceTrain(Rail rail)
