@@ -113,6 +113,9 @@ public partial class Train : Node2D
 
 }
 
+/// <summary>
+/// Интерфейс для дружбы поезда с рельсами
+/// </summary>
 public interface IRail
 {
 	public Curve2D Curve
