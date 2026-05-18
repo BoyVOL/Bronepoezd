@@ -43,6 +43,19 @@ public partial class Rail : Path2D, IRail
     }
 
     /// <summary>
+    /// Метод для смещения позиции ноды вместе с точками кривой
+    /// </summary>
+    /// <param name="Shift">Вектор, на который смещается рельса</param>
+    public void PositionRelShift(Vector2 Shift)
+    {
+        Position+=Shift;
+        for (int i = Curve.PointCount - 1; i >= 0 ; i--)
+        {
+            Curve.SetPointPosition(i,Curve.GetPointPosition(i)-Shift);
+        }
+    }
+
+    /// <summary>
     /// Выводит истину, если хвост текущей рельсы ближе к голове сравниваемой, нежели к её хвосту
     /// </summary>
     /// <param name="NextRail">сравниваемая рельса</param>
