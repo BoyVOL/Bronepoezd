@@ -227,7 +227,7 @@ public partial class RailGenerator : Node2D
 	/// <param name="rail"></param>
 	public void PosAdjust(Rail rail)
 	{
-		rail.PositionRelShift(new Vector2(100,100));
+		rail.PositionRelShift(rail.FindMidPoint());
 	}
 
 	public void PlaceTrain(Rail rail)

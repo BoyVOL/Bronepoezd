@@ -49,10 +49,22 @@ public partial class Rail : Path2D, IRail
     public void PositionRelShift(Vector2 Shift)
     {
         Position+=Shift;
-        for (int i = Curve.PointCount - 1; i >= 0 ; i--)
+        for (int i = 0; i < Curve.PointCount; i++)
         {
             Curve.SetPointPosition(i,Curve.GetPointPosition(i)-Shift);
         }
+    }
+
+
+    public Vector2 FindMidPoint()
+    {
+        var Result = new Vector2(0,0);
+        for (int i = 0; i < Curve.PointCount; i++)
+        {
+            Result += Curve.GetPointPosition(i);
+        }
+        Result /= Curve.PointCount;
+        return Result;
     }
 
     /// <summary>
