@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://b2y3nvqnxdrn7"]
+
+[ext_resource type="Script" uid="uid://b5mdvbifvwmg5" path="res://addons/NodeRemoteTrackerModule/Nodes/Node25DTracker/Node25DTracker.cs" id="1_dutv1"]
+[ext_resource type="Environment" uid="uid://bnhaw4sp2xl76" path="res://Resources/Enviroments/TestSkybox.tres" id="2_nhyjx"]
+[ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="3_fk3qd"]
+[ext_resource type="Texture2D" uid="uid://cirxu7elebpaw" path="res://Resources/Sprites/Smoke.png" id="4_lmuhu"]
+[ext_resource type="Texture2D" uid="uid://dlqcac73tjfik" path="res://Resources/Sprites/player model placeholder.png" id="5_re6q1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5anjg"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k05v2"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_lmuhu")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_es6ox"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_k05v2")
+size = Vector2(0.3, 0.2)
+
+[node name="TrainTracker" type="Node3D" unique_id=901709061 node_paths=PackedStringArray("Source")]
+top_level = true
+script = ExtResource("1_dutv1")
+Source = NodePath("")
+ProjectionScale = Vector2(0.1, 0.1)
+TrackingPlane = 1
+metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1464002240]
+transform = Transform3D(1, -3.20326e-09, 1.56808e-11, 3.20238e-09, 0.999819, 0.0190406, -7.66697e-11, -0.0190406, 0.999819, -0.0168046, 0.371607, 0.89205)
+environment = ExtResource("2_nhyjx")
+fov = 112.351
+near = 0.001
+
+[node name="Rail" type="Sprite3D" parent="." unique_id=176325939]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.34, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Rail3" type="Sprite3D" parent="." unique_id=654528753]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.35, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Rail4" type="Sprite3D" parent="." unique_id=1829620436]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.36, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_hklr1")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="sleepers" type="Sprite3D" parent="." unique_id=554780327]
+transform = Transform3D(0.5, 3.68954e-09, 1.61275e-16, 0, -2.18557e-08, 0.5, 3.68954e-09, -0.5, -2.18557e-08, 0.006, -0.37, -0.007)
+layers = 4
+sorting_use_aabb_center = false
+texture = SubResource("ViewportTexture_5anjg")
+region_rect = Rect2(0, 0, 288, 163.5)
+
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1642996901]
+transform = Transform3D(0.999995, -0.00147655, 0.00286021, 0.00148423, 0.999996, -0.00267836, -0.00285622, 0.00268259, 0.999992, 0, 0, 0.211143)
+sorting_offset = 1.0
+texture_filter = 1
+texture = ExtResource("3_fk3qd")
+
+[node name="Sprite3D4" type="Sprite3D" parent="." unique_id=1907868861]
+transform = Transform3D(1.35506, -0.00190069, 0.0028609, 0.00201123, 1.28724, -0.002679, -0.00387037, 0.00345317, 1.00023, 0.007571, 0.0914192, 0.112031)
+sorting_offset = 1.0
+texture_filter = 1
+texture = ExtResource("3_fk3qd")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=879865982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.480749, 0.299417, -0.0121033)
+amount = 500
+lifetime = 3.29
+preprocess = 0.88
+randomness = 1.0
+draw_order = 1
+mesh = SubResource("QuadMesh_es6ox")
+emission_colors = PackedColorArray(1, 1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.5
+scale_amount_max = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2103767472]
+transform = Transform3D(0.999999, -0.000739234, 0.00142961, 0.00074116, 0.999999, -0.00133971, -0.00142861, 0.00134077, 0.999998, -0.00414681, 0.00809574, -0.212351)
+sorting_offset = 1.0
+texture_filter = 1
+texture = ExtResource("3_fk3qd")
+
+[node name="Character" type="Sprite3D" parent="." unique_id=387956047]
+transform = Transform3D(-0.99813265, 0, -0.061083328, 0, 1, 0, 0.061083328, 0, -0.99813265, 0.3935653, 0.04417181, 0.43136072)
+sorting_offset = 10.0
+billboard = 1
+texture_filter = 0
+texture = ExtResource("5_re6q1")
