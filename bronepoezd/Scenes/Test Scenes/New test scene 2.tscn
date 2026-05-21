@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bkjab5ou31vn2"]
 
 [ext_resource type="Script" uid="uid://ocdra8ykfjf4" path="res://addons/autoscaling_viewport_module/AutoscalingViewport/AutoscalingViewport.cs" id="1_hklr1"]
-[ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/Rail2DGenModule/Nodes/RailGenerator/RailGenerator.cs" id="4_8ri4j"]
-[ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="5_geu54"]
-[ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="6_5anjg"]
+[ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/TrainPhysicsModule/Nodes/RailGenerator/RailGenerator.cs" id="3_hklr1"]
+[ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="4_uvvv4"]
+[ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="5_8ri4j"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 [ext_resource type="PackedScene" uid="uid://b2y3nvqnxdrn7" path="res://Scenes/Components/3dTrain.tscn" id="13_k05v2"]
 [ext_resource type="Script" uid="uid://cgtyv80c272py" path="res://Scenes/Test Scenes/SpeedSlider.cs" id="14_es6ox"]
@@ -69,23 +69,21 @@ metadata/_custom_type_script = "uid://ocdra8ykfjf4"
 
 [node name="Node2D" type="Node2D" parent="SubViewportContainer/AutoscalingViewport" unique_id=1627463819]
 
-[node name="RailGenerator" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=242911968 node_paths=PackedStringArray("Train")]
-script = ExtResource("4_8ri4j")
-GenBoundaries = Vector2(10000, 10000)
-DebugBorderColor = Color(0.057, 0.577917, 0.95, 1)
-JunctCount = 22
-MinGenDistance = 500.0
-MaxDevition = 500.0
-StepScale = 1000.0
-MinSmoothingModule = 5.0
-StraitRail = ExtResource("5_geu54")
-Junction = ExtResource("6_5anjg")
-Train = NodePath("../Train")
-metadata/_custom_type_script = "uid://bbndwvvh1asi7"
-
 [node name="Train" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=2038937439 instance=ExtResource("7_k05v2")]
 BrakeForce = 50.0
 Accelerate = 30.0
+
+[node name="RailGenerator2" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=5647533 node_paths=PackedStringArray("Train")]
+script = ExtResource("3_hklr1")
+GenBoundaries = Vector2(10000, 10000)
+JunctCount = 8
+MinGenDistance = 1000.0
+MaxDevition = 30.0
+StepScale = 50.0
+StraitRail = ExtResource("4_uvvv4")
+Junction = ExtResource("5_8ri4j")
+Train = NodePath("../Train")
+metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="SpeedLever" type="VSlider" parent="." unique_id=2032796699 node_paths=PackedStringArray("train", "reversButton")]
 layout_mode = 1
@@ -167,16 +165,16 @@ texture = SubResource("ViewportTexture_uvvv4")
 [node name="sleepers" parent="SubViewport3/Root/TrainTracker" index="4" unique_id=554780327]
 texture = SubResource("ViewportTexture_8ri4j")
 
-[node name="RailVisualiser" parent="SubViewport3/Root/TrainTracker/Sleepers/Node2D3" parent_id_path=PackedInt32Array(901709061, 1549661959) index="0" unique_id=1270585236 node_paths=PackedStringArray("Source")]
-Source = NodePath("../../../../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator")
+[node name="RailVisualiser2" parent="SubViewport3/Root/TrainTracker/Sleepers/Node2D3" parent_id_path=PackedInt32Array(901709061, 1549661959) index="0" unique_id=218649962 node_paths=PackedStringArray("Source")]
+Source = NodePath("../../../../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator2")
 
-[node name="Node2DTracker" parent="SubViewport3/Root/TrainTracker/Sleepers/Node2D3/RailVisualiser" index="0" unique_id=1985971355 node_paths=PackedStringArray("Source")]
+[node name="Node2DTracker" parent="SubViewport3/Root/TrainTracker/Sleepers/Node2D3/RailVisualiser2" index="0" unique_id=1985971355 node_paths=PackedStringArray("Source")]
 Source = NodePath("../../../../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
 
-[node name="RailVisualiser" parent="SubViewport3/Root/TrainTracker/Rails/Node2D2" parent_id_path=PackedInt32Array(901709061, 379993468) index="0" unique_id=1909454777 node_paths=PackedStringArray("Source")]
-Source = NodePath("../../../../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator")
+[node name="RailVisualiser2" parent="SubViewport3/Root/TrainTracker/Rails/Node2D2" parent_id_path=PackedInt32Array(901709061, 379993468) index="0" unique_id=56157752 node_paths=PackedStringArray("Source")]
+Source = NodePath("../../../../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator2")
 
-[node name="Node2DTracker" parent="SubViewport3/Root/TrainTracker/Rails/Node2D2/RailVisualiser" index="0" unique_id=2023282030 node_paths=PackedStringArray("Source")]
+[node name="Node2DTracker" parent="SubViewport3/Root/TrainTracker/Rails/Node2D2/RailVisualiser2" index="0" unique_id=2023282030 node_paths=PackedStringArray("Source")]
 Source = NodePath("../../../../../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
 
 [editable path="SubViewport3/Root/TrainTracker"]
