@@ -5,12 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="3_fk3qd"]
 [ext_resource type="Texture2D" uid="uid://cirxu7elebpaw" path="res://Resources/Sprites/Smoke.png" id="4_lmuhu"]
 [ext_resource type="Texture2D" uid="uid://dlqcac73tjfik" path="res://Resources/Sprites/player model placeholder.png" id="5_re6q1"]
+[ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/ProxyPath2dVisualiserModule/Nodes/RailVisualiser/RailVisualiser.cs" id="6_re6q1"]
+[ext_resource type="PackedScene" uid="uid://b0jajeai1dj0c" path="res://Scenes/Components/SleepersVisualiser.tscn" id="7_dek27"]
+[ext_resource type="Script" uid="uid://donytb8xf0xsb" path="res://addons/NodeRemoteTrackerModule/Nodes/Node2DTracker/Node2DTracker.cs" id="8_ta0nd"]
+[ext_resource type="PackedScene" uid="uid://dygrhtk5wuc43" path="res://Scenes/Components/RailVisualiser.tscn" id="9_t4xs0"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hklr1"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("Rails")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5anjg"]
-viewport_path = NodePath("SubViewport2")
+viewport_path = NodePath("Sleepers")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k05v2"]
 transparency = 1
@@ -23,10 +27,9 @@ lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_k05v2")
 size = Vector2(0.3, 0.2)
 
-[node name="TrainTracker" type="Node3D" unique_id=901709061 node_paths=PackedStringArray("Source")]
+[node name="TrainTracker" type="Node3D" unique_id=901709061]
 top_level = true
 script = ExtResource("1_dutv1")
-Source = NodePath("")
 ProjectionScale = Vector2(0.1, 0.1)
 TrackingPlane = 1
 metadata/_custom_type_script = "uid://b5mdvbifvwmg5"
@@ -105,3 +108,49 @@ sorting_offset = 10.0
 billboard = 1
 texture_filter = 0
 texture = ExtResource("5_re6q1")
+
+[node name="Sleepers" type="SubViewport" parent="." unique_id=824256115]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(4000, 4000)
+render_target_update_mode = 4
+
+[node name="Node2D3" type="Node2D" parent="Sleepers" unique_id=1549661959]
+
+[node name="RailVisualiser" type="Node2D" parent="Sleepers/Node2D3" unique_id=1270585236 node_paths=PackedStringArray("Source")]
+script = ExtResource("6_re6q1")
+Source = NodePath("")
+VisualTemplate = ExtResource("7_dek27")
+metadata/_custom_type_script = "uid://bbqb35lgqcvcl"
+
+[node name="Node2DTracker" type="Node2D" parent="Sleepers/Node2D3/RailVisualiser" unique_id=1985971355 node_paths=PackedStringArray("Source")]
+script = ExtResource("8_ta0nd")
+Source = NodePath("")
+metadata/_custom_type_script = "uid://donytb8xf0xsb"
+
+[node name="Camera2D" type="Camera2D" parent="Sleepers/Node2D3/RailVisualiser/Node2DTracker" unique_id=335241827]
+ignore_rotation = false
+zoom = Vector2(10, 10)
+
+[node name="Rails" type="SubViewport" parent="." unique_id=812310011]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(4000, 4000)
+render_target_update_mode = 4
+
+[node name="Node2D2" type="Node2D" parent="Rails" unique_id=379993468]
+
+[node name="RailVisualiser" type="Node2D" parent="Rails/Node2D2" unique_id=1909454777 node_paths=PackedStringArray("Source")]
+script = ExtResource("6_re6q1")
+Source = NodePath("")
+VisualTemplate = ExtResource("9_t4xs0")
+metadata/_custom_type_script = "uid://bbqb35lgqcvcl"
+
+[node name="Node2DTracker" type="Node2D" parent="Rails/Node2D2/RailVisualiser" unique_id=2023282030 node_paths=PackedStringArray("Source")]
+script = ExtResource("8_ta0nd")
+Source = NodePath("")
+metadata/_custom_type_script = "uid://donytb8xf0xsb"
+
+[node name="Camera2D" type="Camera2D" parent="Rails/Node2D2/RailVisualiser/Node2DTracker" unique_id=1983334252]
+ignore_rotation = false
+zoom = Vector2(10, 10)
