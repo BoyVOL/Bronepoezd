@@ -28,8 +28,11 @@ lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_k05v2")
 size = Vector2(0.3, 0.2)
 
-[node name="SceneController" type="Node" unique_id=56905080]
+[node name="SceneController" type="Node" unique_id=56905080 node_paths=PackedStringArray("Visualisers", "Trackers2D", "Trackers25D")]
 script = ExtResource("1_dek27")
+Visualisers = [NodePath("TrainTracker/Sleepers/Node2D3/RailVisualiser2"), NodePath("TrainTracker/Rails/Node2D2/RailVisualiser2")]
+Trackers2D = [NodePath("TrainTracker/Sleepers/Node2D3/RailVisualiser2/Node2DTracker"), NodePath("TrainTracker/Rails/Node2D2/RailVisualiser2/Node2DTracker")]
+Trackers25D = [NodePath("TrainTracker")]
 
 [node name="TrainTracker" type="Node3D" parent="." unique_id=901709061]
 top_level = true

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public partial class RailVisualiser : Node2D
 {
     [Export]
-    Node Source = null;
+    public Node Source = null;
 
     [Export]
     PackedScene VisualTemplate = null;
