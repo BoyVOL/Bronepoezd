@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="4_uvvv4"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="5_8ri4j"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
+[ext_resource type="Script" uid="uid://dqmxkfbuar1sc" path="res://Scenes/Test Scenes/SceneInstantiator.cs" id="10_8ri4j"]
 [ext_resource type="PackedScene" uid="uid://b2y3nvqnxdrn7" path="res://Scenes/Components/3dTrain.tscn" id="13_k05v2"]
 [ext_resource type="Script" uid="uid://cgtyv80c272py" path="res://Scenes/Test Scenes/SpeedSlider.cs" id="14_es6ox"]
 [ext_resource type="Script" uid="uid://d2do07b0na54i" path="res://Scenes/Test Scenes/BreakLever.cs" id="15_ai32b"]
@@ -142,8 +143,8 @@ fsr_sharpness = 1.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(500, 250)
 
-[node name="SceneController" parent="SubViewport3" unique_id=56905080 node_paths=PackedStringArray("RailSource", "Train") instance=ExtResource("13_k05v2")]
+[node name="SceneInstantiator" type="Node" parent="SubViewport3" unique_id=853399083 node_paths=PackedStringArray("RailSource", "Train")]
+script = ExtResource("10_8ri4j")
+InstantiatedScene = ExtResource("13_k05v2")
 RailSource = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator2")
 Train = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
-
-[editable path="SubViewport3/SceneController"]
