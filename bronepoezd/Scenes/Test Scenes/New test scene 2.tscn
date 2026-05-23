@@ -13,12 +13,6 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_sl85x"]
 viewport_path = NodePath("SubViewport3")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_uvvv4"]
-viewport_path = NodePath("TrainTracker/Rails")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_8ri4j"]
-viewport_path = NodePath("TrainTracker/Sleepers")
-
 [node name="Control" type="Control" unique_id=1390901496]
 clip_contents = true
 layout_mode = 3
@@ -148,22 +142,8 @@ fsr_sharpness = 1.0
 canvas_item_default_texture_filter = 0
 size = Vector2i(500, 250)
 
-[node name="Root" type="Node3D" parent="SubViewport3" unique_id=1110600320]
+[node name="SceneController" parent="SubViewport3" unique_id=56905080 node_paths=PackedStringArray("RailSource", "Train") instance=ExtResource("13_k05v2")]
+RailSource = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator2")
+Train = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
 
-[node name="Node" parent="SubViewport3/Root" unique_id=56905080 node_paths=PackedStringArray("RailSource", "Train") instance=ExtResource("13_k05v2")]
-RailSource = NodePath("../../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator2")
-Train = NodePath("../../../SubViewportContainer/AutoscalingViewport/Node2D/Train")
-
-[node name="Rail" parent="SubViewport3/Root/Node/TrainTracker" parent_id_path=PackedInt32Array(56905080, 901709061) index="1" unique_id=176325939]
-texture = SubResource("ViewportTexture_uvvv4")
-
-[node name="Rail3" parent="SubViewport3/Root/Node/TrainTracker" parent_id_path=PackedInt32Array(56905080, 901709061) index="2" unique_id=654528753]
-texture = SubResource("ViewportTexture_uvvv4")
-
-[node name="Rail4" parent="SubViewport3/Root/Node/TrainTracker" parent_id_path=PackedInt32Array(56905080, 901709061) index="3" unique_id=1829620436]
-texture = SubResource("ViewportTexture_uvvv4")
-
-[node name="sleepers" parent="SubViewport3/Root/Node/TrainTracker" parent_id_path=PackedInt32Array(56905080, 901709061) index="4" unique_id=554780327]
-texture = SubResource("ViewportTexture_8ri4j")
-
-[editable path="SubViewport3/Root/Node"]
+[editable path="SubViewport3/SceneController"]
