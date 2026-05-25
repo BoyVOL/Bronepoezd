@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 
 [GlobalClass]
-public partial class Node25DTracker : Node3D
+public partial class Node25DTracker : Node3D, Node2DTracking
 {
     public enum Planes
     {
@@ -13,6 +13,12 @@ public partial class Node25DTracker : Node3D
     }
 
     [Export] public Node2D Source = null;
+
+    public Node2D TrackSource
+    {
+        get { return Source;}
+        set { Source = value;}
+    }
 
     [Export]
     public Vector2 ProjectionScale = Vector2.One;

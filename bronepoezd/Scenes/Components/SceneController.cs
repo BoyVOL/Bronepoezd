@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class SceneController : Node
 {
@@ -14,6 +16,7 @@ public partial class SceneController : Node
 
     public void LinkSources()
     {
+        GD.Print("Test"+GetAllKids(GetChildren(true)).Count);
         if(RailSource != null)
         {
             foreach (RailVisualiser kid in Visualisers)
@@ -33,6 +36,25 @@ public partial class SceneController : Node
                     kid.Source = Train;
             }
         }
+    }
+
+    /// <summary>
+    /// Рекурсивно возвращает всех детей в принципе в виде списка
+    /// </summary>
+    /// <param name="nodes"></param>
+    /// <returns></returns>
+    public List<Node> GetAllKids(Godot.Collections.Array<Node> nodes)
+    {
+        List<Node> Result = new List<Node>();
+        foreach (Node item in nodes.ToList<Node>())
+        {
+            Result.Add(item);
+            if (item.GetChildCount() > 0)
+            {
+                Result.AddRange(GetAllKids(item.GetChildren(true)).ToList<Node>());
+            }
+        }
+        return Result;
     }
 
     public override void _EnterTree()
