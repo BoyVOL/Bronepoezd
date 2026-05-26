@@ -11,15 +11,15 @@ using Godot;
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
-        public static List<Node> GetAllKids(Godot.Collections.Array<Node> nodes)
+        public static List<Node> GetAllKids(Godot.Collections.Array<Node> nodes, int DepthLimit = 100)
         {
             List<Node> Result = new List<Node>();
             foreach (Node item in nodes.ToList<Node>())
             {
                 Result.Add(item);
-                if (item.GetChildCount() > 0)
+                if (item.GetChildCount() > 0 && DepthLimit > 0)
                 {
-                    Result.AddRange(GetAllKids(item.GetChildren(true)).ToList<Node>());
+                    Result.AddRange(GetAllKids(item.GetChildren(true),DepthLimit-1).ToList<Node>());
                 }
             }
             return Result;

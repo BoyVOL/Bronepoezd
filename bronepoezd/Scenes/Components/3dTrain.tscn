@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b2y3nvqnxdrn7"]
 
-[ext_resource type="Script" uid="uid://blrk78fomoyi1" path="res://Scenes/Components/SceneController.cs" id="1_dek27"]
+[ext_resource type="Script" uid="uid://blrk78fomoyi1" path="res://Resources/Code/SceneController.cs" id="1_dek27"]
 [ext_resource type="Script" uid="uid://b5mdvbifvwmg5" path="res://addons/NodeRemoteTrackerModule/Nodes/Node25DTracker/Node25DTracker.cs" id="1_dutv1"]
 [ext_resource type="Environment" uid="uid://bnhaw4sp2xl76" path="res://Resources/Enviroments/TestSkybox.tres" id="2_nhyjx"]
 [ext_resource type="Texture2D" uid="uid://b1m5ec1v0smsy" path="res://Resources/Sprites/Loco.bmp" id="3_fk3qd"]
@@ -33,11 +33,8 @@ lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_k05v2")
 size = Vector2(0.3, 0.2)
 
-[node name="SceneController" type="Node" unique_id=56905080 node_paths=PackedStringArray("Visualisers", "Trackers2D", "Trackers25D")]
+[node name="SceneController" type="Node" unique_id=56905080]
 script = ExtResource("1_dek27")
-Visualisers = [NodePath("Root/TrainTracker/Sleepers/Node2D3/RailVisualiser2"), NodePath("Root/TrainTracker/Rails/Node2D2/RailVisualiser2")]
-Trackers2D = [NodePath("Root/TrainTracker/Sleepers/Node2D3/RailVisualiser2/Node2DTracker"), NodePath("Root/TrainTracker/Rails/Node2D2/RailVisualiser2/Node2DTracker")]
-Trackers25D = [NodePath("Root/TrainTracker")]
 
 [node name="Root" type="Node3D" parent="." unique_id=1842079297]
 
