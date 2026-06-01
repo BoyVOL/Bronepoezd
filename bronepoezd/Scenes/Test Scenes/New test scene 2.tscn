@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bbndwvvh1asi7" path="res://addons/TrainPhysicsModule/Nodes/RailGenerator/RailGenerator.cs" id="3_hklr1"]
 [ext_resource type="PackedScene" uid="uid://dxs2qo44su1w3" path="res://Scenes/Components/single_rail2.tscn" id="4_uvvv4"]
 [ext_resource type="PackedScene" uid="uid://5c87f0tj4f02" path="res://Scenes/Components/single_rail3.tscn" id="5_8ri4j"]
+[ext_resource type="Script" uid="uid://bbqb35lgqcvcl" path="res://addons/TrainPhysicsModule/Nodes/RailVisualiser/RailVisualiser.cs" id="6_geu54"]
+[ext_resource type="PackedScene" uid="uid://dygrhtk5wuc43" path="res://Scenes/Components/RailVisualiser.tscn" id="7_5anjg"]
 [ext_resource type="PackedScene" uid="uid://b6xgk3evd0l2h" path="res://Scenes/Components/train.tscn" id="7_k05v2"]
 [ext_resource type="Script" uid="uid://dqmxkfbuar1sc" path="res://Scenes/Test Scenes/SceneInstantiator.cs" id="10_8ri4j"]
 [ext_resource type="PackedScene" uid="uid://b2y3nvqnxdrn7" path="res://Scenes/Components/3dTrain.tscn" id="13_k05v2"]
@@ -34,51 +36,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_sl85x")
 stretch_mode = 5
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1427085992]
-z_index = 1
-z_as_relative = false
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-size_flags_horizontal = 0
-size_flags_vertical = 0
-tooltip_text = "Карта рельсы.
-Приближение отдаление возможно колесом мыши.
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1415101579 node_paths=PackedStringArray("ScalingSource")]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-script = ExtResource("1_hklr1")
-ScalingSource = NodePath("../..")
-metadata/_custom_type_script = "uid://ocdra8ykfjf4"
-
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/AutoscalingViewport" unique_id=1627463819]
-
-[node name="Train" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=2038937439 instance=ExtResource("7_k05v2")]
-BrakeForce = 50.0
-Accelerate = 30.0
-
-[node name="RailGenerator2" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=5647533 node_paths=PackedStringArray("Train")]
-script = ExtResource("3_hklr1")
-GenBoundaries = Vector2(10000, 10000)
-JunctCount = 8
-MinGenDistance = 1000.0
-MaxDevition = 30.0
-StepScale = 50.0
-StraitRail = ExtResource("4_uvvv4")
-Junction = ExtResource("5_8ri4j")
-Train = NodePath("../Train")
-metadata/_custom_type_script = "uid://bbndwvvh1asi7"
 
 [node name="SpeedLever" type="VSlider" parent="." unique_id=2032796699 node_paths=PackedStringArray("train", "reversButton")]
 layout_mode = 1
@@ -134,6 +91,61 @@ tooltip_text = "Кнопка реверса
 Нажмите R для смены направления тяги"
 script = ExtResource("16_sl85x")
 
+[node name="RailGenerator2" type="Node2D" parent="." unique_id=5647533 node_paths=PackedStringArray("Train", "Target")]
+script = ExtResource("3_hklr1")
+GenBoundaries = Vector2(10000, 10000)
+JunctCount = 8
+MinGenDistance = 1000.0
+MaxDevition = 30.0
+StepScale = 50.0
+StraitRail = ExtResource("4_uvvv4")
+Junction = ExtResource("5_8ri4j")
+Train = NodePath("../SubViewportContainer/AutoscalingViewport/Node2D/Train")
+Target = NodePath("../MapStorage")
+metadata/_custom_type_script = "uid://bbndwvvh1asi7"
+
+[node name="MapStorage" type="Node2D" parent="." unique_id=1097489251]
+visible = false
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1427085992]
+z_index = 1
+z_as_relative = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Карта рельсы.
+Приближение отдаление возможно колесом мыши.
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoscalingViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1415101579 node_paths=PackedStringArray("ScalingSource")]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+script = ExtResource("1_hklr1")
+ScalingSource = NodePath("../..")
+metadata/_custom_type_script = "uid://ocdra8ykfjf4"
+
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/AutoscalingViewport" unique_id=1627463819]
+
+[node name="Train" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=2038937439 instance=ExtResource("7_k05v2")]
+BrakeForce = 50.0
+Accelerate = 30.0
+
+[node name="RailVisualiser" type="Node2D" parent="SubViewportContainer/AutoscalingViewport/Node2D" unique_id=1434303530 node_paths=PackedStringArray("Source")]
+script = ExtResource("6_geu54")
+Source = NodePath("../../../../MapStorage")
+VisualTemplate = ExtResource("7_5anjg")
+metadata/_custom_type_script = "uid://bbqb35lgqcvcl"
+
 [node name="SubViewport3" type="SubViewport" parent="." unique_id=31746575]
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
@@ -146,5 +158,5 @@ size = Vector2i(500, 250)
 [node name="SceneInstantiator" type="Node" parent="SubViewport3" unique_id=853399083 node_paths=PackedStringArray("RailSource", "Train")]
 script = ExtResource("10_8ri4j")
 InstantiatedScene = ExtResource("13_k05v2")
-RailSource = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/RailGenerator2")
+RailSource = NodePath("../../MapStorage")
 Train = NodePath("../../SubViewportContainer/AutoscalingViewport/Node2D/Train")

@@ -16,7 +16,6 @@ using System.Xml.XPath;
 [GlobalClass]
 public partial class RailGenerator : Node2D
 {
-	public Node2D Parent;
 
 	[Export]
 	Vector2 GenBoundaries = new Vector2(0, 0);
@@ -51,33 +50,55 @@ public partial class RailGenerator : Node2D
 	[Export]
 	Node2D Train = null;
 
+	[Export]
+	Node Target = null;
+
 	[ExportToolButton("TestGeneration")]
 	public Callable GenerateButton => Callable.From(TestGenerate);
 
 	[ExportToolButton("ClearAll")]
 	public Callable ClearButton => Callable.From(RemoveAllChildren);
 
+	public RailGenerator():base()
+	{
+		if(Target == null)
+		{
+			Target = this;
+		}
+	}
+
 	public void TestGenerate()
 	{
-		Generate();
+		RemoveAllChildren(Target);
+		MultiRail[] juncts = Generate();
+		AddAsChildren(juncts, Target);
 	}
 
 	public MultiRail[] Generate()
 	{
-		RemoveAllChildren();
 		MultiRail[] JunctPoints = GenJunctionPoints(MinGenDistance);
 		GenerateConnections(JunctPoints);
-		AddAsChildren(JunctPoints);
 		return JunctPoints;
 	}
 
-	public void RemoveAllChildren()
+	public void RemoveAllChildren(Node target)
 	{
-		foreach (Node child in GetChildren())
+		foreach (Node child in target.GetChildren())
 		{
 			RemoveChild(child);
 			child.QueueFree();
 		} 
+	}
+
+	public void RemoveAllChildren()
+	{
+		if(Target != null)
+		{
+			RemoveAllChildren(Target);
+		} else
+		{
+			RemoveAllChildren(this);	
+		}
 	}
 
 	public MultiRail[] GenJunctionPoints(double minDistance = 0)
@@ -262,24 +283,24 @@ public partial class RailGenerator : Node2D
 		return rail;
 	}
 
-	public void AddAsChildren(MultiRail[] Junctions) {
+	public void AddAsChildren(MultiRail[] Junctions, Node target) {
 		foreach (MultiRail junct in Junctions)
 		{
-			this.AddChild(junct);
+			target.AddChild(junct);
 			junct.QueueRedraw();
 			foreach (var rail in junct.PrevRails)
 			{
-				if (rail.GetParent<Node>() != this)
+				if (rail.GetParent<Node>() != target)
 				{
-					AddChild(rail);
+					target.AddChild(rail);
 					rail.QueueRedraw();
 				}
 			}
 			foreach (var rail in junct.NextRails)
 			{
-				if (rail.GetParent<Node>() != this)
+				if (rail.GetParent<Node>() != target)
 				{
-					AddChild(rail);
+					target.AddChild(rail);
 					rail.QueueRedraw();
 				}
 			}
@@ -289,8 +310,9 @@ public partial class RailGenerator : Node2D
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-		Parent = GetParent<Node2D>();
+		RemoveAllChildren(Target);
 		MultiRail[] juncts = Generate();
+		AddAsChildren(juncts, Target);
 		PlaceTrain(juncts[0]);
 	}
 
