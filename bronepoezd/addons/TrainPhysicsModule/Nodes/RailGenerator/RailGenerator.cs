@@ -1,12 +1,20 @@
-using bronepoezd.addons.CurveGenerators.Classes;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Xml.XPath;
 
 [Tool]
 [GlobalClass]
-public partial class RailGenerator : GraphGenerator
+public partial class RailGenerator : Node2D
 {
 
 	[Export]
