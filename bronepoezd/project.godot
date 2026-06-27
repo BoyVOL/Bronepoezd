@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Bronepoezd"
-run/main_scene="uid://bkjab5ou31vn2"
+run/main_scene="uid://cvhcbj840s3im"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 
 [display]
