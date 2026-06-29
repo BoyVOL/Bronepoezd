@@ -11,9 +11,8 @@ point_count = 6
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vd057"]
 friction = 0.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ysiod"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_0y4br"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vd057"]
+size = Vector3(1, 0.31695557, 1.0927734)
 
 [node name="3dRailTest" type="Node3D" unique_id=369302085]
 
@@ -26,13 +25,13 @@ polygon = PackedVector2Array(0.642359, 0.016347647, 0.6332124, 0.49026918, 0.989
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
-path_interval = 1.0
+path_interval = 0.1
 path_simplify_angle = 0.0
 path_rotation = 1
 path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
-path_u_distance = 1.05
+path_u_distance = 0.82
 path_joined = true
 
 [node name="Track2" type="CSGPolygon3D" parent="Path3D" unique_id=127959927]
@@ -41,27 +40,29 @@ polygon = PackedVector2Array(-0.6666208, 0.06254244, -0.64552957, 0.51857233, -0
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
-path_interval = 1.0
+path_interval = 0.1
 path_simplify_angle = 0.0
 path_rotation = 1
 path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
-path_u_distance = 1.05
+path_u_distance = 0.82
 path_joined = true
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1172382585]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.848295, 3.531163, -0.08267748)
+[node name="RigidBody3D" type="VehicleBody3D" parent="." unique_id=735288409]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.848295, 3.134911, -0.08267748)
 physics_material_override = SubResource("PhysicsMaterial_vd057")
 can_sleep = false
-constant_force = Vector3(0, 0, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1797572483]
-rotation_edit_mode = 1
-shape = SubResource("SphereShape3D_ysiod")
+[node name="VehicleWheel3D" type="VehicleWheel3D" parent="RigidBody3D" unique_id=1420227783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90748024, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=2123288610]
-mesh = SubResource("SphereMesh_0y4br")
+[node name="VehicleWheel3D2" type="VehicleWheel3D" parent="RigidBody3D" unique_id=2130145508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37292767, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=130192551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34152222, 0.32666016)
+shape = SubResource("BoxShape3D_vd057")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=601876687]
 transform = Transform3D(1, 0, 0, 0, 0.096297495, 0.9953526, 0, -0.9953526, 0.096297495, 0, 11.045101, 0)
