@@ -6,7 +6,7 @@ using PID;
 [GlobalClass]
 public partial class V3PIDNodeBase : Node
 {
-    [Export] protected RigidBody3D ControlledNode = null;
+    [Export] public RigidBody3D ControlledNode = null;
 
 	[Export]protected Vector3 PID = new Vector3(0.01F,0.01F,0.01F);
 

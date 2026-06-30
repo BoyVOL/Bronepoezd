@@ -15,5 +15,6 @@
     <Content Include="addons\TrainPhysicsModule\Nodes\Rail\Rail.cs" />
     <Content Include="addons\TrainPhysicsModule\Nodes\MultiRail\MultiRail.cs" />
     <Content Include="addons\TrainPhysicsModule\Nodes\RailGenerator\RailGenerator.cs" />
+    <Content Include="Scenes\Test Scenes\RailDirector.cs" />
   </ItemGroup>
 </Project>
