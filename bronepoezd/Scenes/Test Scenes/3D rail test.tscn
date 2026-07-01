@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cvhcbj840s3im"]
 
-[ext_resource type="Script" uid="uid://cngpj5tynx7bo" path="res://addons/pid_nodes/MovePID/MovePid.cs" id="1_ysiod"]
 [ext_resource type="Script" uid="uid://c52f5jtax4xj7" path="res://Scenes/Test Scenes/RailDirector.cs" id="2_0y4br"]
 
 [sub_resource type="Curve3D" id="Curve3D_vd057"]
@@ -52,7 +51,7 @@ path_u_distance = 0.82
 path_joined = true
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=618478203]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5421686, 3.430281, 0.2924466)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3926263, 3.430281, -1.3847556)
 physics_material_override = SubResource("PhysicsMaterial_vd057")
 can_sleep = false
 
@@ -64,19 +63,12 @@ disabled = true
 transform = Transform3D(1.3924651, 0, 0, 0, 0.3353197, 0, 0, 0, 1.0819916, 0, 0.77916884, 0)
 mesh = SubResource("BoxMesh_vd057")
 
-[node name="MovePid" type="Node" parent="RigidBody3D" unique_id=1410075612 node_paths=PackedStringArray("ControlledNode")]
-script = ExtResource("1_ysiod")
+[node name="RailClamp" type="Node" parent="RigidBody3D" unique_id=455083852 node_paths=PackedStringArray("Rail", "ControlledNode")]
+script = ExtResource("2_0y4br")
+Rail = NodePath("../../Path3D")
+factor = 10.0
 ControlledNode = NodePath("..")
 PID = Vector3(1, 3, 0.0001)
-MoveImpulseClamp = 10000.0
-metadata/_custom_type_script = "uid://cngpj5tynx7bo"
-
-[node name="RailDirector" type="Node" parent="RigidBody3D" unique_id=455083852 node_paths=PackedStringArray("PID", "Rail")]
-script = ExtResource("2_0y4br")
-PID = NodePath("../MovePid")
-Rail = NodePath("../../Path3D")
-factor = 40.0
-Speed = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="RigidBody3D" unique_id=601876687]
 transform = Transform3D(1, 0, 0, 0, 0.7660669, 0.6427608, 0, -0.6427609, 0.7660669, 0.019842625, 3.3774526, 3.736044)
