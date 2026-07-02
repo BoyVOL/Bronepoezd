@@ -14,6 +14,8 @@ public partial class PIDNodesScript : EditorPlugin
         GD.Load<Texture2D>(GlobalPath + "/AnglePID/icon.png"));
         AddCustomType("MovePID", "MovePID", GD.Load<Script>(GlobalPath + "/MovePID/MovePID.cs"),
         GD.Load<Texture2D>(GlobalPath + "/MovePID/icon.png"));
+        AddCustomType("TargetV3PID", "TargetV3PID", GD.Load<Script>(GlobalPath + "/TargetV3PID/TargetV3PID.cs"),
+        GD.Load<Texture2D>(GlobalPath + "/TargetV3PID/icon.png"));
 		GD.Print("AutoscalingViewportModule loaded");
 	}
 
@@ -21,6 +23,7 @@ public partial class PIDNodesScript : EditorPlugin
 	{
 		// Clean-up of the plugin goes here.
 		RemoveCustomType("MovePID");
+		RemoveCustomType("TargetV3PID");
 		RemoveCustomType("AnglePID");
 		GD.Print("AutoscalingViewportModule unloaded");
 	}
